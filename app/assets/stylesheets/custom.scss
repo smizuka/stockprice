@@ -1,38 +1,52 @@
 //全体の背景を指定する
-body{
-  background-color:#F8F9FC;
+.body{
+    background-color:#F8F9FC;
 }
 
 //サイドバーの背景色を指定する
 .left-bar{
-  background-color:#4C72DE;
+    background-color:#4C72DE;
+    height:2000px;
+}
+
+.fix-menu{
+    background-color:#4C72DE;
+    position: sticky;
+    top:0px;
+    height:200px;
+    width:100%;
 }
 
 .user-name{
-  font-size:20px;
-  color:white;
+    font-size:20px;
+    color:white;
 }
 
 .table-string{
-  font-size:10px;
+    font-size:10px;
 }
 
 .logout{
-  color:bdc3c7;
+    color:bdc3c7;
 }
 
 li{
-  list-style:none;
+    list-style:none;
 }
 
 //サイドナビのaタグの色を白にするコード
 a{
-  font-size:20px;
-  color:white;
+    font-size:15px;
+    color:white;
 }
 
 //右側の行間にラインを描く
-.right-row{
+//.right-row{
+//  border-bottom:solid 1px #bdc3c7;
+//}
+
+//右側の行間にラインを描く
+.right-row-header{
   border-bottom:solid 1px #bdc3c7;
 }
 
@@ -56,3 +70,5 @@ a{
   background-color:white;
   border: dashed thin #bdc3c7;
 }
+
+

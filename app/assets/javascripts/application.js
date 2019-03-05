@@ -17,6 +17,9 @@
 //= require jquery
 //= require jquery_ujs
 
+//chart.jsをrailsで使う場合はgemファイルとこの表記が必要
+//= require Chart.min
+
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
