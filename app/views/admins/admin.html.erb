@@ -1,0 +1,16 @@
+<div class="users-new-wrapper">
+  <div class="container upload_form">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4 users-new-container">
+        <h1>管理者用</h1>
+        <%= form_for :info, url: admins_import_path do |f|%>
+          <div class="form-group">
+            <%= f.label :CSVファイル %>
+            <%= f.file_field :file%>
+          </div>
+          <%= f.submit "アップロード",class: "btn-block btn-white"%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

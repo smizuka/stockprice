@@ -1,0 +1,58 @@
+//全体の背景を指定する
+body{
+  background-color:#F8F9FC;
+}
+
+//サイドバーの背景色を指定する
+.left-bar{
+  background-color:#4C72DE;
+}
+
+.user-name{
+  font-size:20px;
+  color:white;
+}
+
+.table-string{
+  font-size:10px;
+}
+
+.logout{
+  color:bdc3c7;
+}
+
+li{
+  list-style:none;
+}
+
+//サイドナビのaタグの色を白にするコード
+a{
+  font-size:20px;
+  color:white;
+}
+
+//右側の行間にラインを描く
+.right-row{
+  border-bottom:solid 1px #bdc3c7;
+}
+
+.search-alert{
+  padding-top:20px;
+}
+
+.search-row {
+  display:inline-block;
+  margin-top:20px;
+  margin-bottom: 20px;
+}
+
+.mychart{
+  display:inline-block;
+  margin-top:20px;
+  margin-bottom: 20px;
+}
+
+.port-area{
+  background-color:white;
+  border: dashed thin #bdc3c7;
+}

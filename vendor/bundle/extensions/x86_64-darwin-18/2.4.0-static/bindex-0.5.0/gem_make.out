@@ -1,0 +1,15 @@
+current directory: /Users/mizukamisatoru/Desktop/techboost/stockprice2/vendor/bundle/gems/bindex-0.5.0/ext/bindex
+/Users/mizukamisatoru/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20190301-8499-1ddhk0p.rb extconf.rb
+creating Makefile
+
+current directory: /Users/mizukamisatoru/Desktop/techboost/stockprice2/vendor/bundle/gems/bindex-0.5.0/ext/bindex
+make "DESTDIR=" clean
+
+current directory: /Users/mizukamisatoru/Desktop/techboost/stockprice2/vendor/bundle/gems/bindex-0.5.0/ext/bindex
+make "DESTDIR="
+compiling cruby.c
+linking shared-object bindex/cruby.bundle
+
+current directory: /Users/mizukamisatoru/Desktop/techboost/stockprice2/vendor/bundle/gems/bindex-0.5.0/ext/bindex
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 cruby.bundle ./.gem.20190301-8499-1emf0r7/bindex

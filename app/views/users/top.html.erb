@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="row top-col">
+    <div class="col-md-12">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-5 ">
+        <%= button_to "Sign up", {controller: 'users', action: 'signup'}, {method: :get,class: 'btn btn-block btn-primary'} %>
+      </div>
+
+      <% if logged_in? %>
+        <div class="col-md-5 col-md-offset-2">
+            <%= button_to "Log in", {controller: 'mypages', action: 'index'}, {method: :get,class: 'btn btn-block btn-primary'}%>
+        </div>
+      <% else %>
+        <div class="col-md-5 col-md-offset-2">
+            <%= button_to "Log in", {controller: 'users', action: 'login'}, {method: :get,class: 'btn btn-block btn-primary'}%>
+        </div>
+      <% end %>
+
+    <div class="col-md-3">
+    </div>
+  </div>
+</div>
