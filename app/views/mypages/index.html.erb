@@ -111,7 +111,7 @@
                         銘柄検索
                     </h5>
                     <!-- 検索欄 -->
-                    <div class="card-body" style="min-height: 400px;">
+                    <div class="card-body" style="min-height:400px; max-height:400px;">
                         <div class="input-group">
                             <input id="search-form" type="text" class="form-control" placeholder="銘柄名、コードを入力してください" aria-label="...">
                             <span class="input-group-btn">
@@ -130,8 +130,8 @@
                     <h5 class="card-header text-center">
                         ポートフォリオ
                     </h5>
-                    <div class="card-body" style="min-height: 350px;">
-                        <div class="port-area" style="min-height: 307px;">
+                    <div class="card-body" style="min-height:350px;">
+                        <div class="port-area" style="min-height:307px; max-height:307px;">
                             <table class="table table-hover">
  <!--                        <thead>
                           <tr>
@@ -145,7 +145,7 @@
                                 </tbody>
                             </table>
                         </div>
-                      <div class="col-4 col-offset-4 mx-auto mt-3">
+                      <div class="col-6 col-offset-3 mx-auto mt-3">
                         <button id="opt-btn" class="btn btn-block btn-warning">計算する</button>
                       </div>
                     </div>
@@ -155,20 +155,20 @@
 
         <!-- 最適化結果を入れる -->
         <div class="col-12 right-row">
-            <div class="col-11 mychart">
+            <div class="col-12 mychart">
                 <!-- カード要素内 -->
                 <div class="card bg-light shadow">
                     <h5 class="card-header text-center">
                         最適化結果
                     </h5>
-                    <div class="card-body" style="min-height: 350px;">
+                    <div class="card-body" style="min-height:350px;">
                       <!-- リスク１ -->
                         <div class="col-12">
                             <div class="col-8 inline-block">
                                 <canvas id="port-chart1" width="100%" height="80%"></canvas>
                             </div>
                             <div class="col-3 inline-block">
-                                <table id="opt-result-table" class="table">
+                                <table class="table">
                                     <thead class="thead-dark">
                                         <tr>
                                           <td></td>
@@ -176,7 +176,7 @@
                                           <td>リスク(%)</td>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="opt-result-table">
                                         <tr>
                                           <td>1</td>
                                           <td></td>
@@ -204,6 +204,18 @@
                                         </tr>
                                     </tbody>
                                 </table>
+
+                            </div>
+                            <div class="col-6">
+                                <!-- シュミレーション計算をする -->
+                                <div class="input-group">
+                                    <input id="simulation-day" type="text" class="form-control" placeholder="予想日数" aria-label="...">
+                                    <input id="simulation-select" type="text" class="form-control" placeholder="選択肢" aria-label="...">
+                                    <input id="simulation-price" type="text" class="form-control" placeholder="投資金額" aria-label="...">
+                                    <span class="input-group-btn">
+                                      <button id="simulation-button" type="button" class="btn btn-warning">計算する</button>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -212,20 +224,24 @@
         </div>
         <!-- 最適化結果を入れる -->
         <div class="col-12 right-row">
-            <div class="col-11 inline-block mychart">
-                <!-- カード要素内 -->
+            <div class="col-12 inline-block mychart">
                 <div class="card bg-light shadow">
                     <h5 class="card-header text-center">
                         シュミレート
                     </h5>
+
                     <div class="card-body" style="min-height: 300px;">
-                        <p>ここにシュミレート結果を入れる</p>
                         <canvas id="port-chart2" width="100%" height="50%"></canvas>
+                   </div>
+                   <div id="return-reult" class="ml-5">
+                      <p></p>
+                   </div>
+                   <div class="col-3 offset-1 mb-3">
+                        <button id="port-save" class="btn btn-block btn-warning">保存する</button>
                    </div>
                 </div>
             </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -233,29 +249,21 @@
 
 <script>
 // --------------------------------------------------------------
-//ポートフォリオの削除が行われた際に検索欄にあるbuttonの表示を
-//追加済から追加に変更する関数
-//chart.jsはHTMLの中のscriptタグ内に書かなくてはいけない
+//最適化計算結果
 // --------------------------------------------------------------
-// グラフにするデータ
 var BarDatas={
     type: "horizontalBar",
     data: {
         labels: ["選択１","選択２","選択３","選択４","選択５"],
         datasets:[]
     },
-    options: {
+    options:{
         responsive: true,
-        title: {
-            display: true,
-            // fontSize: 50,
-            // text: "帯グラフ"
-        },
-        legend: {
+        legend:{
             position: 'bottom'
         },
-        scales: {
-            xAxes: [
+        scales:{
+            xAxes:[
                 {
                     stacked: true,
                     ticks: {
@@ -288,5 +296,57 @@ var ctx = $('#port-chart1')[0].getContext("2d");
 //グラフ描画
 // var char = new Chart(ctx).Line(BarDatas,options);
 var char = new Chart(ctx,BarDatas);
+
+// --------------------------------------------------------------
+//シミュレーション結果
+// --------------------------------------------------------------
+var lineDatas={
+    type: "line",
+    data: {
+        labels:[],
+        datasets:[]
+    },
+    options:{
+        responsive: true,
+        legend:{
+            position: 'bottom'
+        },
+        scales:{
+            xAxes:[
+                {
+                    ticks: {
+                        max: 10,
+                        min: 0,
+                        stepSize:2
+                    },
+                    gridLines: {
+                      display: false
+                    }
+                }
+            ],
+            yAxes: [
+                {
+                    ticks: {
+                        max: 10,
+                        min: -10,
+                        stepSize:2
+                    },
+                    scaleLabel: {
+                        fontSize: 100,
+                    },
+                    gridLines: {
+                      display: false
+                    }
+                }
+            ]
+        }
+    }
+};
+
+// var ctx = document.getElementById("port-chart1").getContext('2d');
+var ctx2 = $('#port-chart2')[0].getContext("2d");
+//グラフ描画
+// var char = new Chart(ctx).Line(BarDatas,options);
+var char2 = new Chart(ctx2,lineDatas);
 </script>
 

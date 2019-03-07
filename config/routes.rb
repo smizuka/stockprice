@@ -24,11 +24,6 @@ Rails.application.routes.draw do
   #検索したときの動作
   get "searches/index"
 
-  # # 分析画面
-  # get "charts/create"
-  # #グラフの描画
-  # post "charts/display", to: "charts#display"
-
   #最適化計算
   post "optimizations/calc", to: "optimizations#calc"
 
@@ -37,6 +32,8 @@ Rails.application.routes.draw do
   # ポートフォリオを削除する
   delete "portfolios/destroy", to: "portfolios#destroy"
 
+  # シミュレートしてみる
+  post "simulations/calc",to: "simulations#calc"
 
   #管理画面
   get "admins/admin"

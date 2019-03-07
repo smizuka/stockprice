@@ -28,14 +28,98 @@ function changeButton(code){
 // --------------------------------------------------------------
 //ポートフォリオの削除が行われた際に検索欄にあるbuttonの表示を
 //追加済から追加に変更する関数
-//chart.jsはHTMLの中のscriptタグ内に書かなくてはいけない
+// --------------------------------------------------------------
+function sim_chart(data) {
+
+    datas=data["return"];
+    index=[];
+    datas.length;
+
+    console.log(data["return"])
+    // console.log(data["start"])
+
+    // 収益率を算出する
+    r_rate = (data["end"]-data["start"])/data["start"]*100
+    r_rate2 = Math.round(r_rate * 10) / 10
+
+    var p = $("#return-reult").children()[0]
+    p.innerHTML=r_rate2
+
+    for (var i=0; i<datas.length; i++) {
+        index.push(i+1);
+    }
+    // colors=["#6CB9D8","#ECA184","#EBF182","#8BA7D5","#DB7BB1"];
+
+    result_datas=[{
+        // label:"選択1",
+        borderColor: "#ECA184",
+        data: datas,
+        backgroundColor: "rgba(0,0,0,0)"
+    }];
+
+// --------------------------------------------------------------
+//グラフの部分
+// --------------------------------------------------------------
+    var lineDatas={
+        type: "line",
+        data: {
+            labels:index,
+            datasets:result_datas
+        },
+        options:{
+            responsive: true,
+            legend:{
+                display: false
+                // position: 'bottom'
+            },
+            scales:{
+                xAxes:[
+                    {
+                        ticks: {
+                            max: index,
+                            min: 0,
+                            stepSize:2
+                        },
+                        gridLines: {
+                          display: false
+                        }
+                    }
+                ],
+                yAxes: [
+                    {
+                        ticks: {
+                            // max: 10,
+                            // min: -10,
+                            // stepSize:2
+                        },
+                        scaleLabel: {
+                            // fontSize: 100,
+                        },
+                        gridLines: {
+                          display: false
+                        }
+                    }
+                ]
+            }
+        }
+    };
+
+    // var ctx = document.getElementById("port-chart1").getContext('2d');
+    var ctx2 = $('#port-chart2')[0].getContext("2d");
+    //グラフ描画
+    // var char = new Chart(ctx).Line(BarDatas,options);
+    var char2 = new Chart(ctx2,lineDatas);
+}
+
+// --------------------------------------------------------------
+//ポートフォリオの削除が行われた際に検索欄にあるbuttonの表示を
+//追加済から追加に変更する関数
 // --------------------------------------------------------------
 function opt_chart(data) {
 
     //辞書型のデータセットを追加していく空配列
     result_datas=[];
     //凡例を入れたリスト
-
     datas=data["datas"];
     labels=data["labels"];
     colors=["#6CB9D8","#ECA184","#EBF182","#8BA7D5","#DB7BB1"];
@@ -46,7 +130,7 @@ function opt_chart(data) {
             label:labels[i],
             data: datas[i],
             backgroundColor:colors[i],
-            borderColor: null,
+            borderColor: "white",
             borderWidth: 0
         };
         //グラフに表示するデータ
@@ -106,8 +190,77 @@ function opt_chart(data) {
     var char = new Chart(ctx,BarDatas);
 }
 
+// --------------------------------------------------------------
+//計算した期待リターンやリスクをテーブルに入れていく関数
+// --------------------------------------------------------------
+function opt_table(data){
+  //空のテーブル要素を取得する
+  var tbody = $("#opt-result-table")[0];
+  // tbodyの行数を取得する
+  // var num = tbody.rows.length;
 
+  for (var i=0; i<5; i++) {
+      var Cell1 = tbody.rows[i].cells[1];
+      var Cell2 = tbody.rows[i].cells[2];
+      Cell1.innerHTML=data["risk"][i][0];
+      Cell2.innerHTML=data["risk"][i][1];
+  };
+}
+
+// --------------------------------------------------------------
+//最適化したあとにシミュレーションする関数
+// --------------------------------------------------------------
+function simulate(data){
+  $(document).on('click','#simulation-button',function(){
+
+    // 入力された値を取得する
+    var day = $("#simulation-day")[0].value;
+    var select = $("#simulation-select")[0].value;
+    var price = $("#simulation-price")[0].value;
+
+    //価格が50万円以下であるとエラー
+    if(price<500000){
+      return alert("最低投資金額は５０万円です");
+    }
+
+    //１〜５以外の値を入力するとエラー
+    if(select > 5 || select==0){
+      return alert("選択は1~5の値から選んでください");
+    }
+
+    //日数が入力されていないとエラー
+    if(day==0){
+      return alert("日数が入力されていません");
+    }
+
+    $.ajax({
+            url: '/simulations/calc',
+            type: 'POST',
+            data:{
+                'day':day,
+                'codes':data["labels"],
+                'weight':data["weights"],
+                'sigma':data["std"],
+                'select':select,
+                'price':price
+            }
+        })
+        .done((data) => {
+          // 実施した結果をチャート表示する関数
+            sim_chart(data)
+        })
+        .fail((data) => {
+          console.log(data)
+        })
+        // Ajaxリクエストが成功・失敗どちらでも発動
+        .always((data) => {
+        });
+  });
+
+}
+// --------------------------------------------------------------
 //ポートフォリオ一覧に存在する銘柄を取得する
+// --------------------------------------------------------------
 function getCode(){
     // ポートフォリオに登録されている銘柄一覧を取得する
     var tbody = $("#portfolio-table")[0]
@@ -162,17 +315,17 @@ $(document).on('ready', function() {
             var table_h_r=table_h.insertRow(0);
 
             var Cell1 = table_h_r.insertCell(0);
-            Cell1.className='col-xs-2';
+            Cell1.className='col-xs-1';
 
             var Cell2 = table_h_r.insertCell(1);
             Cell2.className='col-xs-8';
 
             var Cell3 = table_h_r.insertCell(2);
-            Cell3.className='col-xs-2';
+            Cell3.className='col-xs-3';
 
-            Cell1.innerHTML = 'コード';
-            Cell2.innerHTML = '銘柄名';
-            Cell3.innerHTML = '';
+            // Cell1.innerHTML = 'コード';
+            // Cell2.innerHTML = '銘柄名';
+            // Cell3.innerHTML = '';
 
             // tbody要素を生成
             var tbody1 = document.createElement('tbody');
@@ -183,9 +336,8 @@ $(document).on('ready', function() {
             //tbody要素を取得する
             var tbody2 =$("#search-table").children().find("tbody")[0];
 
+            //ポートフォリオ一覧にある銘柄を取得
             var codes=getCode();
-
-            console.log(codes);
 
             // jsonファイルをテーブルに入れていく
             for (var i=0; i<num; i++) {
@@ -313,8 +465,6 @@ $(document).on('ready', function() {
           return alert('銘柄は最低３つ選んでください');
       };
 
-      // console.log(codes);
-
       $.ajax({
           url: '/optimizations/calc',
           method: 'post',
@@ -322,7 +472,11 @@ $(document).on('ready', function() {
       })
       .done((data) => {
           // グラフを描写するコード
-          opt_chart(data)
+          opt_chart(data);
+          //平均値とリスクを描写するコード
+          opt_table(data);
+          //最適化結果をもとにシミュレーションするコード
+          simulate(data);
       })
       .fail((data) => {
           console.log(data)
@@ -331,15 +485,14 @@ $(document).on('ready', function() {
       .always((data) => {
       });
   });
-
   //--------------------------------------------------------------
   //ポートフォリオを登録するコード
   //--------------------------------------------------------------
-  $('#port-resist').on('click', function(){
+  $(document).on('click','#port-save',function(){
     //データベースに登録するための名前を入力
     var group_name=prompt("ポートフォリオ名を入力してください");
 
-    var tbody = $("portfolio-table")[0];
+    var tbody = $("#portfolio-table")[0];
     var num = tbody.rows.length;
 
     //行数分だけfor文を回してコードを取得していく

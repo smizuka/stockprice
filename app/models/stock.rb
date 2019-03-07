@@ -9,7 +9,7 @@ class Stock < ApplicationRecord
   #指定したコードの銘柄データをすべて取得する
   scope :code_index, -> (code){where("code=?",code)}
 
-  #取得した:dateを降順に並べて直近count分の日分を取得
+  #取得した:date（日時）を降順（新しい順）に並べて直近count分の日分の価格を取得
   scope :date_desc, -> (count){order(date: :desc).limit(count)}
 
   # has_many :favorites

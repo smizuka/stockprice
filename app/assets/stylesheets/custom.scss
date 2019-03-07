@@ -6,7 +6,7 @@
 //サイドバーの背景色を指定する
 .left-bar{
     background-color:#4C72DE;
-    height:2000px;
+    height:2500px;
 }
 
 .fix-menu{
@@ -23,7 +23,7 @@
 }
 
 .table-string{
-    font-size:10px;
+    font-size:5px;
 }
 
 .logout{
@@ -47,28 +47,36 @@ a{
 
 //右側の行間にラインを描く
 .right-row-header{
-  border-bottom:solid 1px #bdc3c7;
+    border-bottom:solid 1px #bdc3c7;
 }
 
 .search-alert{
-  padding-top:20px;
+    padding-top:20px;
 }
 
 .search-row {
-  display:inline-block;
-  margin-top:20px;
-  margin-bottom: 20px;
+    display:inline-block;
+    margin-top:20px;
+    margin-bottom: 20px;
 }
 
 .mychart{
-  display:inline-block;
-  margin-top:20px;
-  margin-bottom: 20px;
+    display:inline-block;
+    margin-top:20px;
+    margin-bottom: 20px;
 }
 
 .port-area{
-  background-color:white;
-  border: dashed thin #bdc3c7;
+    background-color:white;
+    border: dashed thin #bdc3c7;
+    orverflow:auto;
 }
 
+#opt-result-table{
+    font-size:5px;
+}
+
+tr{
+  height:25;
+}
 

@@ -2,6 +2,8 @@ class PortfoliosController < ApplicationController
 
   def create
 
+    binding.pry
+
     #portfollioに保存する
     portfolio=Portfolio.new
     portfolio.user_id=current_user.id
