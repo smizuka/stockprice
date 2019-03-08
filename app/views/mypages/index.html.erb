@@ -75,37 +75,14 @@
 
     <!-- メインカラム -->
     <div class="col-10 main-col">
-        <div class="right-row-header">
+        <div id="page_top" class="right-row-header">
             <h1 class="text-center">DashBoard</h1>
         </div>
-        <!-- その人が選んだポートフォリオの現在価格 -->
-<!--         <div class="col-12 right-row">
-          <div class="col-8 inline-block mychart">
-              <div class="card bg-light shadow">
-                  <h5 class="card-header text-center">
-                      推移グラフ
-                  </h5>
-                  <div class="card-body" style="min-height: 300px;">
-                      <canvas id="selected-port" width="100%" height="50%"></canvas>
-                 </div>
-              </div>
-          </div>
-          <div class="col-3 col-offset-2 inline-block mychart">
-              <div class="card bg-light shadow">
-                  <h5 class="card-header text-center">
-                      詳細情報
-                  </h5>
-                  <div class="card-body" style="min-height: 300px;">
-                      <canvas id="selected-port" width="100%" height="50%"></canvas>
-                 </div>
-              </div>
-          </div>
-        </div> -->
 
         <!-- <h1>2段目</h1> -->
         <div class="col-12 right-row">
             <!-- 検索画面 -->
-            <div class="col-5 inline-block search-row">
+            <div class="col-5 offset-1 search-row">
                 <div class="card bg-light shadow">
                     <h5 class="card-header text-center">
                         銘柄検索
@@ -125,7 +102,7 @@
             </div>
 
             <!-- ポートフォリオ -->
-            <div class="col-5 inline-block search-row">
+            <div class="col-5 search-row">
                 <div class="card bg-light shadow">
                     <h5 class="card-header text-center">
                         ポートフォリオ
@@ -164,54 +141,53 @@
                     <div class="card-body" style="min-height:350px;">
                       <!-- リスク１ -->
                         <div class="col-12">
-                            <div class="col-8 inline-block">
+                            <div class="col-8 port-chart">
                                 <canvas id="port-chart1" width="100%" height="80%"></canvas>
                             </div>
-                            <div class="col-3 inline-block">
-                                <table class="table">
-                                    <thead class="thead-dark">
+                            <div class="col-3 port-datas">
+                                <table class="table bg-info">
+                                    <thead>
                                         <tr>
                                           <td></td>
-                                          <td>利益(%)</td>
-                                          <td>リスク(%)</td>
+                                          <td>利益</td>
+                                          <td>リスク</td>
                                         </tr>
                                     </thead>
                                     <tbody id="opt-result-table">
                                         <tr>
-                                          <td>1</td>
+                                          <td style="height: 70px;">1</td>
                                           <td></td>
                                           <td></td>
                                         </tr>
                                         <tr>
-                                          <td>2</td>
+                                          <td style="height: 70px;">2</td>
                                           <td></td>
                                           <td></td>
                                         </tr>
                                         <tr>
-                                          <td>3</td>
+                                          <td style="height: 70px;">3</td>
                                           <td></td>
                                           <td></td>
                                         </tr>
                                         <tr>
-                                          <td>4</td>
+                                          <td style="height: 70px;">4</td>
                                           <td></td>
                                           <td></td>
                                         </tr>
                                         <tr>
-                                          <td>5</td>
+                                          <td style="height: 70px;">5</td>
                                           <td></td>
                                           <td></td>
                                         </tr>
                                     </tbody>
                                 </table>
-
                             </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <!-- シュミレーション計算をする -->
                                 <div class="input-group">
-                                    <input id="simulation-day" type="text" class="form-control" placeholder="予想日数" aria-label="...">
-                                    <input id="simulation-select" type="text" class="form-control" placeholder="選択肢" aria-label="...">
-                                    <input id="simulation-price" type="text" class="form-control" placeholder="投資金額" aria-label="...">
+                                    <input id="simulation-day" type="text" class="form-control mr-1" placeholder="予想日数 ~200日">
+                                    <input id="simulation-select" type="text" class="form-control mr-1" placeholder="選択肢 1~5">
+                                    <input id="simulation-price" type="text" class="form-control mr-1" placeholder="投資金額 50万円~">
                                     <span class="input-group-btn">
                                       <button id="simulation-button" type="button" class="btn btn-warning">計算する</button>
                                     </span>
@@ -224,21 +200,20 @@
         </div>
         <!-- 最適化結果を入れる -->
         <div class="col-12 right-row">
-            <div class="col-12 inline-block mychart">
+            <div class="col-12 mysim">
                 <div class="card bg-light shadow">
                     <h5 class="card-header text-center">
                         シュミレート
                     </h5>
-
                     <div class="card-body" style="min-height: 300px;">
                         <canvas id="port-chart2" width="100%" height="50%"></canvas>
-                   </div>
-                   <div id="return-reult" class="ml-5">
+                    </div>
+                    <div id="return-result" class="col-12">
                       <p></p>
-                   </div>
-                   <div class="col-3 offset-1 mb-3">
-                        <button id="port-save" class="btn btn-block btn-warning">保存する</button>
-                   </div>
+                    </div>
+                    <div class="col-4 offset-4 mb-5">
+                        <button id="port-save" class="btn btn-block btn-warning">ポートフォリオを保存する</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -272,7 +247,8 @@ var BarDatas={
                         stepSize:0.2
                     },
                     gridLines: {
-                      display: false
+                      display: false,
+                      drawBorder: true
                     }
                 }
             ],
@@ -283,7 +259,8 @@ var BarDatas={
                         fontSize: 100,
                     },
                     gridLines: {
-                      display: false
+                      display: false,
+                      drawBorder: true
                     }
                 }
             ]
@@ -314,28 +291,30 @@ var lineDatas={
         scales:{
             xAxes:[
                 {
-                    ticks: {
-                        max: 10,
-                        min: 0,
-                        stepSize:2
-                    },
+                    // ticks: {
+                    //     max: 10,
+                    //     min: 0,
+                    //     stepSize:2
+                    // },
                     gridLines: {
-                      display: false
+                      display: false,
+                      drawBorder: true
                     }
                 }
             ],
             yAxes: [
                 {
-                    ticks: {
-                        max: 10,
-                        min: -10,
-                        stepSize:2
-                    },
+                    // ticks: {
+                    //     max: 10,
+                    //     min: -10,
+                    //     stepSize:2
+                    // },
                     scaleLabel: {
                         fontSize: 100,
                     },
                     gridLines: {
-                      display: false
+                      display: false,
+                      drawBorder: true
                     }
                 }
             ]

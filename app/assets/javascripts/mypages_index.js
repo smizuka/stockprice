@@ -1,7 +1,24 @@
 // サインアップ、ログイン画面
 $(document).on('ready', function(){
-  hsize = $(window).height()/3;
-  $(".top-col").css("height", hsize + "px");
+    hsize = $(window).height()/3;
+    $(".top-col").css("height", hsize + "px");
+
+    //チャートのインスタンスを削除する
+    $('#port-chart2').mousemove(function(){
+        console.log("move")
+    });
+
+    $('#port-chart2').mouseover(function(){
+        console.log("over")
+    });
+
+    $('#port-chart2').mouseleave(function(){
+        console.log("leave")
+    });
+
+    $('#port-chart2').mouseout(function(){
+        console.log("out")
+    });
 });
 
 // --------------------------------------------------------------
@@ -22,7 +39,7 @@ function changeButton(code){
     var i=codes.indexOf(code,0);
     // 検索した位置からbuttonのある行に代わりの登録のbuttonを入れる
     var cell = tbody.rows[i].cells[2];
-    cell.innerHTML ='<td><button class="search-result-btn btn btn-warning ">追　加</button></td>';
+    cell.innerHTML ='<td><button class="search-result-btn btn btn-sm btn-warning" style="font-size: 12px; padding:0px">追　加</button></td>';
 }
 
 // --------------------------------------------------------------
@@ -35,14 +52,16 @@ function sim_chart(data) {
     index=[];
     datas.length;
 
-    console.log(data["return"])
     // console.log(data["start"])
+    console.log("開始"+data["start"])
+    console.log("終了"+data["end"])
 
     // 収益率を算出する
     r_rate = (data["end"]-data["start"])/data["start"]*100
+    console.log(r_rate)
     r_rate2 = Math.round(r_rate * 10) / 10
 
-    var p = $("#return-reult").children()[0]
+    var p = $("#return-result").children()[0]
     p.innerHTML=r_rate2
 
     for (var i=0; i<datas.length; i++) {
@@ -57,9 +76,9 @@ function sim_chart(data) {
         backgroundColor: "rgba(0,0,0,0)"
     }];
 
-// --------------------------------------------------------------
-//グラフの部分
-// --------------------------------------------------------------
+    // --------------------------------------------------------------
+    //グラフの部分
+    // --------------------------------------------------------------
     var lineDatas={
         type: "line",
         data: {
@@ -81,7 +100,8 @@ function sim_chart(data) {
                             stepSize:2
                         },
                         gridLines: {
-                          display: false
+                          display: false,
+                          drawBorder: true
                         }
                     }
                 ],
@@ -96,7 +116,8 @@ function sim_chart(data) {
                             // fontSize: 100,
                         },
                         gridLines: {
-                          display: false
+                          display: false,
+                          drawBorder: true
                         }
                     }
                 ]
@@ -106,10 +127,26 @@ function sim_chart(data) {
 
     // var ctx = document.getElementById("port-chart1").getContext('2d');
     var ctx2 = $('#port-chart2')[0].getContext("2d");
+
+    // console.log(chart2);
+
+    // if( chart2 ){
+    //     chart2.destroy();
+    // };
     //グラフ描画
     // var char = new Chart(ctx).Line(BarDatas,options);
-    var char2 = new Chart(ctx2,lineDatas);
+    var chart2 = new Chart(ctx2,lineDatas);
+
 }
+
+
+
+// $("div").mousemove(function(e){
+//   var pageCoords = "( " + e.pageX + ", " + e.pageY + " )";
+//   var clientCoords = "( " + e.clientX + ", " + e.clientY + " )";
+//   $("span:first").text("( e.pageX, e.pageY ) : " + pageCoords);
+//   $("span:last").text("( e.clientX, e.clientY ) : " + clientCoords);
+// });
 
 // --------------------------------------------------------------
 //ポートフォリオの削除が行われた際に検索欄にあるbuttonの表示を
@@ -164,7 +201,8 @@ function opt_chart(data) {
                             stepSize:0.2
                         },
                         gridLines: {
-                          display: false
+                          display: false,
+                          drawBorder: true
                         }
                     }
                 ],
@@ -175,7 +213,8 @@ function opt_chart(data) {
                             fontSize: 100,
                         },
                         gridLines: {
-                          display: false
+                          display: false,
+                          drawBorder: true
                         }
                     }
                 ]
@@ -248,6 +287,7 @@ function simulate(data){
         .done((data) => {
           // 実施した結果をチャート表示する関数
             sim_chart(data)
+            scroll_to_sim()
         })
         .fail((data) => {
           console.log(data)
@@ -274,6 +314,30 @@ function getCode(){
         codes.push(parseInt(tbody.rows[i].cells[0].textContent));
     };
     return codes
+}
+
+// --------------------------------------------------------------
+//最適化されたあとのグラフの場所に飛ぶ
+// --------------------------------------------------------------
+function scroll_to_opt(){
+    var position = $(".mychart").offset().top;
+    $("html,body").animate({
+        scrollTop : position
+    }, {
+        queue : false
+    });
+}
+
+// --------------------------------------------------------------
+//シミュレーション結果にとぶ
+// --------------------------------------------------------------
+function scroll_to_sim(){
+    var position = $(".mysim").offset().top;
+    $("html,body").animate({
+        scrollTop : position
+    }, {
+        queue : false
+    });
 }
 
 $(document).on('ready', function() {
@@ -315,13 +379,13 @@ $(document).on('ready', function() {
             var table_h_r=table_h.insertRow(0);
 
             var Cell1 = table_h_r.insertCell(0);
-            Cell1.className='col-xs-1';
+            // Cell1.className='col-xs-1';
 
             var Cell2 = table_h_r.insertCell(1);
-            Cell2.className='col-xs-8';
+            // Cell2.className='col-xs-8';
 
             var Cell3 = table_h_r.insertCell(2);
-            Cell3.className='col-xs-3';
+            // Cell3.className='col-xs-3';
 
             // Cell1.innerHTML = 'コード';
             // Cell2.innerHTML = '銘柄名';
@@ -358,11 +422,13 @@ $(document).on('ready', function() {
 
                 // もしポートフォリオ欄に同じコードがする場合、追加済みボタンにする
                 if(codes.indexOf(data["code"][i])>=0){
-                    Cell3.innerHTML = '<td><button class="btn btn-default" disabled>追加済</button></td>';
+                    Cell3.innerHTML = '<td><button class="btn btn-sm btn-default" style="font-size: 12px; padding:0px" disabled>追加済</button></td>';
                 }else{
-                    Cell3.innerHTML = '<td><button class="search-result-btn btn btn-warning">追　加</button></td>';
+                    Cell3.innerHTML = '<td><button class="search-result-btn btn btn-sm btn-warning" style="font-size:12px; padding:0px;">追　加</button></td>';
                 };
                 Cell3.className = "table-string";
+                // Cell3.style="padding: 0.75rem 0px";
+
             };
         };
       })
@@ -417,7 +483,7 @@ $(document).on('ready', function() {
     //ここのコードをif文のあとに入れないと、alertが出て登録されなくても「追加済」になってしまう
     //buttonを押した要素のbuttonを追加->追加済に変更する
     var btnCell = tr.cells[2];
-    btnCell.innerHTML ='<td><button class="btn btn-default" disabled>追加済</button></td>';
+    btnCell.innerHTML ='<td><button class="btn btn-sm btn-default" style="padding:0px; font-size:12px;" disabled>追加済</button></td>';
 
     // tbodyにtrを追加していく
     var rows = tbody.insertRow(-1);
@@ -431,7 +497,7 @@ $(document).on('ready', function() {
     // 作成したセルを取得して値を入れる
     cell1.innerHTML = code;
     cell2.innerHTML = name;
-    cell3.innerHTML = '<button class="btn btn-warning remove">削　除</button>';
+    cell3.innerHTML = '<button class="btn btn-sm btn-warning remove" style="font-size:12px; padding:0px;">削　除</button>';
   });
 
   // --------------------------------------------------------------
@@ -475,6 +541,9 @@ $(document).on('ready', function() {
           opt_chart(data);
           //平均値とリスクを描写するコード
           opt_table(data);
+
+          scroll_to_opt();
+
           //最適化結果をもとにシミュレーションするコード
           simulate(data);
       })

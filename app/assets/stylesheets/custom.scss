@@ -6,7 +6,7 @@
 //サイドバーの背景色を指定する
 .left-bar{
     background-color:#4C72DE;
-    height:2500px;
+    height:2000px;
 }
 
 .fix-menu{
@@ -23,7 +23,7 @@
 }
 
 .table-string{
-    font-size:5px;
+    font-size:10px;
 }
 
 .logout{
@@ -54,12 +54,14 @@ a{
     padding-top:20px;
 }
 
+//検索欄
 .search-row {
     display:inline-block;
     margin-top:20px;
     margin-bottom: 20px;
 }
 
+//ポートフォリオ追加欄
 .mychart{
     display:inline-block;
     margin-top:20px;
@@ -76,7 +78,16 @@ a{
     font-size:5px;
 }
 
-tr{
-  height:25;
+
+//最適化グラフ
+.port-chart{
+    display:inline-block;
 }
+
+//最適化計算後のリスクとリターン
+.port-datas{
+    display:inline-block;
+}
+
+
 

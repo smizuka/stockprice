@@ -108,13 +108,15 @@ class SimulationsController < ApplicationController
         start_price=0
         i=0
         prices.each do |price|
-            start_price+=price*obtain_stocks[i]
+            start_price+=price*obtain_stocks[i]*100
+            puts price
+            puts obtain_stocks[i]
+            puts start_price
+            puts "-------------------------"
             i+=1
         end
 
         n= return_datas.length-1
-
-        print n
 
         res ={
             "return": return_datas,
