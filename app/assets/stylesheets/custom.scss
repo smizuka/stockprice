@@ -1,5 +1,5 @@
 //全体の背景を指定する
-.body{
+body{
     background-color:#F8F9FC;
 }
 
@@ -8,6 +8,8 @@
     background-color:#4C72DE;
     height:2000px;
 }
+
+//4F73DF
 
 .fix-menu{
     background-color:#4C72DE;
@@ -37,7 +39,7 @@ li{
 //サイドナビのaタグの色を白にするコード
 a{
     font-size:15px;
-    color:white;
+    color:#FFFFFF;
 }
 
 //右側の行間にラインを描く
@@ -48,6 +50,7 @@ a{
 //右側の行間にラインを描く
 .right-row-header{
     border-bottom:solid 1px #bdc3c7;
+    background-color:white;
 }
 
 .search-alert{
@@ -57,15 +60,15 @@ a{
 //検索欄
 .search-row {
     display:inline-block;
-    margin-top:20px;
-    margin-bottom: 20px;
+    //margin-top:20px;
+    //margin-bottom: 20px;
 }
 
 //ポートフォリオ追加欄
 .mychart{
     display:inline-block;
-    margin-top:20px;
-    margin-bottom: 20px;
+    //margin-top:20px;
+    //margin-bottom: 20px;
 }
 
 .port-area{
@@ -88,6 +91,29 @@ a{
 .port-datas{
     display:inline-block;
 }
+
+//card-header
+.card-header {
+    //border-bottom: 0px solid rgba(0,0,0,.125);
+}
+
+//カードのヘッド名についての設定
+h5{
+    color:#4C72DE;
+    font-size:1.0rem;
+}
+
+//メインコンテンツエリアの設定
+//両幅のpaddingを０にして上書き
+.main-col{
+    padding-left:0px;
+    padding-right:0px;
+}
+
+
+
+
+
 
 
 

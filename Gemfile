@@ -34,6 +34,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :
 
+# 画像を送受信するためのgem
+gem "carrierwave"
+
 # この行を追加する
 gem 'bootstrap-sass'
 

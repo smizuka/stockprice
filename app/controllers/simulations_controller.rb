@@ -3,6 +3,7 @@ class SimulationsController < ApplicationController
     require 'net/http'
     require 'uri'
     require 'json'
+    require 'base64'
 
     def calc
 
@@ -71,6 +72,7 @@ class SimulationsController < ApplicationController
         # 各データの日数分のシミュレーションデータが入っている
         sim_datas = JSON.parse(res.body)
 
+        # 比率を入れていくリスト
         results=[]
 
         i=0
@@ -109,10 +111,6 @@ class SimulationsController < ApplicationController
         i=0
         prices.each do |price|
             start_price+=price*obtain_stocks[i]*100
-            puts price
-            puts obtain_stocks[i]
-            puts start_price
-            puts "-------------------------"
             i+=1
         end
 

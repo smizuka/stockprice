@@ -3,23 +3,12 @@ $(document).on('ready', function(){
     hsize = $(window).height()/3;
     $(".top-col").css("height", hsize + "px");
 
-    //チャートのインスタンスを削除する
-    $('#port-chart2').mousemove(function(){
-        console.log("move")
-    });
-
-    $('#port-chart2').mouseover(function(){
-        console.log("over")
-    });
-
-    $('#port-chart2').mouseleave(function(){
-        console.log("leave")
-    });
-
-    $('#port-chart2').mouseout(function(){
-        console.log("out")
-    });
+    // hsize = $(window).height();
+    // $(".left-bar").css("height", hsize + "px");
 });
+
+//chart.jsの際にchartインスタンスが入っていたらオブジェクト
+var chart_sim = null;
 
 // --------------------------------------------------------------
 //ポートフォリオの削除が行われた際に検索欄にあるbuttonの表示を
@@ -125,28 +114,18 @@ function sim_chart(data) {
         }
     };
 
-    // var ctx = document.getElementById("port-chart1").getContext('2d');
     var ctx2 = $('#port-chart2')[0].getContext("2d");
 
-    // console.log(chart2);
-
-    // if( chart2 ){
-    //     chart2.destroy();
-    // };
-    //グラフ描画
-    // var char = new Chart(ctx).Line(BarDatas,options);
-    var chart2 = new Chart(ctx2,lineDatas);
+    //chart_simの中にインスタンスが入っていたら更新、入っていなければ新規作成
+    if(chart_sim){
+        chart_sim.data.labels=index;
+        chart_sim.data.datasets=result_datas;
+        chart_sim.update();
+    }else{
+        chart_sim= new Chart(ctx2,lineDatas);
+    };
 
 }
-
-
-
-// $("div").mousemove(function(e){
-//   var pageCoords = "( " + e.pageX + ", " + e.pageY + " )";
-//   var clientCoords = "( " + e.clientX + ", " + e.clientY + " )";
-//   $("span:first").text("( e.pageX, e.pageY ) : " + pageCoords);
-//   $("span:last").text("( e.clientX, e.clientY ) : " + clientCoords);
-// });
 
 // --------------------------------------------------------------
 //ポートフォリオの削除が行われた際に検索欄にあるbuttonの表示を

@@ -35,6 +35,13 @@ Rails.application.routes.draw do
   # シミュレートしてみる
   post "simulations/calc",to: "simulations#calc"
 
+
+  # 時系列分析のトップページ
+  get "analyses/index"
+
+  # 時系列データ結果を表示する
+  post "analyses/calc",to: "analyses#calc"
+
   #管理画面
   get "admins/admin"
   #ファイルのアップロード

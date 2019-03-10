@@ -26,11 +26,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                      <span>
-                          <i class="fas fa-search"></i>
-                      </span>
-                      選ぶ
+                    <a class="nav-link" href="/analyses/index">
+                        <span>
+                            <i class="fas fa-search"></i>
+                        </span>
+                        時系列分析
                     </a>
                 </li>
                 <li class="nav-item">
@@ -38,15 +38,15 @@
                         <span>
                             <i class="fas fa-adjust"></i></i>
                         </span>
-                        最適化
+                        ポートフォリオ作成
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                      <span>
-                          <i class="fas fa-calculator"></i>
-                      </span>
-                      シミュレート
+                        <span>
+                            <i class="fas fa-calculator"></i>
+                        </span>
+                        マイポートフォリオ
                     </a>
                 </li>
                 <!-- ボーダーライン -->
@@ -75,22 +75,29 @@
 
     <!-- メインカラム -->
     <div class="col-10 main-col">
-        <div id="page_top" class="right-row-header">
+
+        <div id="page_top" class="right-row-header shadow">
             <h1 class="text-center">DashBoard</h1>
         </div>
 
-        <!-- <h1>2段目</h1> -->
-        <div class="col-12 right-row">
+        <div class="col-12 mb-4 mt-4">
+          <div class="card border-primary h-100 bg-light shadow">
+            <div class="card-body">
+              <h1>サンプル</h1>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 mb-4 mt-4">
             <!-- 検索画面 -->
             <div class="col-5 offset-1 search-row">
                 <div class="card bg-light shadow">
-                    <h5 class="card-header text-center">
-                        銘柄検索
+                    <h5 class="card-header">
+                        Search
                     </h5>
-                    <!-- 検索欄 -->
                     <div class="card-body" style="min-height:400px; max-height:400px;">
                         <div class="input-group">
-                            <input id="search-form" type="text" class="form-control" placeholder="銘柄名、コードを入力してください" aria-label="...">
+                            <input id="search-form" type="text" class="form-control mr-1" placeholder="銘柄名、コード" aria-label="...">
                             <span class="input-group-btn">
                               <button id="search-button" type="button" class="btn btn-warning">検索</button>
                             </span>
@@ -104,8 +111,8 @@
             <!-- ポートフォリオ -->
             <div class="col-5 search-row">
                 <div class="card bg-light shadow">
-                    <h5 class="card-header text-center">
-                        ポートフォリオ
+                    <h5 class="card-header">
+                        Portfolio
                     </h5>
                     <div class="card-body" style="min-height:350px;">
                         <div class="port-area" style="min-height:307px; max-height:307px;">
@@ -128,78 +135,97 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
         <!-- 最適化結果を入れる -->
-        <div class="col-12 right-row">
+        <div class="col-12 mb-4">
             <div class="col-12 mychart">
-                <!-- カード要素内 -->
                 <div class="card bg-light shadow">
-                    <h5 class="card-header text-center">
-                        最適化結果
+                    <h5 class="card-header">
+                        Optimization
                     </h5>
                     <div class="card-body" style="min-height:350px;">
-                      <!-- リスク１ -->
                         <div class="col-12">
                             <div class="col-8 port-chart">
                                 <canvas id="port-chart1" width="100%" height="80%"></canvas>
                             </div>
-                            <div class="col-3 port-datas">
-                                <table class="table bg-info">
-                                    <thead>
-                                        <tr>
-                                          <td></td>
-                                          <td>利益</td>
-                                          <td>リスク</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="opt-result-table">
-                                        <tr>
-                                          <td style="height: 70px;">1</td>
-                                          <td></td>
-                                          <td></td>
-                                        </tr>
-                                        <tr>
-                                          <td style="height: 70px;">2</td>
-                                          <td></td>
-                                          <td></td>
-                                        </tr>
-                                        <tr>
-                                          <td style="height: 70px;">3</td>
-                                          <td></td>
-                                          <td></td>
-                                        </tr>
-                                        <tr>
-                                          <td style="height: 70px;">4</td>
-                                          <td></td>
-                                          <td></td>
-                                        </tr>
-                                        <tr>
-                                          <td style="height: 70px;">5</td>
-                                          <td></td>
-                                          <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-12">
-                                <!-- シュミレーション計算をする -->
-                                <div class="input-group">
-                                    <input id="simulation-day" type="text" class="form-control mr-1" placeholder="予想日数 ~200日">
-                                    <input id="simulation-select" type="text" class="form-control mr-1" placeholder="選択肢 1~5">
-                                    <input id="simulation-price" type="text" class="form-control mr-1" placeholder="投資金額 50万円~">
-                                    <span class="input-group-btn">
-                                      <button id="simulation-button" type="button" class="btn btn-warning">計算する</button>
-                                    </span>
-                                </div>
+                            <div class="col-3 port-datas mb-5">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- 最適化結果を入れる -->
-        <div class="col-12 right-row">
+
+        <div class="col-12 mb-4">
+            <div class="card bg-light shadow">
+                <h5 class="card-header text-center">
+                    条件指定
+                </h5>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                              <td style="height: 30px;"></td>
+                              <td>利益</td>
+                              <td>リスク</td>
+                            </tr>
+                        </thead>
+                        <tbody id="opt-result-table">
+                            <tr>
+                              <td style="height: 80px;">1</td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td style="height: 80px;">2</td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td style="height: 80px;">3</td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td style="height: 80px;">4</td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td style="height: 80px;">5</td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 mb-4">
+            <div class="card bg-light shadow">
+                <h5 class="card-header text-center">
+                    条件指定
+                </h5>
+                <div class="card-body">
+                    <div class="col-10 offset-1">
+                        <div class="input-group">
+                            <input id="simulation-day" type="text" class="form-control mr-1" placeholder="予想日数 ~200日">
+                            <input id="simulation-select" type="text" class="form-control mr-1" placeholder="選択肢 1~5">
+                            <input id="simulation-price" type="text" class="form-control mr-1" placeholder="投資金額 50万円~">
+                            <span class="input-group-btn">
+                              <button id="simulation-button" type="button" class="btn btn-warning">計算する</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- シミュレーション結果 -->
+        <div class="col-12">
             <div class="col-12 mysim">
                 <div class="card bg-light shadow">
                     <h5 class="card-header text-center">
@@ -217,10 +243,13 @@
                 </div>
             </div>
         </div>
+
       </div>
     </div>
   </div>
 </div>
+
+
 
 <script>
 // --------------------------------------------------------------
