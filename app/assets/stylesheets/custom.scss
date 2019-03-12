@@ -11,6 +11,24 @@ body{
     background-position: center;
 }
 
+//シミュレーション結果を表示するためのボタンの設定
+#simulation-day{
+    color:white;
+    background-color:#4C72DE;
+    border-color:#4C72DE;
+}
+#simulation-select{
+    color:white;
+    background-color:#4C72DE;
+    border-color:#4C72DE;
+}
+#simulation-price{
+    color:white;
+    background-color:#4C72DE;
+    border-color:#4C72DE;
+}
+
+
 //トップ画面の設定
 .top-div-height{
     height: 100vh;
