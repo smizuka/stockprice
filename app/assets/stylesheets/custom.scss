@@ -11,13 +11,53 @@ body{
     background-position: center;
 }
 
-.top-height{
+//トップ画面の設定
+.top-div-height{
     height: 100vh;
+    position:relative;
+}
+.top-div-h-middle{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: 700px;
+    height: 350px;
 }
 
-.top-button{
-    //親要素に対して上下中央寄せ
-    vertical-align: middle;
+//サインアップ画面の設定
+.signup-div-height{
+    height: 100vh;
+    position:relative;
+}
+.signup-div-h-middle{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: 350px;
+    height: 500px;
+}
+
+//ログイン画面のcardを入れるdivの縦方向の長さを決める
+.login-div-height{
+    height: 100vh;
+    position:relative;
+}
+//ログイン画面のcardを上下方向に中央寄せ
+.login-div-h-middle{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: 350px;
+    height: 350px;
 }
 
 //サイドバーの仕切り
@@ -28,6 +68,11 @@ body{
 //ユーザー認証のドロップダウンの矢印を非表示にする
 .user-button.dropdown-toggle::after{
     display:none;
+}
+
+//ユーザーアイコンの中の文字の色
+.user-button{
+    color: #6889E4;
 }
 
 //メインアイコンの色
@@ -47,13 +92,22 @@ body{
     height:2000px;
     //height: 100vh;
 }
-
+//サイドバーに関する設定
 .fix-menu{
     background-color:#4C72DE;
     position: sticky;
     top:0px;
     height:200px;
     width:100%;
+}
+
+//ページトップを固定する
+#page-top{
+    //position: fixed;
+    //top: 0px;
+    //left: 204px;
+    //width: 100%;
+    //height: 140px;
 }
 
 .user-name{
@@ -65,7 +119,7 @@ body{
     font-size:10px;
 }
 
-
+//サイドバーのリスト形式を無効にする設定
 li{
     list-style:none;
 }

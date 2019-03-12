@@ -1,72 +1,62 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="row">
-        <!-- 左側（空欄） -->
-        <div class="col-md-4">
+    <div class="row">
+        <div class="col-4 offset-4 signup-div-height">
+            <!-- login-cardはcard要素の縦方向の位置を決める -->
+            <div class="card bg-light shadow signup-div-h-middle">
+                <div class="card-body" style="min-height:500px;">
+                    <h3 class="text-center text-primary">新規ユーザー登録</h1>
+                    <%= form_for :user , url: users_create_path do |f|%>
+                    <%#= form_for @user do |f|%>
+                      <div class="form-group">
+                        <%= f.label :name, class: 'text-primary'%>
+                        <%= f.text_field :name, class: 'form-control'%>
+
+                        <% if @user.errors.any? %>
+                          <% @user.errors.full_messages_for(:name).each do |message| %>
+                           <p class="text-primary"><%= message %></p>
+                          <% end %>
+                        <% end %>
+
+                      </div>
+                      <div class="form-group">
+                        <%= f.label :email, class: "text-primary"%>
+                        <%= f.text_field :email, class: "form-control"%>
+
+                        <% if @user.errors.any? %>
+                          <% @user.errors.full_messages_for(:email).each do |message| %>
+                            <p class="text-primary"><%= message %></p>
+                          <% end %>
+                        <% end %>
+
+                      </div>
+                      <div class="form-group">
+                        <%= f.label :password,class: "text-primary"%>
+                        <%= f.password_field :password,class: "form-control" %>
+
+                        <% if @user.errors.any? %>
+                          <% @user.errors.full_messages_for(:password).each do |message| %>
+                            <p class="text-primary"><%= message %></p>
+                          <% end %>
+                        <% end %>
+
+                      </div>
+                      <div class="form-group">
+                        <%= f.label :password_confirmation,class: "text-primary" %>
+                        <%= f.password_field :password_confirmation,class: "form-control" %>
+
+                        <% if @user.errors.any? %>
+                          <% @user.errors.full_messages_for(:password_confirmation).each do |message| %>
+                            <p class="text-primary"><%= message %></p>
+                          <% end %>
+                        <% end %>
+
+                      </div>
+                      <%= f.submit "登録",class: "btn btn-block btn-primary"%>
+                    <% end %>
+                    <%= link_to "ログインはこちら",root_path,class: "text-primary"%>
+                </div>
+            </div>
         </div>
-        <!-- 中央 -->
-        <div class="col-md-4 form-custom">
-          <div class="col-md-8 col-md-offset-2">
-            <h3 class="text-center text-white">新規ユーザー登録</h1>
-
-            <p>テスト用アカウント</p><br><p>名前：test</p><br><p>email：test@test.com</p><br><p>password：Test1234</p>
-
-            <%= form_for :user , url: users_create_path do |f|%>
-            <%#= form_for @user do |f|%>
-              <div class="form-group">
-                <%= f.label :name, class: 'text-white'%>
-                <%= f.text_field :name, class: 'form-control'%>
-
-                <% if @user.errors.any? %>
-                  <% @user.errors.full_messages_for(:name).each do |message| %>
-                   <p class="text-white"><%= message %></p>
-                  <% end %>
-                <% end %>
-
-              </div>
-              <div class="form-group">
-                <%= f.label :email, class: "text-white"%>
-                <%= f.text_field :email, class: "form-control"%>
-
-                <% if @user.errors.any? %>
-                  <% @user.errors.full_messages_for(:email).each do |message| %>
-                    <p class="text-white"><%= message %></p>
-                  <% end %>
-                <% end %>
-
-              </div>
-              <div class="form-group">
-                <%= f.label :password,class: "text-white"%>
-                <%= f.password_field :password,class: "form-control" %>
-
-                <% if @user.errors.any? %>
-                  <% @user.errors.full_messages_for(:password).each do |message| %>
-                    <p class="text-white"><%= message %></p>
-                  <% end %>
-                <% end %>
-
-              </div>
-              <div class="form-group">
-                <%= f.label :password_confirmation,class: "text-white" %>
-                <%= f.password_field :password_confirmation,class: "form-control" %>
-
-                <% if @user.errors.any? %>
-                  <% @user.errors.full_messages_for(:password_confirmation).each do |message| %>
-                    <p class="text-white"><%= message %></p>
-                  <% end %>
-                <% end %>
-
-              </div>
-              <%= f.submit "登録",class: "btn btn-block btn-primary"%>
-            <% end %>
-            <%= link_to "ログインはこちら",root_path,class: "text-white"%>
-          </div>
-        </div>
-        <!-- 右側(空欄) -->
-        <div class="col-md-4">
-        </div>
-      </div>
     </div>
-  </div>
 </div>
+

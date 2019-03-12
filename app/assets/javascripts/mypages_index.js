@@ -7,6 +7,7 @@ $(document).on('ready', function(){
     // $(".left-bar").css("height", hsize + "px");
 });
 
+//ドロップダウン設定
 $(document).on('ready', function(){
     $('.dropdown-menu .dropdown-item').click(function(){
         var visibleItem = $('.dropdown-toggle', $(this).closest('.dropdown'));

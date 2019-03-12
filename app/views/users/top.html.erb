@@ -1,18 +1,18 @@
 <div class="top-bg">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
-                <div class="col-6 offset-3 top-height">
-                    <div class="col-5 inline-block top-button">
+            <div class="col-6 offset-3 top-div-height">
+                <div class="top-div-h-middle">
+                    <div class="col-5 inline-block">
                       <%= button_to "Sign up", {controller: 'users', action: 'signup'}, {method: :get,class: 'btn btn-block btn-primary'} %>
                     </div>
 
                     <% if logged_in? %>
-                        <div class="col-5 offset-1 inline-block top-button">
+                        <div class="col-5 offset-1 inline-block">
                             <%= button_to "Log in", {controller: 'mypages', action: 'index'}, {method: :get,class: 'btn btn-block btn-primary'}%>
                         </div>
                     <% else %>
-                        <div class="col-5 offset-1 inline-block top-button">
+                        <div class="col-5 offset-1 inline-block">
                             <%= button_to "Log in", {controller: 'users', action: 'login'}, {method: :get,class: 'btn btn-block btn-primary'}%>
                         </div>
                     <% end %>
