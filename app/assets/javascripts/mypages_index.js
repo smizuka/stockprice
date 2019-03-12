@@ -7,6 +7,13 @@ $(document).on('ready', function(){
     // $(".left-bar").css("height", hsize + "px");
 });
 
+$(document).on('ready', function(){
+    $('.dropdown-menu .dropdown-item').click(function(){
+        var visibleItem = $('.dropdown-toggle', $(this).closest('.dropdown'));
+        visibleItem.text($(this).attr('value'));
+    });
+});
+
 //chart.jsの際にchartインスタンスが入っていたらオブジェクト
 var chart_sim = null;
 
@@ -32,8 +39,7 @@ function changeButton(code){
 }
 
 // --------------------------------------------------------------
-//ポートフォリオの削除が行われた際に検索欄にあるbuttonの表示を
-//追加済から追加に変更する関数
+//シミュレーション結果を表示するコード
 // --------------------------------------------------------------
 function sim_chart(data) {
 
@@ -42,16 +48,22 @@ function sim_chart(data) {
     datas.length;
 
     // console.log(data["start"])
-    console.log("開始"+data["start"])
-    console.log("終了"+data["end"])
+    // console.log("開始"+data["start"])
+    // console.log("終了"+data["end"])
 
     // 収益率を算出する
     r_rate = (data["end"]-data["start"])/data["start"]*100
     console.log(r_rate)
     r_rate2 = Math.round(r_rate * 10) / 10
 
-    var p = $("#return-result").children()[0]
-    p.innerHTML=r_rate2
+    // var p = $("#return-result")[0].children();
+    var p = $("#return-result").children()[0];
+    p.innerHTML=r_rate2+" %";
+    if(r_rate2<0){
+        p.className="text-primary text-center";
+    }else{
+        p.className="text-danger text-center";
+    }
 
     for (var i=0; i<datas.length; i++) {
         index.push(i+1);
@@ -66,7 +78,7 @@ function sim_chart(data) {
     }];
 
     // --------------------------------------------------------------
-    //グラフの部分
+    //シミュレーション結果を表示するコード
     // --------------------------------------------------------------
     var lineDatas={
         type: "line",
@@ -78,6 +90,7 @@ function sim_chart(data) {
             responsive: true,
             legend:{
                 display: false
+
                 // position: 'bottom'
             },
             scales:{
@@ -86,7 +99,7 @@ function sim_chart(data) {
                         ticks: {
                             max: index,
                             min: 0,
-                            stepSize:2
+                            stepSize:10
                         },
                         gridLines: {
                           display: false,
@@ -114,7 +127,7 @@ function sim_chart(data) {
         }
     };
 
-    var ctx2 = $('#port-chart2')[0].getContext("2d");
+    var ctx3 = $('#port-chart3')[0].getContext("2d");
 
     //chart_simの中にインスタンスが入っていたら更新、入っていなければ新規作成
     if(chart_sim){
@@ -122,9 +135,8 @@ function sim_chart(data) {
         chart_sim.data.datasets=result_datas;
         chart_sim.update();
     }else{
-        chart_sim= new Chart(ctx2,lineDatas);
+        chart_sim= new Chart(ctx3,lineDatas);
     };
-
 }
 
 // --------------------------------------------------------------
@@ -153,7 +165,9 @@ function opt_chart(data) {
         result_datas.push(dic);
     };
 
-    // グラフにするデータ
+    // --------------------------------------------------------------
+    //銘柄比率を表示するチャート
+    // --------------------------------------------------------------
     var BarDatas={
         type: "horizontalBar",
         data: {
@@ -165,7 +179,7 @@ function opt_chart(data) {
             title: {
                 display: true,
                 // fontSize: 50,
-                // text: "帯グラフ"
+                text: "各銘柄の比率"
             },
             legend: {
                 position: 'bottom'
@@ -201,11 +215,77 @@ function opt_chart(data) {
         }
     };
 
-    // var ctx = document.getElementById("port-chart1").getContext('2d');
     var ctx = $('#port-chart1')[0].getContext("2d");
-    //グラフ描画
-    // var char = new Chart(ctx).Line(BarDatas,options);
     var char = new Chart(ctx,BarDatas);
+
+    // --------------------------------------------------------------
+    //リスクとリターンを表示するチャート
+    // --------------------------------------------------------------
+    var datas = [
+    {
+        label: 'リターン',
+        data: data["risk"][0],
+        borderColor : "rgba(254,97,132,0.8)",
+        backgroundColor : "rgba(254,97,132,0.5)",
+    },
+    {
+        label: 'リスク',
+        data: data["risk"][1],
+        borderColor : "rgba(54,164,235,0.8)",
+        backgroundColor : "rgba(54,164,235,0.5)",
+    },
+    ]
+
+    var BarDatas={
+        type: "horizontalBar",
+        data: {
+            labels: ["選択１","選択２","選択３","選択４","選択５"],
+            datasets:datas
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                // fontSize: 50,
+                text: "リターンとリスク"
+            },
+            legend: {
+                position: 'bottom'
+            },
+            scales: {
+                xAxes: [
+                    {
+                        // stacked: true,
+                        ticks: {
+                            max: 10,
+                            min: -5,
+                            stepSize:3
+                        },
+                        gridLines: {
+                          display: false,
+                          drawBorder: true
+                        }
+                    }
+                ],
+                yAxes: [
+                    {
+                        // stacked: true,
+                        scaleLabel: {
+                            fontSize: 100,
+                        },
+                        gridLines: {
+                          display: false,
+                          drawBorder: true
+                        }
+                    }
+                ]
+            }
+        }
+    };
+
+    var ctx2 = $('#port-chart2')[0].getContext("2d");
+    var char2 = new Chart(ctx2,BarDatas);
+
 }
 
 // --------------------------------------------------------------
@@ -232,14 +312,17 @@ function simulate(data){
   $(document).on('click','#simulation-button',function(){
 
     // 入力された値を取得する
-    var day = $("#simulation-day")[0].value;
-    var select = $("#simulation-select")[0].value;
-    var price = $("#simulation-price")[0].value;
+    var day = $("#simulation-day")[0].innerHTML;
+    var select = $("#simulation-select")[0].innerHTML;
+    var price = $("#simulation-price")[0].innerHTML;
+
+    var price2=price.slice(0,3);
+    var price3=Number(price2)*10000;
 
     //価格が50万円以下であるとエラー
-    if(price<500000){
-      return alert("最低投資金額は５０万円です");
-    }
+    // if(price<500000){
+    //   return alert("最低投資金額は５０万円です");
+    // }
 
     //１〜５以外の値を入力するとエラー
     if(select > 5 || select==0){
@@ -260,7 +343,7 @@ function simulate(data){
                 'weight':data["weights"],
                 'sigma':data["std"],
                 'select':select,
-                'price':price
+                'price':price3
             }
         })
         .done((data) => {
@@ -519,7 +602,7 @@ $(document).on('ready', function() {
           // グラフを描写するコード
           opt_chart(data);
           //平均値とリスクを描写するコード
-          opt_table(data);
+          // opt_table(data);
 
           scroll_to_opt();
 

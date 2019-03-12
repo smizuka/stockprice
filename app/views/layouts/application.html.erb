@@ -11,7 +11,11 @@
     <%#= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= Gon::Base.render_data %>
 <!--     bootstrapよりもcssの優先順位をあげたい場合、custom.scssの読み込むをbootstrapよりも後にする -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <%= stylesheet_link_tag 'application', media: 'all' %>
 
     <meta charset="utf-8">

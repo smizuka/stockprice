@@ -95,6 +95,7 @@ class SimulationsController < ApplicationController
 
         #ポートフォリオの予想収益結果を入れるリスト
         return_datas=[]
+
         for i in 0..r do
             #各銘柄の各行の値にウェイトを乗じて合計したものを一時的に入れる変数
             data=0
@@ -118,7 +119,7 @@ class SimulationsController < ApplicationController
 
         res ={
             "return": return_datas,
-            "start": start_price,
+            "start": return_datas[0],
             "end": return_datas[n]
         }
 

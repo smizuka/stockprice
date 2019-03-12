@@ -16,8 +16,8 @@ class AnalysesController < ApplicationController
 
       codes.each do |code|
           value=Stock.code_index(code).pluck(:adjust)
-          name=Stock.find_by(code: code).name
-          stock_prices[name]=value
+          # name=Stock.find_by(code: code).name
+          stock_prices[code]=value
       end
 
       # APIに送るためにhash形式にする
@@ -40,9 +40,12 @@ class AnalysesController < ApplicationController
       #https://docs.ruby-lang.org/ja/latest/class/Base64.html
       bin = Base64.decode64(ana_datas["data"])
 
-      File.open("./app/assets/images/analysis_result.jpg",'wb') do|f|
+      File.open("./app/assets/images/analysis_result.png",'wb') do|f|
           f.write(bin)
       end
+
+      # 「app/assets/images」ディレクトリに配置した画像ファイルは「/assets/画像ファイル名」で参照できるようになります)。
+      res={"url": "/assets/analysis_result.png"}
 
       render json: res.to_json
 

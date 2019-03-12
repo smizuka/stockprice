@@ -1,84 +1,102 @@
 <div class="container-fluid">
     <div class="row">
 
-        <!-- 左側カラム -->
-        <div class="col-2 left-bar">
-            <div class="fix-menu">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">こんにちは !</a>
-                    </li>
-                    <li class="nav-item">
-                        <p class="user-name text-center"><%= current_user.name %> さん</p>
-                    </li>
+    <!-- 左側カラム -->
+    <div class="col-2 left-bar">
+        <div class="fix-menu">
+            <ul class="nav flex-column">
+                <h5 class="top-icon text-center mt-3 pb-3 under-line">
+                    Piggy bank
+                    <span>
+                        <i class="fas fa-piggy-bank fa-2x"></i>
+                    </span>
+                </h5>
 
-                    <!-- ボーダーライン -->
-                    <div class="border-bottom">
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                      <span>
+                          <i class="fas fa-exclamation-circle"></i>
+                      </span>
+                      はじめに
+                    </a>
+                </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                          <span>
-                              <i class="fas fa-exclamation-circle"></i>
-                          </span>
-                          はじめに
-                        </a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <span>
+                            <i class="fas fa-search"></i>
+                        </span>
+                        時系列分析
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/mypages/index">
+                        <span>
+                            <i class="fas fa-adjust"></i></i>
+                        </span>
+                        ポートフォリオ作成
+                    </a>
+                </li>
+                <li class="nav-item under-line">
+                    <a class="nav-link" href="#">
+                        <span>
+                            <i class="fas fa-calculator"></i>
+                        </span>
+                        マイポートフォリオ
+                    </a>
+                </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span>
-                                <i class="fas fa-search"></i>
-                            </span>
-                            時系列分析
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/mypages/index">
-                            <span>
-                                <i class="fas fa-adjust"></i></i>
-                            </span>
-                            ポートフォリオ作成
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span>
-                                <i class="fas fa-calculator"></i>
-                            </span>
-                            マイポートフォリオ
-                        </a>
-                    </li>
-                    <!-- ボーダーライン -->
-                    <div class="border-bottom">
-                    </div>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-left logout" href="#">
-                          <span>
-                              <i class="fas fa-user-edit"></i>
-                          </span>
-                          登録情報変更
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-left logout" href="#">
-                          <span>
-                              <i class="fas fa-sign-out-alt"></i>
-                          </span>
-                          ログアウト
-                        </a>
-                    </li>
-                </ul>
-            </div>
+<!--                 <li class="nav-item">
+                    <a class="nav-link text-left mt-3" href="#">
+                      <span>
+                          <i class="fas fa-user-edit"></i>
+                      </span>
+                      登録情報変更
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-left logout" href="#">
+                      <span>
+                          <i class="fas fa-sign-out-alt"></i>
+                      </span>
+                      ログアウト
+                    </a>
+                </li> -->
+            </ul>
         </div>
+    </div>
 
         <!-- メインカラム -->
-        <div class="col-10 main-col mt-5">
-            <div class="card bg-light shadow col-8 offset-2">
+        <div class="col-10 main-col">
+            <div id="page_top" class="col-12 shadow" style="min-height:62px;">
+
+                <div class="col-2 offset-10 border-left btn-group inline-block">
+                      <button type="button" class="btn btn-default dropdown-toggle user-button" data-toggle="dropdown">
+                              <%= current_user.name %>
+                              <span>
+                                  <i class="far fa-user fa-2x"></i>
+                              </span>
+                      </button>
+                      <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">
+                              <span>
+                                  <i class="fas fa-user-edit"></i>
+                              </span>
+                              登録情報変更
+                            </a>
+                            <a class="dropdown-item" href="/users/destroy">
+                              <span>
+                                  <i class="fas fa-sign-out-alt"></i>
+                              </span>
+                              ログアウト
+                            </a>
+                      </div>
+                </div>
+            </div>
+
+            <div class="card bg-light mt-5 shadow col-8">
                 <h5 class="card-header text-center">
                     銘柄のコードを指定してください（最大５つまで指定できます）
-                    <br>7201,7203,7261
                 </h5>
                 <div class="card-body">
                     <div class="input-group">
@@ -93,18 +111,15 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- メインカラム -->
-        <div class="col-10 main-col mt-5">
-            <div class="card bg-light shadow col-8 offset-2">
-                <h5 class="card-header text-center">
-                    銘柄のコードを指定してください（最大５つまで指定できます）
-                </h5>
-                <div id="analyses-result" class="card-body">
 
+            <div class="col-8 mt-5">
+                <div class="card bg-light shadow col-10 offset-2" style="min-height:350px; min-width:350px;">
+                    <img id="analyses-result" src="/assets/analysis_result.png" width="500" height="500" />
                 </div>
             </div>
+
         </div>
+
 
     </div>
 </div>

@@ -63,7 +63,7 @@ class UsersController < ApplicationController
 
   #ログアウトするときのセッション
   def log_out
-    sesison.delete(:user_id)
+    session.delete(:user_id)
     @current_user=nil
   end
 

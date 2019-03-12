@@ -38,13 +38,25 @@ class OptimizationsController < ApplicationController
 
     #各ポートフォリオの目標リターン、想定リスク
     data1=[]
+    risks=[]
+    returns=[]
 
     # 各ポートフォリオの目標リターン(target)、想定リスク(risk)
+    # for i in 0..4 do
+    #     # n2=[i+1,opt_datas["target"][i].round(2),opt_datas["risk"][i].round(2)]
+    #     n2=[opt_datas["target"][i].round(2),opt_datas["risk"][i].round(2)]
+    #     data1.push(n2)
+    # end
+
+    # 各ポートフォリオの目標リターン(target)、想定リスク(risk)、チャート表示用
     for i in 0..4 do
-        n2=[i+1,opt_datas["target"][i].round(2),opt_datas["risk"][i].round(2)]
-        n2=[opt_datas["target"][i].round(2),opt_datas["risk"][i].round(2)]
-        data1.push(n2)
+        returns.push(opt_datas["target"][i].round(2))
+        risks.push(opt_datas["risk"][i].round(2))
     end
+
+    #リターン、リスクの順番で値の入ったリスト
+    data1.push(returns)
+    data1.push(risks)
 
     #各ポートフォリオにおける、各銘柄の比率を収納していくリスト
     data2=[]

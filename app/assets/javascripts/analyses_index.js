@@ -23,7 +23,9 @@ $(document).on('ready', function(){
             }
         })
         .done((data) => {
-          // 実施した結果をチャート表示する関数
+          img=$("#analyses-result")[0]
+          console.log(img)
+          img.src=data["url"];
 
         })
         .fail((data) => {

@@ -5,16 +5,12 @@
     <div class="col-2 left-bar">
         <div class="fix-menu">
             <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">こんにちは !</a>
-                </li>
-                <li class="nav-item">
-                    <p class="user-name text-center"><%= current_user.name %> さん</p>
-                </li>
-
-                <!-- ボーダーライン -->
-                <div class="border-bottom">
-                </div>
+                <h5 class="top-icon text-center mt-3 pb-3 under-line">
+                    Piggy bank
+                    <span>
+                        <i class="fas fa-piggy-bank fa-2x"></i>
+                    </span>
+                </h5>
 
                 <li class="nav-item">
                     <a class="nav-link" href="#">
@@ -41,7 +37,7 @@
                         ポートフォリオ作成
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item under-line">
                     <a class="nav-link" href="#">
                         <span>
                             <i class="fas fa-calculator"></i>
@@ -49,12 +45,8 @@
                         マイポートフォリオ
                     </a>
                 </li>
-                <!-- ボーダーライン -->
-                <div class="border-bottom">
-                </div>
-
-                <li class="nav-item">
-                    <a class="nav-link text-left logout" href="#">
+<!--                 <li class="nav-item">
+                    <a class="nav-link text-left mt-3" href="#">
                       <span>
                           <i class="fas fa-user-edit"></i>
                       </span>
@@ -68,7 +60,7 @@
                       </span>
                       ログアウト
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>
@@ -76,24 +68,38 @@
     <!-- メインカラム -->
     <div class="col-10 main-col">
 
-        <div id="page_top" class="right-row-header shadow">
-            <h1 class="text-center">DashBoard</h1>
-        </div>
+        <!--タイトルバー -->
+        <div id="page_top" class="col-12 shadow" style="min-height:62px;">
 
-        <div class="col-12 mb-4 mt-4">
-          <div class="card border-primary h-100 bg-light shadow">
-            <div class="card-body">
-              <h1>サンプル</h1>
+            <div class="col-2 offset-10 border-left btn-group inline-block">
+                  <button type="button" class="btn btn-default dropdown-toggle user-button" data-toggle="dropdown">
+                          <%= current_user.name %>
+                          <span>
+                              <i class="far fa-user fa-2x"></i>
+                          </span>
+                  </button>
+                  <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">
+                          <span>
+                              <i class="fas fa-user-edit"></i>
+                          </span>
+                          登録情報変更
+                        </a>
+                        <a class="dropdown-item" href="/users/destroy">
+                          <span>
+                              <i class="fas fa-sign-out-alt"></i>
+                          </span>
+                          ログアウト
+                        </a>
+                  </div>
             </div>
-          </div>
         </div>
 
         <div class="col-12 mb-4 mt-4">
-            <!-- 検索画面 -->
-            <div class="col-5 offset-1 search-row">
+            <div class="col-5 offset-1 search-row inline-block">
                 <div class="card bg-light shadow">
-                    <h5 class="card-header">
-                        Search
+                    <h5 class="card-header text-center">
+                        銘柄検索
                     </h5>
                     <div class="card-body" style="min-height:400px; max-height:400px;">
                         <div class="input-group">
@@ -108,138 +114,160 @@
                 </div>
             </div>
 
-            <!-- ポートフォリオ -->
-            <div class="col-5 search-row">
+
+            <div class="col-5 inline-block">
                 <div class="card bg-light shadow">
-                    <h5 class="card-header">
-                        Portfolio
+                    <h5 class="card-header text-center">
+                        ポートフォリオ
                     </h5>
                     <div class="card-body" style="min-height:350px;">
                         <div class="port-area" style="min-height:307px; max-height:307px;">
                             <table class="table table-hover">
- <!--                        <thead>
-                          <tr>
-                            <th class="col-xs-2">コード</th>
-                            <th class="col-xs-8">銘柄名</th>
-                            <th class="col-xs-2"></th>
-                          </tr>
-                        </thead> -->
-                        <!-- ポートフォリオ作成のための銘柄を表示していくところ -->
                                 <tbody id="portfolio-table">
                                 </tbody>
                             </table>
                         </div>
                       <div class="col-6 col-offset-3 mx-auto mt-3">
-                        <button id="opt-btn" class="btn btn-block btn-warning">計算する</button>
+                        <button id="opt-btn" class="btn btn-block btn-warning">最適化</button>
                       </div>
                     </div>
                 </div>
+
             </div>
+
+        </div>
+
+        <div class="col12 mb-4">
+
+<!--             <div class="col-4  offset-1 inline-block">
+                <div class="card bg-light shadow">
+                    <h5 class="card-header text-center">
+                        ポートフォリオ
+                    </h5>
+                    <div class="card-body" style="min-height:350px;">
+                        <div class="port-area" style="min-height:307px; max-height:307px;">
+                            <table class="table table-hover">
+                                <tbody id="portfolio-table">
+                                </tbody>
+                            </table>
+                        </div>
+                      <div class="col-6 col-offset-3 mx-auto mt-3">
+                        <button id="opt-btn" class="btn btn-block btn-warning">最適化</button>
+                      </div>
+                    </div>
+                </div>
+            </div> -->
+
+<!--             <div class="col-5 inline-block">
+                <div class="card bg-light shadow">
+                    <h5 class="card-header text-center">
+                        各銘柄の期待リターンとリスク
+                    </h5>
+                    <div class="card-body" style="min-height:350px;">
+                        <canvas id="port-chart4" width="100%" height="100%"></canvas>
+                    </div>
+                </div>
+            </div> -->
 
         </div>
 
         <!-- 最適化結果を入れる -->
-        <div class="col-12 mb-4">
-            <div class="col-12 mychart">
+        <!-- class名のmychartはスクロール用 -->
+        <div class="col-12 mb-4 mychart">
+            <div class="col-10 offset-1">
                 <div class="card bg-light shadow">
-                    <h5 class="card-header">
-                        Optimization
-                    </h5>
-                    <div class="card-body" style="min-height:350px;">
+<!--                     <h5 class="card-header text-center">
+                        最適化された結果
+                    </h5> -->
+                    <div class="card-body" style="min-height:300px;">
                         <div class="col-12">
-                            <div class="col-8 port-chart">
-                                <canvas id="port-chart1" width="100%" height="80%"></canvas>
+                            <div class="col-5 inline-block ml-3">
+                                <canvas id="port-chart1" width="100%" height="100%"></canvas>
                             </div>
-                            <div class="col-3 port-datas mb-5">
+                            <div class="col-5 offset-1 inline-block">
+                                <canvas id="port-chart2" width="100%" height="100%"></canvas>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-12 mb-4">
-            <div class="card bg-light shadow">
-                <h5 class="card-header text-center">
-                    条件指定
-                </h5>
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                              <td style="height: 30px;"></td>
-                              <td>利益</td>
-                              <td>リスク</td>
-                            </tr>
-                        </thead>
-                        <tbody id="opt-result-table">
-                            <tr>
-                              <td style="height: 80px;">1</td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td style="height: 80px;">2</td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td style="height: 80px;">3</td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td style="height: 80px;">4</td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td style="height: 80px;">5</td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+                    <div class="col-12 border-top pt-3 mb-3">
+                        <h5 class="text-center mt-1 mb-3">
+                            シミュレーションの条件を指定してください
+                        </h5>
+                        <div class="col-2 offset-2 inline-block">
+                            <div class="dropdown">
+                                <button  id="simulation-day" type="button" class="btn btn-primary dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">日数</button>
+                                <ul class="dropdown-menu">
+                                    <li><button class="dropdown-item" value="50">50</button></li>
+                                    <li><button class="dropdown-item" value="100">100</button></li>
+                                    <li><button class="dropdown-item" value="200">200</button></li>
+                                </ul>
+                            </div>
+                        </div>
 
-        <div class="col-12 mb-4">
-            <div class="card bg-light shadow">
-                <h5 class="card-header text-center">
-                    条件指定
-                </h5>
-                <div class="card-body">
-                    <div class="col-10 offset-1">
-                        <div class="input-group">
-                            <input id="simulation-day" type="text" class="form-control mr-1" placeholder="予想日数 ~200日">
-                            <input id="simulation-select" type="text" class="form-control mr-1" placeholder="選択肢 1~5">
-                            <input id="simulation-price" type="text" class="form-control mr-1" placeholder="投資金額 50万円~">
-                            <span class="input-group-btn">
-                              <button id="simulation-button" type="button" class="btn btn-warning">計算する</button>
-                            </span>
+                        <div class="col-2 inline-block">
+                            <div class="dropdown">
+                                <button id="simulation-select"type="button" class="btn btn-primary dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">選択肢</button>
+                                <ul class="dropdown-menu">
+                                    <li><button class="dropdown-item" value="1">1</button></li>
+                                    <li><button class="dropdown-item" value="2">2</button></li>
+                                    <li><button class="dropdown-item" value="3">3</button></li>
+                                    <li><button class="dropdown-item" value="4">4</button></li>
+                                    <li><button class="dropdown-item" value="5">5</button></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-2 inline-block">
+                            <div class="dropdown">
+                                <button id="simulation-price" type="button" class="btn btn-primary dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">金額</button>
+                                <ul class="dropdown-menu">
+                                    <li><button class="dropdown-item" value="100万円">100万円</button></li>
+                                    <li><button class="dropdown-item" value="200万円">200万円</button></li>
+                                    <li><button class="dropdown-item" value="300万円">
+                                    300万円</button></li>
+                                    <li><button class="dropdown-item" value="400万円">400万円</button></li>
+                                    <li><button class="dropdown-item" value="500万円">
+                                    500万円</button></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-2 inline-block">
+                            <button id="simulation-button" type="button" class="btn btn-warning btn-block">計算する</button>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
 
         <!-- シミュレーション結果 -->
         <div class="col-12">
-            <div class="col-12 mysim">
+            <div class="col-10 offset-1 mysim">
                 <div class="card bg-light shadow">
-                    <h5 class="card-header text-center">
-                        シュミレート
-                    </h5>
                     <div class="card-body" style="min-height: 300px;">
-                        <canvas id="port-chart2" width="100%" height="50%"></canvas>
+                        <canvas id="port-chart3" width="100%" height="50%"></canvas>
                     </div>
-                    <div id="return-result" class="col-12">
-                      <p></p>
+
+                    <div class="pt-3 mb-3 col-12">
+                        <div class="col-2 inline-block text-right">
+                            リターン :
+                        </div>
+                        <div id="return-result" class="col-2 inline-block box1" style="min-height: 30px;">
+                            <p></p>
+                        </div>
+                        <div class="col-2 inline-block text-right">
+                            リスク :
+                        </div>
+                        <div id="risk-result" class="col-2 inline-block box1 mr-4" style="min-height: 30px;">
+                            <p></p>
+                        </div>
+                        <div class="col-3 ml-3 inline-block">
+                            <button id="port-save" class="btn btn-block btn-warning">結果を保存する</button>
+                        </div>
                     </div>
-                    <div class="col-4 offset-4 mb-5">
-                        <button id="port-save" class="btn btn-block btn-warning">ポートフォリオを保存する</button>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -249,9 +277,62 @@
   </div>
 </div>
 
-
-
 <script>
+// --------------------------------------------------------------
+//各銘柄のリスクとリターン
+// --------------------------------------------------------------
+// var BarDatas={
+//     type: "horizontalBar",
+//     data: {
+//         labels: ["銘柄１","銘柄２","銘柄３","銘柄４","銘柄５"],
+//         datasets:[]
+//     },
+//     options:{
+//         responsive: true,
+//         legend:{
+//             position: 'bottom'
+//         },
+//         title: {
+//             display: true,
+//             text: 'リターンとリスク'
+//         },
+//         scales:{
+//             xAxes:[
+//                 {
+//                     // stacked: true,
+//                     ticks: {
+//                         max: 10,
+//                         min: -5,
+//                         stepSize:1
+//                     },
+//                     gridLines: {
+//                       display: false,
+//                       drawBorder: true
+//                     }
+//                 }
+//             ],
+//             yAxes: [
+//                 {
+//                     // stacked: true,
+//                     // scaleLabel: {
+//                     //     fontSize: 100,
+//                     // },
+//                     gridLines: {
+//                       display: false,
+//                       drawBorder: true
+//                     }
+//                 }
+//             ]
+//         }
+//     }
+// };
+
+// // var ctx = document.getElementById("port-chart1").getContext('2d');
+// var ctx4 = $('#port-chart4')[0].getContext("2d");
+// //グラフ描画
+// // var char = new Chart(ctx).Line(BarDatas,options);
+// var chart4 = new Chart(ctx4,BarDatas);
+
 // --------------------------------------------------------------
 //最適化計算結果
 // --------------------------------------------------------------
@@ -265,6 +346,10 @@ var BarDatas={
         responsive: true,
         legend:{
             position: 'bottom'
+        },
+        title: {
+            display: true,
+            text: '各銘柄の割合'
         },
         scales:{
             xAxes:[
@@ -301,7 +386,62 @@ var BarDatas={
 var ctx = $('#port-chart1')[0].getContext("2d");
 //グラフ描画
 // var char = new Chart(ctx).Line(BarDatas,options);
-var char = new Chart(ctx,BarDatas);
+var chart = new Chart(ctx,BarDatas);
+
+// --------------------------------------------------------------
+//各ポートフォリオの期待リターンとリスク
+// --------------------------------------------------------------
+var BarDatas={
+    type: "horizontalBar",
+    data: {
+        labels: ["選択１","選択２","選択３","選択４","選択５"],
+        datasets:[]
+    },
+    options:{
+        responsive: true,
+        legend:{
+            position: 'bottom'
+        },
+        title: {
+            display: true,
+            text: 'リターンとリスク'
+        },
+        scales:{
+            xAxes:[
+                {
+                    // stacked: true,
+                    ticks: {
+                        max: 10,
+                        min: -5,
+                        stepSize:3
+                    },
+                    gridLines: {
+                      display: false,
+                      drawBorder: true
+                    }
+                }
+            ],
+            yAxes: [
+                {
+                    // stacked: true,
+                    // scaleLabel: {
+                    //     fontSize: 100,
+                    // },
+                    gridLines: {
+                      display: false,
+                      drawBorder: true
+                    }
+                }
+            ]
+        }
+    }
+};
+
+// var ctx = document.getElementById("port-chart1").getContext('2d');
+var ctx2 = $('#port-chart2')[0].getContext("2d");
+//グラフ描画
+// var char = new Chart(ctx).Line(BarDatas,options);
+var chart2 = new Chart(ctx2,BarDatas);
 
 // --------------------------------------------------------------
 //シミュレーション結果
@@ -352,9 +492,9 @@ var lineDatas={
 };
 
 // var ctx = document.getElementById("port-chart1").getContext('2d');
-var ctx2 = $('#port-chart2')[0].getContext("2d");
+var ctx3 = $('#port-chart3')[0].getContext("2d");
 //グラフ描画
 // var char = new Chart(ctx).Line(BarDatas,options);
-var char2 = new Chart(ctx2,lineDatas);
+var chart3 = new Chart(ctx3,lineDatas);
 </script>
 
