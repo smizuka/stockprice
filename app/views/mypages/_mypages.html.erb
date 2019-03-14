@@ -1,0 +1,408 @@
+<!--         <div class="col-12 mt-4">
+            <div class="col-6 offset-3">
+                <div class="card bg-light shadow">
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input id="modall" type="text" class="form-control mr-1" placeholder="銘柄名、コード" aria-label="...">
+                            <span class="input-group-btn">
+                              <button id="search-button" type="button" class="btn btn-warning">検索</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="col-12 mb-4 mt-4">
+            <div class="col-5 offset-1 search-row inline-block">
+                <div class="card bg-light shadow">
+                    <h5 class="card-header text-center">
+                        銘柄検索
+                    </h5>
+                    <div class="card-body" style="min-height:400px; max-height:400px;">
+                    <!-- <div class="card-body"> -->
+                        <div class="input-group">
+                            <input id="search-form" type="text" class="form-control mr-1" placeholder="銘柄名、コード" aria-label="...">
+                            <span class="input-group-btn">
+                              <button id="search-button" type="button" class="btn btn-warning">検索</button>
+                            </span>
+                        </div>
+                        <div id="search-table">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-5 inline-block">
+                <div class="card bg-light shadow">
+                    <h5 class="card-header text-center">
+                        ポートフォリオ
+                    </h5>
+                    <div class="card-body" style="min-height:350px;">
+                        <div class="port-area" style="min-height:307px; max-height:307px;">
+                            <table class="table table-hover">
+                                <tbody id="portfolio-table">
+                                </tbody>
+                            </table>
+                        </div>
+                      <div class="col-6 col-offset-3 mx-auto mt-3">
+                        <button id="opt-btn" class="btn btn-block btn-warning">最適化</button>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col12 mb-4">
+<!--             <div class="col-4  offset-1 inline-block">
+                <div class="card bg-light shadow">
+                    <h5 class="card-header text-center">
+                        ポートフォリオ
+                    </h5>
+                    <div class="card-body" style="min-height:350px;">
+                        <div class="port-area" style="min-height:307px; max-height:307px;">
+                            <table class="table table-hover">
+                                <tbody id="portfolio-table">
+                                </tbody>
+                            </table>
+                        </div>
+                      <div class="col-6 col-offset-3 mx-auto mt-3">
+                        <button id="opt-btn" class="btn btn-block btn-warning">最適化</button>
+                      </div>
+                    </div>
+                </div>
+            </div> -->
+
+<!--             <div class="col-5 inline-block">
+                <div class="card bg-light shadow">
+                    <h5 class="card-header text-center">
+                        各銘柄の期待リターンとリスク
+                    </h5>
+                    <div class="card-body" style="min-height:350px;">
+                        <canvas id="port-chart4" width="100%" height="100%"></canvas>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+
+        <!-- 最適化結果を入れる -->
+        <!-- class名のmychartはスクロール用 -->
+        <div class="col-12 mb-4 mychart">
+            <div class="col-10 offset-1">
+
+                <div class="card bg-light shadow">
+                    <div class="card-body" style="min-height:300px;">
+                        <div class="col-12">
+                            <div class="col-5 inline-block ml-3">
+                                <canvas id="port-chart1" width="100%" height="100%"></canvas>
+                            </div>
+                            <div class="col-5 offset-1 inline-block">
+                                <canvas id="port-chart2" width="100%" height="100%"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 border-top pt-3 mb-3">
+                        <h5 class="text-center mt-1 mb-3">
+                            シミュレーションの条件を指定してください
+                        </h5>
+                        <div class="col-2 offset-2 inline-block">
+                            <div class="dropdown">
+                                <button  id="simulation-day" type="button" class="btn dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">日数</button>
+                                <ul class="dropdown-menu">
+                                    <li><button class="dropdown-item" value="50">50</button></li>
+                                    <li><button class="dropdown-item" value="100">100</button></li>
+                                    <li><button class="dropdown-item" value="200">200</button></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-2 inline-block">
+                            <div class="dropdown">
+                                <button id="simulation-select"type="button" class="btn dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">選択肢</button>
+                                <ul class="dropdown-menu">
+                                    <li><button class="dropdown-item" value="1">1</button></li>
+                                    <li><button class="dropdown-item" value="2">2</button></li>
+                                    <li><button class="dropdown-item" value="3">3</button></li>
+                                    <li><button class="dropdown-item" value="4">4</button></li>
+                                    <li><button class="dropdown-item" value="5">5</button></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-2 inline-block">
+                            <div class="dropdown">
+                                <button id="simulation-price" type="button" class="btn dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">金額</button>
+                                <ul class="dropdown-menu">
+                                    <li><button class="dropdown-item" value="100万円">100万円</button></li>
+                                    <li><button class="dropdown-item" value="200万円">200万円</button></li>
+                                    <li><button class="dropdown-item" value="300万円">
+                                    300万円</button></li>
+                                    <li><button class="dropdown-item" value="400万円">400万円</button></li>
+                                    <li><button class="dropdown-item" value="500万円">
+                                    500万円</button></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-2 inline-block">
+                            <button id="simulation-button" type="button" class="btn btn-warning btn-block">計算する</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- シミュレーション結果 -->
+        <div class="col-12">
+            <div class="col-10 offset-1 mysim">
+                <div class="card bg-light shadow">
+                    <div class="card-body" style="min-height: 300px;">
+                        <canvas id="port-chart3" width="100%" height="50%"></canvas>
+                    </div>
+
+                    <div class="pt-3 mb-3 col-12">
+                        <div class="col-2 inline-block text-right">
+                            リターン :
+                        </div>
+                        <div id="return-result" class="col-2 inline-block box1" style="min-height: 30px;">
+                            <p></p>
+                        </div>
+                        <div class="col-2 inline-block text-right">
+                            リスク :
+                        </div>
+                        <div id="risk-result" class="col-2 inline-block box1 mr-4" style="min-height: 30px;">
+                            <p></p>
+                        </div>
+                        <div class="col-3 ml-3 inline-block">
+                            <button id="port-save" class="btn btn-block btn-warning">結果を保存する</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<script>
+// --------------------------------------------------------------
+//各銘柄のリスクとリターン
+// --------------------------------------------------------------
+// var BarDatas={
+//     type: "horizontalBar",
+//     data: {
+//         labels: ["銘柄１","銘柄２","銘柄３","銘柄４","銘柄５"],
+//         datasets:[]
+//     },
+//     options:{
+//         responsive: true,
+//         legend:{
+//             position: 'bottom'
+//         },
+//         title: {
+//             display: true,
+//             text: 'リターンとリスク'
+//         },
+//         scales:{
+//             xAxes:[
+//                 {
+//                     // stacked: true,
+//                     ticks: {
+//                         max: 10,
+//                         min: -5,
+//                         stepSize:1
+//                     },
+//                     gridLines: {
+//                       display: false,
+//                       drawBorder: true
+//                     }
+//                 }
+//             ],
+//             yAxes: [
+//                 {
+//                     // stacked: true,
+//                     // scaleLabel: {
+//                     //     fontSize: 100,
+//                     // },
+//                     gridLines: {
+//                       display: false,
+//                       drawBorder: true
+//                     }
+//                 }
+//             ]
+//         }
+//     }
+// };
+
+// // var ctx = document.getElementById("port-chart1").getContext('2d');
+// var ctx4 = $('#port-chart4')[0].getContext("2d");
+// //グラフ描画
+// // var char = new Chart(ctx).Line(BarDatas,options);
+// var chart4 = new Chart(ctx4,BarDatas);
+
+// --------------------------------------------------------------
+//最適化計算結果
+// --------------------------------------------------------------
+var BarDatas={
+    type: "horizontalBar",
+    data: {
+        labels: ["選択１","選択２","選択３","選択４","選択５"],
+        datasets:[]
+    },
+    options:{
+        responsive: true,
+        legend:{
+            position: 'bottom'
+        },
+        title: {
+            display: true,
+            text: '各銘柄の割合'
+        },
+        scales:{
+            xAxes:[
+                {
+                    stacked: true,
+                    ticks: {
+                        max: 1,
+                        min: 0,
+                        stepSize:0.2
+                    },
+                    gridLines: {
+                      display: false,
+                      drawBorder: true
+                    }
+                }
+            ],
+            yAxes: [
+                {
+                    stacked: true,
+                    scaleLabel: {
+                        fontSize: 100,
+                    },
+                    gridLines: {
+                      display: false,
+                      drawBorder: true
+                    }
+                }
+            ]
+        }
+    }
+};
+
+// var ctx = document.getElementById("port-chart1").getContext('2d');
+var ctx = $('#port-chart1')[0].getContext("2d");
+//グラフ描画
+// var char = new Chart(ctx).Line(BarDatas,options);
+var chart = new Chart(ctx,BarDatas);
+
+// --------------------------------------------------------------
+//各ポートフォリオの期待リターンとリスク
+// --------------------------------------------------------------
+var BarDatas={
+    type: "horizontalBar",
+    data: {
+        labels: ["選択１","選択２","選択３","選択４","選択５"],
+        datasets:[]
+    },
+    options:{
+        responsive: true,
+        legend:{
+            position: 'bottom'
+        },
+        title: {
+            display: true,
+            text: 'リターンとリスク'
+        },
+        scales:{
+            xAxes:[
+                {
+                    // stacked: true,
+                    ticks: {
+                        max: 10,
+                        min: -5,
+                        stepSize:3
+                    },
+                    gridLines: {
+                      display: false,
+                      drawBorder: true
+                    }
+                }
+            ],
+            yAxes: [
+                {
+                    // stacked: true,
+                    // scaleLabel: {
+                    //     fontSize: 100,
+                    // },
+                    gridLines: {
+                      display: false,
+                      drawBorder: true
+                    }
+                }
+            ]
+        }
+    }
+};
+
+// var ctx = document.getElementById("port-chart1").getContext('2d');
+var ctx2 = $('#port-chart2')[0].getContext("2d");
+//グラフ描画
+// var char = new Chart(ctx).Line(BarDatas,options);
+var chart2 = new Chart(ctx2,BarDatas);
+
+// --------------------------------------------------------------
+//シミュレーション結果
+// --------------------------------------------------------------
+var lineDatas={
+    type: "line",
+    data: {
+        labels:[],
+        datasets:[]
+    },
+    options:{
+        responsive: true,
+        legend:{
+            position: 'bottom'
+        },
+        scales:{
+            xAxes:[
+                {
+                    // ticks: {
+                    //     max: 10,
+                    //     min: 0,
+                    //     stepSize:2
+                    // },
+                    gridLines: {
+                      display: false,
+                      drawBorder: true
+                    }
+                }
+            ],
+            yAxes: [
+                {
+                    // ticks: {
+                    //     max: 10,
+                    //     min: -10,
+                    //     stepSize:2
+                    // },
+                    scaleLabel: {
+                        fontSize: 100,
+                    },
+                    gridLines: {
+                      display: false,
+                      drawBorder: true
+                    }
+                }
+            ]
+        }
+    }
+};
+
+// var ctx = document.getElementById("port-chart1").getContext('2d');
+var ctx3 = $('#port-chart3')[0].getContext("2d");
+//グラフ描画
+// var char = new Chart(ctx).Line(BarDatas,options);
+var chart3 = new Chart(ctx3,lineDatas);
+</script>
+
+

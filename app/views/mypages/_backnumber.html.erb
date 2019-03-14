@@ -1,0 +1,293 @@
+<div class="row">
+    <!-- <div class="col-3 inline-block mt-3 ml-5"> -->
+    <div class="col-10 offset-1 mt-3">
+        <% @lists.zip(@names) do |lists,names|%>
+            <div class="card bg-light shadow mr-3 inline-block">
+                <div class="card-body button-parent" style="min-height:300px;">
+                    <!-- <div> -->
+                    <h5 class="text-center"><%=names%></h5>
+                    <table class="table table-sm">
+                        <thead class="bg-primary">
+                            <tr>
+                                <th class="text-center">Code</th>
+                                <th class="text-center">Name</th>
+                            <tr>
+                        </thead>
+                        <tbody>
+                            <% lists.each do |list|%>
+                                    <tr>
+                                        <td><%=list[0]%></td>
+                                        <td class="h6"><%=list[1]%></td>
+                                    </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                    <!-- </div> -->
+                    <div class="button-children">
+                        <!-- backnumber-optは描写アクションのためのクラス -->
+                        <button class="backnumber-opt ml-3 btn btn-primary inline-block">描写</button>
+                        <!-- backnumber-deleteは削除アクションのためのクラス -->
+                        <!-- <button class="backnumber-delete ml-3 btn btn-primary inline-block">削除</button> -->
+                        <%= link_to "削除",{:controller => "portfolios", :action => "destroy",:name => names},{:class => "ml-3 btn btn-primary inline-block"} %>
+
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
+
+    <div class="col-10 offset-1 mt-3 backnumber-right-block">
+    <!-- <div class="col-8 inline-block mt-3 backnumber-right-block"> -->
+        <div class="card bg-light shadow">
+                <div class="card bg-light shadow">
+                    <div class="card-body" style="min-height:300px;">
+                        <div class="col-12">
+                            <div class="col-5 inline-block ml-3">
+                                <canvas id="port-chart5" width="100%" height="100%"></canvas>
+                            </div>
+                            <div class="col-5 offset-1 inline-block">
+                                <canvas id="port-chart6" width="100%" height="100%"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 border-top pt-3 mb-3">
+                        <h5 class="text-center mt-1 mb-3">
+                            シミュレーションの条件を指定してください
+                        </h5>
+                        <div class="col-2 offset-2 inline-block">
+                            <div class="dropdown">
+                                <button  id="simulation-day-back" type="button" class="btn dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">日数</button>
+                                <ul class="dropdown-menu">
+                                    <li><button class="dropdown-item" value="50">50</button></li>
+                                    <li><button class="dropdown-item" value="100">100</button></li>
+                                    <li><button class="dropdown-item" value="200">200</button></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-2 inline-block">
+                            <div class="dropdown">
+                                <button id="simulation-select-back"type="button" class="btn dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">選択肢</button>
+                                <ul class="dropdown-menu">
+                                    <li><button class="dropdown-item" value="1">1</button></li>
+                                    <li><button class="dropdown-item" value="2">2</button></li>
+                                    <li><button class="dropdown-item" value="3">3</button></li>
+                                    <li><button class="dropdown-item" value="4">4</button></li>
+                                    <li><button class="dropdown-item" value="5">5</button></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-2 inline-block">
+                            <div class="dropdown">
+                                <button id="simulation-price-back" type="button" class="btn dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">金額</button>
+                                <ul class="dropdown-menu">
+                                    <li><button class="dropdown-item" value="100万円">100万円</button></li>
+                                    <li><button class="dropdown-item" value="200万円">200万円</button></li>
+                                    <li><button class="dropdown-item" value="300万円">
+                                    300万円</button></li>
+                                    <li><button class="dropdown-item" value="400万円">400万円</button></li>
+                                    <li><button class="dropdown-item" value="500万円">
+                                    500万円</button></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-2 inline-block">
+                            <button id="simulation-button-back" type="button" class="btn btn-warning btn-block">計算</button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="card bg-light shadow mt-3">
+            <div class="card-body" style="min-height: 300px;">
+                <canvas id="port-chart7" width="100%" height="50%"></canvas>
+            </div>
+
+            <div class="pt-3 mb-3 col-12">
+                <div class="col-2 offset-1 inline-block text-right">
+                    リターン :
+                </div>
+                <div id="return-result-back" class="col-2 inline-block box1" style="min-height: 30px;">
+                    <p></p>
+                </div>
+                <div class="col-2 inline-block text-right">
+                    リスク :
+                </div>
+                <div id="risk-result-back" class="col-2 inline-block box1 mr-4" style="min-height: 30px;">
+                    <p></p>
+                </div>
+<!--                 <div class="col-3 ml-3 inline-block">
+                    <button id="port-save-back" class="btn btn-block btn-warning">結果を保存する</button>
+                </div> -->
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+// --------------------------------------------------------------
+//最適化計算結果
+// --------------------------------------------------------------
+var BarDatas={
+    type: "horizontalBar",
+    data: {
+        labels: ["選択１","選択２","選択３","選択４","選択５"],
+        datasets:[]
+    },
+    options:{
+        responsive: true,
+        legend:{
+            position: 'bottom'
+        },
+        title: {
+            display: true,
+            text: '各銘柄の割合'
+        },
+        scales:{
+            xAxes:[
+                {
+                    stacked: true,
+                    ticks: {
+                        max: 1,
+                        min: 0,
+                        stepSize:0.2
+                    },
+                    gridLines: {
+                      display: false,
+                      drawBorder: true
+                    }
+                }
+            ],
+            yAxes: [
+                {
+                    stacked: true,
+                    scaleLabel: {
+                        fontSize: 100,
+                    },
+                    gridLines: {
+                      display: false,
+                      drawBorder: true
+                    }
+                }
+            ]
+        }
+    }
+};
+
+var ctx5 = $('#port-chart5')[0].getContext("2d");
+//グラフ描画
+var chart5 = new Chart(ctx5,BarDatas);
+
+// --------------------------------------------------------------
+//各ポートフォリオの期待リターンとリスク
+// --------------------------------------------------------------
+var BarDatas={
+    type: "horizontalBar",
+    data: {
+        labels: ["選択１","選択２","選択３","選択４","選択５"],
+        datasets:[]
+    },
+    options:{
+        responsive: true,
+        legend:{
+            position: 'bottom'
+        },
+        title: {
+            display: true,
+            text: 'リターンとリスク'
+        },
+        scales:{
+            xAxes:[
+                {
+                    // stacked: true,
+                    ticks: {
+                        max: 10,
+                        min: -5,
+                        stepSize:3
+                    },
+                    gridLines: {
+                      display: false,
+                      drawBorder: true
+                    }
+                }
+            ],
+            yAxes: [
+                {
+                    // stacked: true,
+                    // scaleLabel: {
+                    //     fontSize: 100,
+                    // },
+                    gridLines: {
+                      display: false,
+                      drawBorder: true
+                    }
+                }
+            ]
+        }
+    }
+};
+
+
+var ctx6 = $('#port-chart6')[0].getContext("2d");
+//グラフ描画
+var chart6 = new Chart(ctx6,BarDatas);
+
+// --------------------------------------------------------------
+//シミュレーション結果
+// --------------------------------------------------------------
+var lineDatas={
+    type: "line",
+    data: {
+        labels:[],
+        datasets:[]
+    },
+    options:{
+        responsive: true,
+        legend:{
+            position: 'bottom'
+        },
+        scales:{
+            xAxes:[
+                {
+                    // ticks: {
+                    //     max: 10,
+                    //     min: 0,
+                    //     stepSize:2
+                    // },
+                    gridLines: {
+                      display: false,
+                      drawBorder: true
+                    }
+                }
+            ],
+            yAxes: [
+                {
+                    // ticks: {
+                    //     max: 10,
+                    //     min: -10,
+                    //     stepSize:2
+                    // },
+                    scaleLabel: {
+                        fontSize: 100,
+                    },
+                    gridLines: {
+                      display: false,
+                      drawBorder: true
+                    }
+                }
+            ]
+        }
+    }
+};
+
+// var ctx = document.getElementById("port-chart1").getContext('2d');
+var ctx7 = $('#port-chart7')[0].getContext("2d");
+//グラフ描画
+// var char = new Chart(ctx).Line(BarDatas,options);
+var chart7 = new Chart(ctx7,lineDatas);
+
+</script>

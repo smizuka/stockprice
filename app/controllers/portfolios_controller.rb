@@ -1,9 +1,6 @@
 class PortfoliosController < ApplicationController
 
   def create
-
-    binding.pry
-
     #portfollioに保存する
     portfolio=Portfolio.new
     portfolio.user_id=current_user.id
@@ -21,5 +18,20 @@ class PortfoliosController < ApplicationController
     end
   end
 
+  def destroy
+
+    portfolio=Portfolio.find_by(group_name: params[:name])
+    portfolio.destroy
+
+    group=Group.where(group_name: params[:name])
+    puts "-----------------------"
+    puts group
+
+    group.each do|g|
+        g.destroy
+    end
+
+    # redirect_to "mypages/backnumber"
+  end
 end
 

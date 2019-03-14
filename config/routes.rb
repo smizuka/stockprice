@@ -20,6 +20,10 @@ Rails.application.routes.draw do
   # お気に入り削除
   delete "favorites/destroy", to: "favorites#destroy"
 
+  #部分テンプレートの設定
+  get "mypages/mypages"
+  get "mypages/analyses"
+  get "mypages/backnumber"
 
   #検索したときの動作
   get "searches/index"
@@ -30,7 +34,8 @@ Rails.application.routes.draw do
   #ポートフォリオを保存する
   post "portfolios/create", to: "portfolios#create"
   # ポートフォリオを削除する
-  delete "portfolios/destroy", to: "portfolios#destroy"
+  # delete "portfolios/destroy", to: "portfolios#destroy"
+  get "portfolios/destroy"
 
   # シミュレートしてみる
   post "simulations/calc",to: "simulations#calc"
