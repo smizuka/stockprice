@@ -212,11 +212,12 @@ h5{
 }
 
 //バックナンバーページの右側ブロックを固定
+//現在廃止中
 .backnumber-right-block{
-    position: sticky;
-    top:0px;
-    height:100%;
-    width:100%;
+    //position: sticky;
+    //top:0px;
+    //height:100%;
+    //width:100%;
 }
 
 //バックナンバーのページのボタンに対する設定
@@ -229,5 +230,24 @@ h5{
     bottom: 20px;
 }
 
+
+//サイドバーの設定
+.sidebar{
+position: fixed;
+color: #fff; /* 好みに応じて調節してください */
+}
+
+.sidebar.left {
+  top: 200px;
+  left: 0;
+  bottom: 0;
+  width: 320px;
+  //background: white;
+  //border: solid 3px #6091d3;
+}
+
+.td-text{
+ vertical-align: middle;
+}
 
 

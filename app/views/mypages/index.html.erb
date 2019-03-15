@@ -2,7 +2,7 @@
   <div class="row">
 
     <!-- 左側カラム -->
-    <div class="col-2 left-bar">
+    <div class="col-3 left-bar">
         <div class="fix-menu">
             <ul class="nav flex-column">
                 <h5 class="top-icon text-center mt-3 pb-3 under-line">
@@ -22,16 +22,14 @@
                       (仮）はじめに
                     </a>
                 </li>
-
-                <li class="nav-item">
+<!--                 <li class="nav-item">
                     <a class="nav-link" href="./analyses" data-remote="true">
-                    <!-- <a class="nav-link" href="./analyses"> -->
                         <span>
                             <i class="fas fa-search"></i>
                         </span>
                         （仮）時系列分析
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="./mypages" data-remote="true">
                         <span>
@@ -50,21 +48,14 @@
                 </li>
             </ul>
         </div>
+
+    <!-- 左側カラム終わり -->
     </div>
 
     <!-- メインカラム -->
-    <div class="col-10 main-col">
+    <div class="col-9 main-col">
 
-        <!--タイトルバー -->
         <div id="page-top" class="col-12 shadow" style="min-height:62px;">
-<!--             <div class="col-4 offset-1 inline-block">
-                <div class="input-group">
-                    <input id="search-form" type="text" class="form-control mr-1" placeholder="銘柄名、コード" aria-label="...">
-                    <span class="input-group-btn">
-                      <button id="search-button" type="button" class="btn header-button">検索</button>
-                    </span>
-                </div>
-            </div> -->
             <div class="col-2 offset-10 border-left btn-group inline-block text-right mt-2">
                   <button type="button" class="btn btn-default dropdown-toggle user-button" data-toggle="dropdown">
                           <%= current_user.name %>
@@ -113,6 +104,7 @@
             </div>
         </div>
 
+      <!-- メインカラム終わり -->
       </div>
     </div>
   </div>

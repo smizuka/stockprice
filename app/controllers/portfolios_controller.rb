@@ -24,8 +24,6 @@ class PortfoliosController < ApplicationController
     portfolio.destroy
 
     group=Group.where(group_name: params[:name])
-    puts "-----------------------"
-    puts group
 
     group.each do|g|
         g.destroy

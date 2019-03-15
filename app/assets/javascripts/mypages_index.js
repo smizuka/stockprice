@@ -8,6 +8,27 @@ $(function() {
         visibleItem.text($(this).attr('value'));
     });
 
+    //サイドバーを表示させるコード
+    $(document).ready(function () {
+        // 向き
+        var sides = ["left", "top", "right", "bottom"];
+        // サイドバーの初期化
+        for (var i = 0; i < sides.length; ++i) {
+            var cSide = sides[i];
+            $(".sidebar." + cSide).sidebar({side: cSide});
+        }
+
+        // ボタンのクリックにより...
+        $(document).on('click','.btn[data-action]', function () {
+            var $this = $(this);
+            var action = $this.attr("data-action");
+            var side = $this.attr("data-side");
+            $(".sidebar." + side).toggle("sidebar:" + action);
+            return false;
+        });
+    });
+
+
     //chart.jsの際にchartインスタンスが入っていたらオブジェクト
     var chart_sim = null;
 
@@ -26,10 +47,16 @@ $(function() {
             codes.push(tbody.rows[i].cells[0].textContent);
         }
         // 該当するコードがある位置を取得する
+        console.log(code)
         var i=codes.indexOf(code,0);
         // 検索した位置からbuttonのある行に代わりの登録のbuttonを入れる
+        console.log(i);
+        console.log("tbody.rows[i]",tbody.rows[i]);
+        console.log("tbody.rows[i].cells",tbody.rows[i].cells);
+
         var cell = tbody.rows[i].cells[2];
-        cell.innerHTML ='<td><button class="search-result-btn btn btn-warning" style="font-size: 12px; padding:0px">追　加</button></td>';
+
+        cell.innerHTML ='<td><button class="search-result-btn btn btn-warning table-string">追　加</button></td>';
     }
 
     // --------------------------------------------------------------
@@ -37,8 +64,8 @@ $(function() {
     // --------------------------------------------------------------
     function sim_chart(data) {
 
-        datas=data["return"];
-        index=[];
+        var datas=data["return"];
+        var index=[];
         datas.length;
 
         // console.log(data["start"])
@@ -46,17 +73,24 @@ $(function() {
         // console.log("終了"+data["end"])
 
         // 収益率を算出する
-        r_rate = (data["end"]-data["start"])/data["start"]*100
-        // console.log(r_rate)
-        r_rate2 = Math.round(r_rate * 10) / 10
+        var r_rate = (data["end"]-data["start"])/data["start"]*100;
 
-        // var p = $("#return-result")[0].children();
+        var r_rate2 = Math.round(r_rate * 10) / 10;
+
         var p = $("#return-result").children()[0];
         p.innerHTML=r_rate2+" %";
         if(r_rate2<0){
             p.className="text-primary text-center";
         }else{
             p.className="text-danger text-center";
+        }
+
+        var p2 = $("#risk-result").children()[0];
+        p2.innerHTML=data["drowdown"]+"%";
+        if(r_rate2<0){
+            p2.className="text-primary text-center";
+        }else{
+            p2.className="text-danger text-center";
         }
 
         for (var i=0; i<datas.length; i++) {
@@ -86,6 +120,10 @@ $(function() {
                     display: false
 
                     // position: 'bottom'
+                },
+                title: {
+                    display: true,
+                    text: 'シミュレーション結果'
                 },
                 scales:{
                     xAxes:[
@@ -430,21 +468,10 @@ $(function() {
             $("#search-table").append(table);
             table.className='table table-hover';
             var table_h = table.createTHead();
-
             var table_h_r=table_h.insertRow(0);
-
             var Cell1 = table_h_r.insertCell(0);
-            // Cell1.className='col-xs-1';
-
             var Cell2 = table_h_r.insertCell(1);
-            // Cell2.className='col-xs-8';
-
             var Cell3 = table_h_r.insertCell(2);
-            // Cell3.className='col-xs-3';
-
-            // Cell1.innerHTML = 'コード';
-            // Cell2.innerHTML = '銘柄名';
-            // Cell3.innerHTML = '';
 
             // tbody要素を生成
             var tbody1 = document.createElement('tbody');
@@ -455,7 +482,7 @@ $(function() {
             //tbody要素を取得する
             var tbody2 =$("#search-table").children().find("tbody")[0];
 
-            //ポートフォリオ一覧にある銘柄を取得
+            //ポートフォリオ一覧にある銘柄を取得する関数
             var codes=getCode();
 
             // jsonファイルをテーブルに入れていく
@@ -471,18 +498,19 @@ $(function() {
                 var Cell3 = tbody_r[0].cells[2];
 
                 Cell1.innerHTML = data["code"][i];
-                // Cell1.className = "table-string";
-                Cell2.innerHTML = data["name"][i].substr(0,8);
-                // Cell2.className = "table-string";
+                Cell1.className = "table-string";
+                //substrで0文字目から8文字切り抜く
+                Cell2.innerHTML = data["name"][i].substr(0,12);
+                Cell2.className = "table-string";
 
                 // もしポートフォリオ欄に同じコードがする場合、追加済みボタンにする
                 if(codes.indexOf(data["code"][i])>=0){
-                    Cell3.innerHTML = '<td><button class="btn btn-default" disabled>追加済</button></td>';
+                    Cell3.innerHTML = '<td><button class="btn btn-default table-string" disabled>追加済</button></td>';
                     // Cell3.innerHTML = '<td><button class="btn btn-default" style="font-size: 12px; padding:0px" disabled>追加済</button></td>';
                 }else{
-                    Cell3.innerHTML = '<td><button class="search-result-btn btn btn-warning">追　加</button></td>';
+                    Cell3.innerHTML = '<td><button class="search-result-btn btn btn-warning table-string">追　加</button></td>';
                 };
-                // Cell3.className = "table-string";
+                Cell3.className = "table-string text-right";
                 // Cell3.style="padding: 0.75rem 0px";
 
             };
@@ -508,7 +536,9 @@ $(function() {
   $(document).on('click','#search-table .search-result-btn',function(){
 
     // buttonの入っているtr要素を取得する
-    var tr = $(this).parent().parent()[0];
+    // var tr = $(this).parent().parent()[0];
+    var tr = $(this).closest("tr")[0];
+
     // 押したbuttonの行の位置を取得する
     // var r = tr.sectionRowIndex;
     // 各セル内に入っている値を取得する
@@ -517,43 +547,77 @@ $(function() {
 
     // ポートフォリオテーブルにある行数を取得する
     var tbody = $("#portfolio-table")[0]
-    // tbodyの行数を取得する
-    var num = tbody.rows.length;
 
-    //すでにポートフォリオが５つある場合
-    if(num==5){
+    var codes=[];
+    for (var i=0; i<5; i++) {
+        var a =tbody.rows[i].cells[1].textContent;
+        if(a!=""){
+            codes.push(a);
+        };
+    };
+
+    if(codes.length==5){
       return alert('ポートフォリオは最大５つまでです');
     };
-    //すでに行が存在する場合、コードだけを取得していく
-    if(num != 0){
-        var codes=[];
-        for (var i=0; i<num; i++) {
-            codes.push(tbody.rows[i].cells[0].textContent);
-        };
-        //もし取得したコード群の中に追加しようとしたコードがあればアラート
-        if(codes.indexOf(code)>=0){
-            return alert('すでにそのコードは存在します');
-        };
+    //もし取得したコード群の中に追加しようとしたコードがあればアラート
+    if(codes.indexOf(code)>=0){
+        return alert('すでにそのコードは存在します');
     };
 
-    //ここのコードをif文のあとに入れないと、alertが出て登録されなくても「追加済」になってしまう
-    //buttonを押した要素のbuttonを追加->追加済に変更する
+    //検索一覧の中でbuttonを押した要素のbuttonを追加->追加済に変更する
     var btnCell = tr.cells[2];
-    btnCell.innerHTML ='<td><button class="btn btn-sm btn-default" style="padding:0px; font-size:12px;" disabled>追加済</button></td>';
+    btnCell.innerHTML ='<td><button class="btn btn-default table-string" disabled>追加済</button></td>';
+
+
+      $.ajax({
+          url: '/analyses/stat',
+          method: 'post',
+          data: {'data': code}
+      })
+      .done((data) => {
+
+            var num=codes.length;
+            var cell1 = tbody.rows[num].cells[1];//コード
+            var cell2 = tbody.rows[num].cells[2];//銘柄名
+            var cell3 = tbody.rows[num].cells[3];//現在株価
+            var cell4 = tbody.rows[num].cells[4];//増減率
+            var cell5 = tbody.rows[num].cells[5];//リターン
+            var cell6 = tbody.rows[num].cells[6];//リスク
+            var cell7 = tbody.rows[num].cells[7];//リスク
+
+            cell1.innerHTML = code;
+            cell2.innerHTML = name;
+            cell3.innerHTML = data["adjust"];
+            cell4.innerHTML = data["change"];
+            if(data["change"]<=0){
+                cell4.className="text-primary text-right";
+            }else{
+                cell4.className="text-danger text-right";
+            }
+            cell5.innerHTML = data["mean"];
+            if(data["change"]<=0){
+                cell5.className="text-primary text-right";
+            }else{
+                cell5.className="text-danger text-right";
+            }
+            cell6.innerHTML = data["std"];
+            cell7.innerHTML = '<button class="btn btn-warning remove">削　除</button>';
+
+      })
+      .fail((data) => {
+          console.log(data)
+      })
+      // Ajaxリクエストが成功・失敗どちらでも発動
+      .always((data) => {
+      });
 
     // tbodyにtrを追加していく
-    var rows = tbody.insertRow(-1);
+    // var rows = tbody.insertRow(-1);
     // trの中にcellを入れていく、-1にすると下に追加していく
-    var cell1 = tbody.rows[num].insertCell(-1);
-    cell1.className= "col-xs-2 table-string";
-    var cell2 = tbody.rows[num].insertCell(-1);
-    cell2.className= "col-xs-8 table-string";
-    var cell3 = tbody.rows[num].insertCell(-1);
-    cell3.className= "col-xs-2 table-string";
-    // 作成したセルを取得して値を入れる
-    cell1.innerHTML = code;
-    cell2.innerHTML = name;
-    cell3.innerHTML = '<button class="btn btn-sm btn-warning remove" style="font-size:12px; padding:0px;">削　除</button>';
+    // var cell1 = tbody.rows[num].insertCell(-1);
+    // cell1.className= "col-xs-2 table-string";
+
+    // btnCell.innerHTML ='<td><button class="btn btn-default" style="padding:0px; font-size:12px;" disabled>追加済</button></td>';
   });
 
   // --------------------------------------------------------------
@@ -562,11 +626,19 @@ $(function() {
   $(document).on('click','#portfolio-table .remove',function(){
       // buttonを押した行を取得する
       var row = $(this).parents('tr')[0];
+
       //削除した行のコードを取得する
-      var code = row.cells[0].textContent;
+      var code = row.cells[1].textContent;
       //ボタンを押した行を削除する
-      row.remove();
-      //検索エリアのボタン表示を変更する関数を実行
+      // row.remove();
+      //ボタンを押した行の要素を空にする
+      for(var i=1 ;i<8;i++){
+          row.cells[i].innerHTML="";
+      }
+
+
+
+      // 検索エリアのボタン表示を変更する関数を実行
       changeButton(code);
   });
 
@@ -576,11 +648,14 @@ $(function() {
   $(document).on('click','#opt-btn',function(){
 
       var tbody = $('#portfolio-table')[0];
-      var num = tbody.rows.length; // 行数を取得する,header=1とする
+      // var num = tbody.rows.length; // 行数を取得する,header=1とする
 
       var codes=[];
-      for (var i=0; i<num; i++) {
-          codes.push(tbody.rows[i].cells[0].textContent);
+      for (var i=0; i<5; i++) {
+          var a =tbody.rows[i].cells[1].textContent;
+          if(a!=""){
+              codes.push(a);
+          };
       };
 
       if(codes.length < 3){
@@ -617,14 +692,26 @@ $(function() {
     //データベースに登録するための名前を入力
     var group_name=prompt("ポートフォリオ名を入力してください");
 
+    if(group_name==""){
+        return alert("ポートフォリオ名を入れてください");
+    };
+
     var tbody = $("#portfolio-table")[0];
-    var num = tbody.rows.length;
+    // var num = tbody.rows.length;
 
     //行数分だけfor文を回してコードを取得していく
-    codes=[];
-    for (var i=0; i<num; i++) {
-        codes.push(tbody.rows[i].cells[0].textContent);
-    }
+    // codes=[];
+    // for (var i=0; i<num; i++) {
+    //     codes.push(tbody.rows[i].cells[1].textContent);
+    // }
+
+    var codes=[];
+    for (var i=0; i<5; i++) {
+        var a =tbody.rows[i].cells[1].textContent;
+        if(a!=""){
+          codes.push(a);
+        };
+    };
 
     $.ajax({
             url: '/portfolios/create',

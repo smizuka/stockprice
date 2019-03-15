@@ -1,26 +1,120 @@
-<!--         <div class="col-12 mt-4">
-            <div class="col-6 offset-3">
+        <!-- 要素を表示させない場合、display:noneとする -->
+        <!-- サイドバーの設定 -->
+        <div class="sidebar left" style="display:none;">
+            <div class="card bg-light shadow">
+<!--                 <h5 class="card-header text-center">
+                    銘柄検索
+                </h5> -->
+                <div class="card-body" style="min-height:600px;">
+                    <div class="input-group">
+                        <input id="search-form" type="text" class="form-control mr-1" placeholder="銘柄名、コード" aria-label="...">
+                        <span class="input-group-btn">
+                          <button id="search-button" type="button" class="btn btn-warning">検索</button>
+                        </span>
+                    </div>
+                    <div id="search-table">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 mb-4 mt-4">
+            <div class="col-12">
+            <!-- <div class="col-10  offset-1 inline-block"> -->
                 <div class="card bg-light shadow">
-                    <div class="card-body">
-                        <div class="input-group">
-                            <input id="modall" type="text" class="form-control mr-1" placeholder="銘柄名、コード" aria-label="...">
-                            <span class="input-group-btn">
-                              <button id="search-button" type="button" class="btn btn-warning">検索</button>
-                            </span>
+
+                    <div class="card-body" style="min-height:350px;">
+                        <div class="col-12">
+                            <div class="col-4 mt-2 mb-4">
+                                <a href="#" class="btn btn-block btn-warning" data-action="toggle" data-side="left">
+                                  銘柄を追加
+                                </a>
+                                <!-- <button id="sidebar-appear" class="btn btn-block btn-warning">ポートフォリオに追加する</button> -->
+                            </div>
+                            <table class="table table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="col-xs-1 text-left">#</th>
+                                        <th class="col-xs-1 text-left">コード</th>
+                                        <th class="col-xs-4 text-left">銘柄名</th>
+                                        <th class="col-xs-1 text-left">現在株価</th>
+                                        <th class="col-xs-1 text-left">増減率</th>
+                                        <th class="col-xs-1 text-left">リターン</th>
+                                        <th class="col-xs-1 text-left">リスク</th>
+                                        <th class="col-xs-2"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="portfolio-table">
+                                    <tr>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right"></td>
+                                        <td ></td>
+                                        <td ></td>
+                                        <td class="text-right"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right"></td>
+                                        <td ></td>
+                                        <td ></td>
+                                        <td class="text-right"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right"></td>
+                                        <td ></td>
+                                        <td ></td>
+                                        <td class="text-right"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right"></td>
+                                        <td ></td>
+                                        <td ></td>
+                                        <td class="text-right"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right"></td>
+                                        <td ></td>
+                                        <td ></td>
+                                        <td class="text-right"></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-4 offset-4">
+                            <div class="col-10 offset-1">
+                                <button id="opt-btn" class="btn btn-block btn-warning">最適化</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
 
-        <div class="col-12 mb-4 mt-4">
-            <div class="col-5 offset-1 search-row inline-block">
+        <!-- <div class="col-12 mb-4 mt-4"> -->
+<!--             <div class="col-5 offset-1 search-row inline-block">
                 <div class="card bg-light shadow">
                     <h5 class="card-header text-center">
                         銘柄検索
                     </h5>
                     <div class="card-body" style="min-height:400px; max-height:400px;">
-                    <!-- <div class="card-body"> -->
                         <div class="input-group">
                             <input id="search-form" type="text" class="form-control mr-1" placeholder="銘柄名、コード" aria-label="...">
                             <span class="input-group-btn">
@@ -31,14 +125,14 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="col-5 inline-block">
-                <div class="card bg-light shadow">
-                    <h5 class="card-header text-center">
+            <!-- <div class="col-5 inline-block"> -->
+                <!-- <div class="card bg-light shadow"> -->
+<!--                     <h5 class="card-header text-center">
                         ポートフォリオ
-                    </h5>
-                    <div class="card-body" style="min-height:350px;">
+                    </h5> -->
+<!--                     <div class="card-body" style="min-height:350px;">
                         <div class="port-area" style="min-height:307px; max-height:307px;">
                             <table class="table table-hover">
                                 <tbody id="portfolio-table">
@@ -48,47 +142,16 @@
                       <div class="col-6 col-offset-3 mx-auto mt-3">
                         <button id="opt-btn" class="btn btn-block btn-warning">最適化</button>
                       </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col12 mb-4">
-<!--             <div class="col-4  offset-1 inline-block">
-                <div class="card bg-light shadow">
-                    <h5 class="card-header text-center">
-                        ポートフォリオ
-                    </h5>
-                    <div class="card-body" style="min-height:350px;">
-                        <div class="port-area" style="min-height:307px; max-height:307px;">
-                            <table class="table table-hover">
-                                <tbody id="portfolio-table">
-                                </tbody>
-                            </table>
-                        </div>
-                      <div class="col-6 col-offset-3 mx-auto mt-3">
-                        <button id="opt-btn" class="btn btn-block btn-warning">最適化</button>
-                      </div>
-                    </div>
-                </div>
+                    </div> -->
+<!--                 </div>
             </div> -->
-
-<!--             <div class="col-5 inline-block">
-                <div class="card bg-light shadow">
-                    <h5 class="card-header text-center">
-                        各銘柄の期待リターンとリスク
-                    </h5>
-                    <div class="card-body" style="min-height:350px;">
-                        <canvas id="port-chart4" width="100%" height="100%"></canvas>
-                    </div>
-                </div>
-            </div> -->
-        </div>
+        <!-- </div> -->
 
         <!-- 最適化結果を入れる -->
         <!-- class名のmychartはスクロール用 -->
         <div class="col-12 mb-4 mychart">
-            <div class="col-10 offset-1">
+            <div class="col-12">
+            <!-- <div class="col-10 offset-1"> -->
 
                 <div class="card bg-light shadow">
                     <div class="card-body" style="min-height:300px;">
@@ -156,7 +219,8 @@
 
         <!-- シミュレーション結果 -->
         <div class="col-12">
-            <div class="col-10 offset-1 mysim">
+            <!-- <div class="col-10 offset-1 mysim"> -->
+            <div class="col-12 mysim">
                 <div class="card bg-light shadow">
                     <div class="card-body" style="min-height: 300px;">
                         <canvas id="port-chart3" width="100%" height="50%"></canvas>
@@ -164,13 +228,13 @@
 
                     <div class="pt-3 mb-3 col-12">
                         <div class="col-2 inline-block text-right">
-                            リターン :
+                            利益率 :
                         </div>
                         <div id="return-result" class="col-2 inline-block box1" style="min-height: 30px;">
                             <p></p>
                         </div>
                         <div class="col-2 inline-block text-right">
-                            リスク :
+                            最大下落率 :
                         </div>
                         <div id="risk-result" class="col-2 inline-block box1 mr-4" style="min-height: 30px;">
                             <p></p>
@@ -186,7 +250,7 @@
 
 <script>
 // --------------------------------------------------------------
-//各銘柄のリスクとリターン
+// 各銘柄のリスクとリターン
 // --------------------------------------------------------------
 // var BarDatas={
 //     type: "horizontalBar",
@@ -363,6 +427,10 @@ var lineDatas={
         responsive: true,
         legend:{
             position: 'bottom'
+        },
+        title: {
+            display: true,
+            text: 'シミュレーション結果'
         },
         scales:{
             xAxes:[

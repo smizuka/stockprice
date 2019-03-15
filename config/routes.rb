@@ -31,10 +31,11 @@ Rails.application.routes.draw do
   #最適化計算
   post "optimizations/calc", to: "optimizations#calc"
 
+  # ポートフォリオに追加したときに同時に計算もする
+  post "analyses/stat", to: "analyses#stat"
   #ポートフォリオを保存する
   post "portfolios/create", to: "portfolios#create"
   # ポートフォリオを削除する
-  # delete "portfolios/destroy", to: "portfolios#destroy"
   get "portfolios/destroy"
 
   # シミュレートしてみる
