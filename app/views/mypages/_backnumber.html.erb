@@ -6,7 +6,8 @@
             <div class="card bg-light shadow ml-3 inline-block">
                 <div class="card-body button-parent" style="max-height:270px;">
                     <!-- <div> -->
-                    <h5 class="text-center"><%=names%></h5>
+                    <!-- group-titleは取得するタイトル名の位置を示すためのクラス -->
+                    <h5 class="group-title text-center"><%=names%></h5>
                     <table class="table table-sm table-hover">
                         <thead class="thead-light">
                             <tr>
@@ -28,8 +29,9 @@
                         <!-- backnumber-optは描写アクションのためのクラス -->
                         <button class="original-btn backnumber-opt ml-3 btn btn-primary inline-block">描写</button>
                         <!-- backnumber-deleteは削除アクションのためのクラス -->
-                        <!-- <button class="backnumber-delete ml-3 btn btn-primary inline-block">削除</button> -->
-                        <%= link_to "削除",{:controller => "portfolios", :action => "destroy",:name => names},{:class => "original-btn ml-5 btn btn-primary inline-block"} %>
+                        <!-- <button class="original-btn backnumber-delete ml-5 btn btn-primary inline-block" data-remote="true">削除</button> -->
+                        <!-- <button class="original-btn ml-5 btn btn-primary inline-block" data-remote="true">削除</button> -->
+                        <%= link_to "削除",{:controller => "portfolios", :action => "destroy",:name => names},{:class => "original-btn ml-5 btn btn-primary inline-block",remote: true,method: "delete"} %>
 
                     </div>
                 </div>
@@ -60,9 +62,9 @@
                             <div class="dropdown">
                                 <button  id="simulation-day-back" type="button" class="btn dropdown-toggle btn-block sim-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">日数</button>
                                 <ul class="dropdown-menu">
-                                    <li><button class="dropdown-item" value="50">50</button></li>
-                                    <li><button class="dropdown-item" value="100">100</button></li>
-                                    <li><button class="dropdown-item" value="200">200</button></li>
+                                    <li><button class="dropdown-item" value="50日">50日</button></li>
+                                    <li><button class="dropdown-item" value="100日">100日</button></li>
+                                    <li><button class="dropdown-item" value="200日">200日</button></li>
                                 </ul>
                             </div>
                         </div>
@@ -71,11 +73,11 @@
                             <div class="dropdown">
                                 <button id="simulation-select-back"type="button" class="btn dropdown-toggle btn-block sim-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">選択肢</button>
                                 <ul class="dropdown-menu">
-                                    <li><button class="dropdown-item" value="1">1</button></li>
-                                    <li><button class="dropdown-item" value="2">2</button></li>
-                                    <li><button class="dropdown-item" value="3">3</button></li>
-                                    <li><button class="dropdown-item" value="4">4</button></li>
-                                    <li><button class="dropdown-item" value="5">5</button></li>
+                                    <li><button class="dropdown-item" value="選択1">選択1</button></li>
+                                    <li><button class="dropdown-item" value="選択2">選択2</button></li>
+                                    <li><button class="dropdown-item" value="選択3">選択3</button></li>
+                                    <li><button class="dropdown-item" value="選択4">選択4</button></li>
+                                    <li><button class="dropdown-item" value="選択5">選択5</button></li>
                                 </ul>
                             </div>
                         </div>
@@ -109,13 +111,13 @@
 
             <div class="pt-3 mb-3 col-12">
                 <div class="col-2 offset-1 inline-block text-right">
-                    リターン :
+                    利益率 :
                 </div>
                 <div id="return-result-back" class="col-2 inline-block box1" style="min-height: 30px;">
                     <p></p>
                 </div>
                 <div class="col-2 inline-block text-right">
-                    リスク :
+                    最大下落率 :
                 </div>
                 <div id="risk-result-back" class="col-2 inline-block box1 mr-4" style="min-height: 30px;">
                     <p></p>

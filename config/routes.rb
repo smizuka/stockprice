@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   #ポートフォリオを保存する
   post "portfolios/create", to: "portfolios#create"
   # ポートフォリオを削除する
-  get "portfolios/destroy"
+  delete "portfolios/destroy", to: "portfolios#destroy"
 
   # シミュレートしてみる
   post "simulations/calc",to: "simulations#calc"
