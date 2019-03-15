@@ -29,7 +29,7 @@ class MypagesController < ApplicationController
         stock_name=Stock.where(code: stock.code).select("name").distinct
         # binding.pry
         #銘柄名を入れる
-        list.push(stock_name[0].name.slice(0, 8))
+        list.push(stock_name[0].name.slice(0, 16))
         #リストに入れる
         lists.push(list)
       end

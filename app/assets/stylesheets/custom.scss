@@ -17,6 +17,7 @@ body{
     background-color:#4C72DE;
     border-color:#4C72DE;
 }
+
 #simulation-select{
     color:white;
     background-color:#4C72DE;
@@ -27,7 +28,29 @@ body{
     background-color:#4C72DE;
     border-color:#4C72DE;
 }
+//バックナンバーのviewファイルの設定
+.original-btn{
+    color:white;
+    background-color:#4C72DE;
+    border-color:#4C72DE;
+}
 
+#simulation-day-back{
+    color:white;
+    background-color:#4C72DE;
+    border-color:#4C72DE;
+}
+
+#simulation-select-back{
+    color:white;
+    background-color:#4C72DE;
+    border-color:#4C72DE;
+}
+#simulation-price-back{
+    color:white;
+    background-color:#4C72DE;
+    border-color:#4C72DE;
+}
 
 //トップ画面の設定
 .top-div-height{
@@ -85,6 +108,11 @@ body{
 
 //ユーザー認証のドロップダウンの矢印を非表示にする
 .user-button.dropdown-toggle::after{
+    display:none;
+}
+
+//シミュレーションのドロップダウンの矢印を非表示にする
+.sim-button.dropdown-toggle::after{
     display:none;
 }
 
@@ -238,7 +266,7 @@ color: #fff; /* 好みに応じて調節してください */
 }
 
 .sidebar.left {
-  top: 200px;
+  top: 220px;
   left: 0;
   bottom: 0;
   width: 320px;

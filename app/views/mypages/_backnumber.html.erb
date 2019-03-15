@@ -1,24 +1,24 @@
-<div class="row">
+<!-- <div class="row"> -->
 
     <!-- <div class="col-10 offset-1 mt-3"> -->
     <div class="col-12 mt-3">
         <% @lists.zip(@names) do |lists,names|%>
-            <div class="card bg-light shadow mr-3 inline-block">
-                <div class="card-body button-parent" style="min-height:300px;">
+            <div class="card bg-light shadow ml-3 inline-block">
+                <div class="card-body button-parent" style="max-height:270px;">
                     <!-- <div> -->
                     <h5 class="text-center"><%=names%></h5>
-                    <table class="table table-sm">
-                        <thead class="bg-primary">
+                    <table class="table table-sm table-hover">
+                        <thead class="thead-light">
                             <tr>
-                                <th class="text-center">Code</th>
-                                <th class="text-center">Name</th>
+                                <th class="table-string text-center">Code</th>
+                                <th class="table-string text-center">Name</th>
                             <tr>
                         </thead>
                         <tbody>
                             <% lists.each do |list|%>
                                     <tr>
-                                        <td><%=list[0]%></td>
-                                        <td class="h6"><%=list[1]%></td>
+                                        <td class="table-string"><%=list[0]%></td>
+                                        <td  class="table-string"><%=list[1]%></td>
                                     </tr>
                             <% end %>
                         </tbody>
@@ -26,16 +26,15 @@
                     <!-- </div> -->
                     <div class="button-children">
                         <!-- backnumber-optは描写アクションのためのクラス -->
-                        <button class="backnumber-opt ml-3 btn btn-primary inline-block">描写</button>
+                        <button class="original-btn backnumber-opt ml-3 btn btn-primary inline-block">描写</button>
                         <!-- backnumber-deleteは削除アクションのためのクラス -->
                         <!-- <button class="backnumber-delete ml-3 btn btn-primary inline-block">削除</button> -->
-                        <%= link_to "削除",{:controller => "portfolios", :action => "destroy",:name => names},{:class => "ml-3 btn btn-primary inline-block"} %>
+                        <%= link_to "削除",{:controller => "portfolios", :action => "destroy",:name => names},{:class => "original-btn ml-5 btn btn-primary inline-block"} %>
 
                     </div>
                 </div>
             </div>
         <% end %>
-    </div>
 
     <div class="col-12 mt-3 backnumber-right-block">
     <!-- <div class="col-10 offset-1 mt-3 backnumber-right-block"> -->
@@ -59,7 +58,7 @@
                         </h5>
                         <div class="col-2 offset-2 inline-block">
                             <div class="dropdown">
-                                <button  id="simulation-day-back" type="button" class="btn dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">日数</button>
+                                <button  id="simulation-day-back" type="button" class="btn dropdown-toggle btn-block sim-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">日数</button>
                                 <ul class="dropdown-menu">
                                     <li><button class="dropdown-item" value="50">50</button></li>
                                     <li><button class="dropdown-item" value="100">100</button></li>
@@ -70,7 +69,7 @@
 
                         <div class="col-2 inline-block">
                             <div class="dropdown">
-                                <button id="simulation-select-back"type="button" class="btn dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">選択肢</button>
+                                <button id="simulation-select-back"type="button" class="btn dropdown-toggle btn-block sim-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">選択肢</button>
                                 <ul class="dropdown-menu">
                                     <li><button class="dropdown-item" value="1">1</button></li>
                                     <li><button class="dropdown-item" value="2">2</button></li>
@@ -83,7 +82,7 @@
 
                         <div class="col-2 inline-block">
                             <div class="dropdown">
-                                <button id="simulation-price-back" type="button" class="btn dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">金額</button>
+                                <button id="simulation-price-back" type="button" class="btn dropdown-toggle btn-block sim-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">金額</button>
                                 <ul class="dropdown-menu">
                                     <li><button class="dropdown-item" value="100万円">100万円</button></li>
                                     <li><button class="dropdown-item" value="200万円">200万円</button></li>
@@ -128,7 +127,7 @@
         </div>
 
     </div>
-</div>
+<!-- </div> -->
 
 <script type="text/javascript">
 // --------------------------------------------------------------

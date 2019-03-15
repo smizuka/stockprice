@@ -47,13 +47,8 @@ $(function() {
             codes.push(tbody.rows[i].cells[0].textContent);
         }
         // 該当するコードがある位置を取得する
-        console.log(code)
         var i=codes.indexOf(code,0);
         // 検索した位置からbuttonのある行に代わりの登録のbuttonを入れる
-        console.log(i);
-        console.log("tbody.rows[i]",tbody.rows[i]);
-        console.log("tbody.rows[i].cells",tbody.rows[i].cells);
-
         var cell = tbody.rows[i].cells[2];
 
         cell.innerHTML ='<td><button class="search-result-btn btn btn-warning table-string">追　加</button></td>';
@@ -405,7 +400,7 @@ $(function() {
         //for文を回してtbodyの中のコードを取得する
         //コードの中身は文字列になっているので整数にする
         for (var i=0; i<num; i++) {
-            codes.push(parseInt(tbody.rows[i].cells[0].textContent));
+            codes.push(parseInt(tbody.rows[i].cells[1].textContent));
         };
         return codes
     }
@@ -626,17 +621,33 @@ $(function() {
   $(document).on('click','#portfolio-table .remove',function(){
       // buttonを押した行を取得する
       var row = $(this).parents('tr')[0];
+      var tb=$(this).closest('tbody')[0];
 
       //削除した行のコードを取得する
       var code = row.cells[1].textContent;
-      //ボタンを押した行を削除する
-      // row.remove();
-      //ボタンを押した行の要素を空にする
-      for(var i=1 ;i<8;i++){
-          row.cells[i].innerHTML="";
+      // ボタンを押した行を削除する
+      row.remove();
+
+      // テーブルの中の行数を取得する
+      var num = tb.rows.length;
+      //最終行に行のみを挿入して変数に入れる
+      var new_row = tb.insertRow(num);
+
+      //新規作成した行に列を加えて空欄を追加
+      for(var i=0 ;i<8;i++){
+          var c =new_row.insertCell(i)
+          c.innerHTML="";
       }
+      // var col =tb.rows[0];
+      // var col =tb.rows[0].Cells;
 
+      // console.log(col)
 
+      // tboyの１列目のセルに１〜５のindex番号を振る
+      for(var i=1 ;i<6;i++){
+          var c =tb.rows[i-1].cells[0];
+          c.innerHTML=i;
+      }
 
       // 検索エリアのボタン表示を変更する関数を実行
       changeButton(code);

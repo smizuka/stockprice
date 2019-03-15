@@ -29,7 +29,7 @@ class PortfoliosController < ApplicationController
         g.destroy
     end
 
-    # redirect_to "mypages/backnumber"
+    redirect_to root_path
   end
 end
 
