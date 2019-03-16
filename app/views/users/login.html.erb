@@ -1,27 +1,28 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-4 offset-4 login-div-height">
-            <!-- login-cardはcard要素の縦方向の位置を決める -->
-            <div class="card bg-light shadow login-div-h-middle">
-                <div class="card-body" style="min-height:350px;">
-                    <h3 class="text-center text-primary">ログイン</h1>
-                    <%= form_for :session , url: users_auth_path do |f|%>
-                        <div class="form-group">
-                            <%= f.label :name, class: 'text-primary'%>
-                            <%= f.text_field :name, class: 'form-control'%>
-                        </div>
-                        <div class="form-group">
-                            <%= f.label :password,class: "text-primary"%>
-                            <%= f.password_field :password,class: "form-control" %>
-                        </div>
-                        <%= f.submit "Log in",class: "btn btn-block btn-primary mt-5"%>
-                    <% end %>
+<div class="top-bg">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4 offset-4 login-div-height">
+                <!-- login-cardはcard要素の縦方向の位置を決める -->
+                <div class="card bg-light shadow login-div-h-middle">
+                    <div class="card-body" style="min-height:350px;">
+                        <h3 class="text-center original-text-color">ログイン</h1>
+                        <%= form_for :session , url: users_auth_path do |f|%>
+                            <div class="form-group">
+                                <%= f.label :name, class: 'original-text-color'%>
+                                <%= f.text_field :name, class: 'form-control'%>
+                            </div>
+                            <div class="form-group">
+                                <%= f.label :password,class: "original-text-color"%>
+                                <%= f.password_field :password,class: "form-control" %>
+                            </div>
+                            <%= f.submit "Log in",class: "login-btn btn btn-block mt-5 text-white"%>
+                        <% end %>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 
 

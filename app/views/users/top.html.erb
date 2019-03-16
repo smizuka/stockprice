@@ -3,17 +3,23 @@
         <div class="row">
             <div class="col-6 offset-3 top-div-height">
                 <div class="top-div-h-middle">
+                    <div class="text-center mb-5 pb-5">
+                        <div class="h1 inline-block text-white">Safety</div>
+                        <div class="inline-block text-white">
+                            <i class="fas fa-hand-holding-usd fa-7x"></i>
+                        </div>
+                    </div>
                     <div class="col-5 inline-block">
-                      <%= button_to "Sign up", {controller: 'users', action: 'signup'}, {method: :get,class: 'btn btn-block btn-primary'} %>
+                      <%= button_to "Sign up", {controller: 'users', action: 'signup'}, {method: :get,class: 'toppage-btn btn btn-block btn-primary'} %>
                     </div>
 
                     <% if logged_in? %>
                         <div class="col-5 offset-1 inline-block">
-                            <%= button_to "Log in", {controller: 'mypages', action: 'index'}, {method: :get,class: 'btn btn-block btn-primary'}%>
+                            <%= button_to "Log in", {controller: 'mypages', action: 'index'}, {method: :get,class: 'toppage-btn btn btn-block btn-primary'}%>
                         </div>
                     <% else %>
                         <div class="col-5 offset-1 inline-block">
-                            <%= button_to "Log in", {controller: 'users', action: 'login'}, {method: :get,class: 'btn btn-block btn-primary'}%>
+                            <%= button_to "Log in", {controller: 'users', action: 'login'}, {method: :get,class: 'toppage-btn btn btn-block btn-primary'}%>
                         </div>
                     <% end %>
                 </div>

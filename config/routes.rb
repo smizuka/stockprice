@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   get "users/signup"
   #ユーザー登録画面
   post "users/create", to: "users#create"
+
+  #ユーザー情報変更
+  get "users/edit"
+
   #topページからlogin
   get "users/login"
   #ログイン画面

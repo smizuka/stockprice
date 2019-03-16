@@ -5,48 +5,31 @@ body{
 
 //トップ画面の背景
 .top-bg{
-    background-image: image-url("123.jpg");
+    //background-image: image-url("123.jpg");
+    background-color:#4C72DE;
     width: 100vw;
     height: 100vh;
     background-position: center;
 }
-
-//シミュレーション結果を表示するためのボタンの設定
-#simulation-day{
+//トップページのボタンの設定
+.toppage-btn{
     color:white;
     background-color:#4C72DE;
-    border-color:#4C72DE;
+    border:3px solid white;
 }
 
-#simulation-select{
-    color:white;
-    background-color:#4C72DE;
-    border-color:#4C72DE;
-}
-#simulation-price{
-    color:white;
-    background-color:#4C72DE;
-    border-color:#4C72DE;
-}
-//バックナンバーのviewファイルの設定
-.original-btn{
-    color:white;
-    background-color:#4C72DE;
-    border-color:#4C72DE;
+.original-text-color{
+    color:#4C72DE;
 }
 
-#simulation-day-back{
-    color:white;
+//ログイン画面のボタン
+.login-btn{
     background-color:#4C72DE;
-    border-color:#4C72DE;
 }
 
-#simulation-select-back{
-    color:white;
-    background-color:#4C72DE;
-    border-color:#4C72DE;
-}
-#simulation-price-back{
+
+//自分で設定したbtnの色
+.btn-original-color{
     color:white;
     background-color:#4C72DE;
     border-color:#4C72DE;
@@ -59,7 +42,7 @@ body{
 }
 .top-div-h-middle{
     position: absolute;
-    top: 50%;
+    top: 10%;
     right: 0;
     bottom: 0;
     left: 0;
@@ -188,11 +171,6 @@ a{
     font-size:5px;
 }
 
-//card-header
-.card-header {
-    //border-bottom: 0px solid rgba(0,0,0,.125);
-}
-
 //カードのヘッド名についての設定
 h5{
     color:#4C72DE;
@@ -239,14 +217,6 @@ h5{
     border-color:#4C72DE;
 }
 
-//バックナンバーページの右側ブロックを固定
-//現在廃止中
-.backnumber-right-block{
-    //position: sticky;
-    //top:0px;
-    //height:100%;
-    //width:100%;
-}
 
 //バックナンバーのページのボタンに対する設定
 .button-parent{

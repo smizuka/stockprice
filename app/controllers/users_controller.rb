@@ -13,6 +13,10 @@ class UsersController < ApplicationController
   def login
   end
 
+  #登録情報変更画面に遷移
+  def edit
+  end
+
   # 新規ユーザー登録メゾット
   def create
     @user=User.new(user_params)

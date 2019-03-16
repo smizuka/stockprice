@@ -27,11 +27,11 @@
                     <!-- </div> -->
                     <div class="button-children">
                         <!-- backnumber-optは描写アクションのためのクラス -->
-                        <button class="original-btn backnumber-opt ml-3 btn btn-primary inline-block">描写</button>
+                        <button class="btn-original-color backnumber-opt ml-3 btn btn-primary inline-block">描写</button>
                         <!-- backnumber-deleteは削除アクションのためのクラス -->
                         <!-- <button class="original-btn backnumber-delete ml-5 btn btn-primary inline-block" data-remote="true">削除</button> -->
                         <!-- <button class="original-btn ml-5 btn btn-primary inline-block" data-remote="true">削除</button> -->
-                        <%= link_to "削除",{:controller => "portfolios", :action => "destroy",:name => names},{:class => "original-btn ml-5 btn btn-primary inline-block",remote: true,method: "delete"} %>
+                        <%= link_to "削除",{:controller => "portfolios", :action => "destroy",:name => names},{:class => "btn-original-color ml-5 btn btn-primary inline-block",remote: true,method: "delete"} %>
 
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                         </h5>
                         <div class="col-2 offset-2 inline-block">
                             <div class="dropdown">
-                                <button  id="simulation-day-back" type="button" class="btn dropdown-toggle btn-block sim-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">日数</button>
+                                <button  id="simulation-day-back" type="button" class="btn-original-color btn dropdown-toggle btn-block sim-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">日数</button>
                                 <ul class="dropdown-menu">
                                     <li><button class="dropdown-item" value="50日">50日</button></li>
                                     <li><button class="dropdown-item" value="100日">100日</button></li>
@@ -71,7 +71,7 @@
 
                         <div class="col-2 inline-block">
                             <div class="dropdown">
-                                <button id="simulation-select-back"type="button" class="btn dropdown-toggle btn-block sim-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">選択肢</button>
+                                <button id="simulation-select-back"type="button" class="btn-original-color btn dropdown-toggle btn-block sim-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">選択肢</button>
                                 <ul class="dropdown-menu">
                                     <li><button class="dropdown-item" value="選択1">選択1</button></li>
                                     <li><button class="dropdown-item" value="選択2">選択2</button></li>
@@ -84,7 +84,7 @@
 
                         <div class="col-2 inline-block">
                             <div class="dropdown">
-                                <button id="simulation-price-back" type="button" class="btn dropdown-toggle btn-block sim-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">金額</button>
+                                <button id="simulation-price-back" type="button" class="btn btn-original-color dropdown-toggle btn-block sim-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">金額</button>
                                 <ul class="dropdown-menu">
                                     <li><button class="dropdown-item" value="100万円">100万円</button></li>
                                     <li><button class="dropdown-item" value="200万円">200万円</button></li>
