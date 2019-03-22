@@ -6,26 +6,18 @@
                 <div class="card bg-light shadow signup-div-h-middle">
                     <div class="card-body" style="min-height:500px;">
                         <h3 class="text-center original-text-color">ユーザー情報変更</h1>
-                        <%= form_for :user , url: users_create_path do |f|%>
-                        <%#= form_for @user do |f|%>
+                        <%= form_for :change , url: users_update_path do |f|%>
                           <div class="form-group">
-                            <%= f.label :name, class: 'original-text-color'%>
-                            <%= f.text_field :name, class: 'form-control'%>
-
+                            <%= f.label :old_password,class: "original-text-color"%>
+                            <%= f.password_field :old_password,class: "form-control" %>
                           </div>
-                          <div class="form-group">
-                            <%= f.label :email, class: "original-text-color"%>
-                            <%= f.text_field :email, class: "form-control"%>
-
-                          </div>
-                          <div class="form-group">
-                            <%= f.label :password,class: "original-text-color"%>
+                          <div  id="pass"class="form-group">
+                            <%= f.label :new_password,class: "original-text-color"%>
                             <%= f.password_field :password,class: "form-control" %>
                           </div>
-                          <div class="form-group">
+                          <div id="pass_confirm" class="form-group">
                             <%= f.label :password_confirmation,class: "original-text-color" %>
                             <%= f.password_field :password_confirmation,class: "form-control" %>
-
                           </div>
                           <%= f.submit "変更する",class: "login-btn btn btn-block text-white"%>
                         <% end %>

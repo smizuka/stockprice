@@ -15,17 +15,23 @@ class UsersController < ApplicationController
 
   #登録情報変更画面に遷移
   def edit
-    # @user = User.find(params[:id])
   end
 
-  # def update
-  #   @user = User.find(params[:id])
-  #   if @user.update_attributes(user_params)
-  #     # 更新に成功したときの処理
-  #   else
-  #     render 'edit'
-  #   end
-  # end
+  def update
+    @user = User.find(current_user.id)
+
+    if @user && @user.authenticate(params[:change][:old_password])
+    # if @user.password_digest==change_params[:old_password]
+      if @user.update_attributes(change_params)
+        redirect_to root_path
+        # 更新に成功したときの処理
+      else
+        render 'edit'
+      end
+    else
+      render 'edit'
+    end
+  end
 
   # 新規ユーザー登録メゾット
   def create
@@ -73,6 +79,12 @@ class UsersController < ApplicationController
 
   def password_params
     params.require(:session).permit(:password)
+  end
+
+  # ユーザー情報変更のときのコード
+  def change_params
+    params.require(:change).permit(:password,
+      :password_confirmation)
   end
 
   #ログアウトするときのセッション

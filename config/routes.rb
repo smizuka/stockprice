@@ -7,8 +7,11 @@ Rails.application.routes.draw do
   #ユーザー登録画面
   post "users/create", to: "users#create"
 
-  #ユーザー情報変更
+  #変更画面に移動
   get "users/edit"
+
+  #ユーザー情報変更
+  post "users/update", to: "users#update"
 
   #topページからlogin
   get "users/login"
