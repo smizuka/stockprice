@@ -15,7 +15,17 @@ class UsersController < ApplicationController
 
   #登録情報変更画面に遷移
   def edit
+    # @user = User.find(params[:id])
   end
+
+  # def update
+  #   @user = User.find(params[:id])
+  #   if @user.update_attributes(user_params)
+  #     # 更新に成功したときの処理
+  #   else
+  #     render 'edit'
+  #   end
+  # end
 
   # 新規ユーザー登録メゾット
   def create
