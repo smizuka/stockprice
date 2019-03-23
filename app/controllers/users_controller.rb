@@ -20,11 +20,11 @@ class UsersController < ApplicationController
   def update
     @user = User.find(current_user.id)
 
+    #検索するだけの場合ストロングパラメータに通す必要はない。
     if @user && @user.authenticate(params[:change][:old_password])
-    # if @user.password_digest==change_params[:old_password]
+      #データベースに登録する場合、ストロングパラメータに登録する
       if @user.update_attributes(change_params)
         redirect_to root_path
-        # 更新に成功したときの処理
       else
         render 'edit'
       end
