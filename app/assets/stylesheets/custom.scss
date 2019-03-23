@@ -17,10 +17,15 @@ body{
     background-color:#4C72DE;
     border:3px solid white;
 }
-
 .original-text-color{
     color:#4C72DE;
 }
+
+//はじめにのページの文字の色
+.text-original-color{
+    color:#5A5C68
+}
+
 
 //ログイン画面のボタン
 .login-btn{
@@ -112,14 +117,13 @@ body{
 //ユーザーアイコン
 .user-icon{
 
-
 }
 
 //サイドバーの背景色を指定する
 .left-bar{
     background-color:#4C72DE;
-    height:2000px;
-    //height: 100vh;
+    //サイドバーの固定はheigthを無効化すると機能する
+    //height:2000px;
 }
 
 //サイドバーの固定に関する設定
@@ -231,21 +235,20 @@ h5{
 
 //サイドバーの設定
 .sidebar{
-position: fixed;
-color: #fff; /* 好みに応じて調節してください */
+    position: fixed;
+    color: #fff;
 }
-
 .sidebar.left {
   top: 220px;
   left: 0;
   bottom: 0;
-  width: 320px;
+  //画面の横幅に対して25%になるように設定
+  width: 25%;
   //background: white;
   //border: solid 3px #6091d3;
 }
-
 .td-text{
- vertical-align: middle;
+    vertical-align: middle;
 }
 
 
