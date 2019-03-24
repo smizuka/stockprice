@@ -1,6 +1,7 @@
 class SimulationsController < ApplicationController
 
     require 'net/http'
+    require 'net/https'
     require 'uri'
     require 'json'
     require 'base64'
@@ -61,12 +62,26 @@ class SimulationsController < ApplicationController
                "adjust": prices
         }
 
-        uri = URI('http://0.0.0.0:5000/simulation')
+        uri = URI('https://serene-reaches-83793.herokuapp.com/simulation')
+        http = Net::HTTP.new(uri.host, uri.port)
+
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
         req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
+
         req.body = datas.to_json
-        res = Net::HTTP.start(uri.hostname, uri.port) do |http|
-            http.request(req)
-        end
+
+        res = http.request(req)
+
+        #------------------------ローカルテスト用------------------------
+        # uri = URI('http://0.0.0.0:5000/simulation')
+        # req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
+        # req.body = datas.to_json
+        # res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+        #     http.request(req)
+        #     http.use_ssl = true if uri.scheme == 'https'
+        # end
 
         #戻ってきたJSONファイルをデコードする
         # 各データの日数分のシミュレーションデータが入っている

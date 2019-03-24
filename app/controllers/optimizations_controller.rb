@@ -1,6 +1,7 @@
 class OptimizationsController < ApplicationController
 
-  require 'net/http'
+  # require 'net/http'
+  require 'net/https'
   require 'uri'
   require 'json'
 
@@ -16,12 +17,34 @@ class OptimizationsController < ApplicationController
         datas[code]=values
     end
 
-    uri = URI('http://0.0.0.0:5000/optimisation')
+    uri = URI('https://serene-reaches-83793.herokuapp.com/optimisation')
+
+    http = Net::HTTP.new(uri.host, uri.port)
+
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
     req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
+
     req.body = datas.to_json
-    res = Net::HTTP.start(uri.hostname, uri.port) do |http|
-        http.request(req)
-    end
+
+    res = http.request(req)
+
+    #------------------------ローカルテスト用--------------------------
+    # uri = URI('http://0.0.0.0:5000/optimisation')
+    # #<URI::HTTP http://0.0.0.0:5000/optimisation>
+    # req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
+    # #<Net::HTTP::Post POST>
+    # req.body = datas.to_json
+    # #jsonファイル
+    # #uri.hostname : "0.0.0.0"
+    # #uri.port : 5000
+    # res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+    #     http.request(req)
+    # end
+    # #res <Net::HTTPOK 200 OK readbody=true>
+
+    #----------------------------ここまで変更箇所----------------------------
 
     #戻ってきたJSONファイルをデコードする
     opt_datas = JSON.parse(res.body)
