@@ -21,14 +21,27 @@ class PortfoliosController < ApplicationController
   def destroy
     #グループの名前と一致するポートフォリをを選択して削除する
     portfolio=Portfolio.find_by(group_name: params[:name])
-    portfolio.destroy
 
     group=Group.where(group_name: params[:name])
 
-    group.each do|g|
-        g.destroy
+    #transactionで囲むことで両方のモデルの削除がおこわ慣れないと
+    #ロールバックされる
+    Portfolio.transaction do
+      Group.transaction do
+
+        #削除に失敗したらFlaseなので文の前に!をつければ失敗したときの
+        #メッセージが表示される
+        portfolio.destroy
+
+        group.each do|g|
+            g.destroy
+        end
+      end
     end
 
+    #-----------------------------------------------------
+    #ここから一覧を表示するためのコード
+    #-----------------------------------------------------
     names=current_user.groups.select("group_name").distinct
     # stock=current_user.groups.select(names[0])
 
