@@ -50,9 +50,7 @@ $(function() {
         cell.innerHTML ='<td><button class="search-result-btn btn btn-warning table-string">追　加</button></td>';
     }
 
-    // --------------------------------------------------------------
     //最適化したあとにシミュレーションする関数
-    // --------------------------------------------------------------
     function simulate(data){
       $(document).on('click','#simulation-button',function(){
 
@@ -101,7 +99,6 @@ $(function() {
                 }
             })
             .done((data) => {
-              // 実施した結果をチャート表示する関数
                 sim_chart_mypage(data)
                 scroll_to_sim()
             })
@@ -114,9 +111,8 @@ $(function() {
       });
 
     }
-    // --------------------------------------------------------------
+
     //ポートフォリオ一覧に存在する銘柄を取得する
-    // --------------------------------------------------------------
     function getCode(){
         // ポートフォリオに登録されている銘柄一覧を取得する
         var tbody = $("#portfolio-table")[0]
@@ -132,9 +128,7 @@ $(function() {
         return codes
     }
 
-    // --------------------------------------------------------------
   // 検索した際に実行されるコード
-  // --------------------------------------------------------------
   $(document).on('click','#search-button',function(){
 
     // 入力された値を取得する
@@ -208,7 +202,6 @@ $(function() {
                     Cell3.innerHTML = '<td><button class="search-result-btn btn btn-warning table-string">追　加</button></td>';
                 };
                 Cell3.className = "table-string text-right";
-                // Cell3.style="padding: 0.75rem 0px";
 
             };
         };
@@ -232,12 +225,8 @@ $(function() {
   // --------------------------------------------------------------
   $(document).on('click','#search-table .search-result-btn',function(){
 
-    // buttonの入っているtr要素を取得する
-    // var tr = $(this).parent().parent()[0];
     var tr = $(this).closest("tr")[0];
 
-    // 押したbuttonの行の位置を取得する
-    // var r = tr.sectionRowIndex;
     // 各セル内に入っている値を取得する
     var code = tr.cells[0].textContent;
     var name = tr.cells[1].textContent;
@@ -264,7 +253,6 @@ $(function() {
     //検索一覧の中でbuttonを押した要素のbuttonを追加->追加済に変更する
     var btnCell = tr.cells[2];
     btnCell.innerHTML ='<td><button class="btn btn-default table-string" disabled>追加済</button></td>';
-
 
       $.ajax({
           url: '/analyses/stat',
@@ -310,9 +298,7 @@ $(function() {
 
   });
 
-  // --------------------------------------------------------------
   // ポートフォリオを削除するコード
-  // --------------------------------------------------------------
   $(document).on('click','#portfolio-table .remove',function(){
       // buttonを押した行を取得する
       var row = $(this).parents('tr')[0];
@@ -344,9 +330,7 @@ $(function() {
       changeButton(code);
   });
 
-  // --------------------------------------------------------------
   // 最適化計算を行うコード
-  // --------------------------------------------------------------
   $(document).on('click','#opt-btn',function(){
 
       var tbody = $('#portfolio-table')[0];
@@ -363,18 +347,14 @@ $(function() {
           return alert('銘柄は最低３つ選んでください');
       };
 
-      console.log(codes);
-
       $.ajax({
           url: '/optimizations/calc',
           method: 'post',
           data: {'data': codes}
       })
       .done((data) => {
-          // グラフを描写するコード
           opt_chart_mypage(data);
           scroll_to_opt();
-          //最適化結果をもとにシミュレーションするajax
           simulate(data);
       })
       .fail((data) => {
@@ -384,9 +364,8 @@ $(function() {
       .always((data) => {
       });
   });
-  //--------------------------------------------------------------
+
   //ポートフォリオを登録するコード
-  //--------------------------------------------------------------
   $(document).on('click','#port-save',function(){
     //データベースに登録するための名前を入力
     var group_name=prompt("ポートフォリオ名を入力してください");
@@ -419,7 +398,6 @@ $(function() {
         .always((data) => {
         });
   });
-
 });
 
 

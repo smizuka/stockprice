@@ -1,8 +1,6 @@
 $(function() {
 
-    // -----------------------------------------------------------
     //最適化したあとにシミュレーションする関数
-    // --------------------------------------------------------------
     function simulate(data){
       $(document).on('click','#simulation-button-back',function(){
 
@@ -53,6 +51,7 @@ $(function() {
             .done((data) => {
               // 実施した結果をチャート表示する関数
                 sim_chart_backnumber(data)
+                scroll_to_sim()
             })
             .fail((data) => {
               console.log(data)
@@ -63,11 +62,11 @@ $(function() {
       });
     }
 
+    //最適化計算をする部分
     $(document).on('ready', function() {
       $(document).on('click','.backnumber-opt',function(){
 
           var tbody = $(this).closest(".card-body").find("table.table tbody")[0];
-          // .parent().parent().find("")
 
           var num = tbody.rows.length; // 行数を取得する,header=1とする
 
@@ -82,13 +81,8 @@ $(function() {
               data: {'data': codes}
           })
           .done((data) => {
-              // グラフを描写するコード
               opt_chart_backnumber(data);
-              //平均値とリスクを描写するコード
-              // opt_table(data);
-
-              // scroll_to_opt();
-
+              scroll_to_opt();
               //最適化結果をもとにシミュレーションするコード
               simulate(data);
           })
@@ -100,12 +94,9 @@ $(function() {
           });
       });
 
-      // --------------------------------------------------------------
       // グループを削除するコード
-      // --------------------------------------------------------------
       $(document).on('click','.backnumber-delete',function(){
 
-          // var tbody = $(this).closest(".card-body");
           var tbody = $(this).closest(".card-body").find(".group-title")[0];
           var name=tbody.textContent;
 

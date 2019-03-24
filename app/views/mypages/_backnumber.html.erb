@@ -1,12 +1,8 @@
-<!-- <div class="row"> -->
 
-    <!-- <div class="col-10 offset-1 mt-3"> -->
     <div class="col-12 mt-3">
         <% @lists.zip(@names) do |lists,names|%>
             <div class="card bg-light shadow ml-3 inline-block">
                 <div class="card-body button-parent" style="max-height:270px;">
-                    <!-- <div> -->
-                    <!-- group-titleは取得するタイトル名の位置を示すためのクラス -->
                     <h5 class="group-title text-center"><%=names%></h5>
                     <table class="table table-sm table-hover">
                         <thead class="thead-light">
@@ -28,19 +24,16 @@
                     <div class="button-children">
                         <!-- backnumber-optは描写アクションのためのクラス -->
                         <button class="btn-original-color backnumber-opt ml-3 btn btn-primary inline-block">描写</button>
-                        <!-- backnumber-deleteは削除アクションのためのクラス -->
-                        <!-- <button class="original-btn backnumber-delete ml-5 btn btn-primary inline-block" data-remote="true">削除</button> -->
-                        <!-- <button class="original-btn ml-5 btn btn-primary inline-block" data-remote="true">削除</button> -->
+
                         <%= link_to "削除",{:controller => "portfolios", :action => "destroy",:name => names},{:class => "btn-original-color ml-5 btn btn-primary inline-block",remote: true,method: "delete"} %>
 
                     </div>
                 </div>
             </div>
         <% end %>
+    </div>
 
-    <div class="col-12 mt-3 backnumber-right-block">
-    <!-- <div class="col-10 offset-1 mt-3 backnumber-right-block"> -->
-    <!-- <div class="col-8 inline-block mt-3 backnumber-right-block"> -->
+    <div class="col-12 mt-3 backnumber-right-block mychart">
         <div class="card bg-light shadow">
                 <div class="card bg-light shadow">
                     <div class="card-body" style="min-height:300px;">
@@ -104,7 +97,7 @@
                 </div>
         </div>
 
-        <div class="card bg-light shadow mt-3">
+        <div class="card bg-light shadow mt-3 mysim">
             <div class="card-body" style="min-height: 300px;">
                 <canvas id="port-chart7" width="100%" height="50%"></canvas>
             </div>
@@ -122,19 +115,14 @@
                 <div id="risk-result-back" class="col-2 inline-block box1 mr-4" style="min-height: 30px;">
                     <p></p>
                 </div>
-<!--                 <div class="col-3 ml-3 inline-block">
-                    <button id="port-save-back" class="btn btn-block btn-warning">結果を保存する</button>
-                </div> -->
             </div>
         </div>
-
     </div>
-<!-- </div> -->
+
 
 <script type="text/javascript">
-// --------------------------------------------------------------
+
 //最適化計算結果
-// --------------------------------------------------------------
 var BarDatas={
     type: "horizontalBar",
     data: {
@@ -182,12 +170,9 @@ var BarDatas={
 };
 
 var ctx5 = $('#port-chart5')[0].getContext("2d");
-//グラフ描画
 var chart5 = new Chart(ctx5,BarDatas);
 
-// --------------------------------------------------------------
-//各ポートフォリオの期待リターンとリスク
-// --------------------------------------------------------------
+//リターンとリスクの結果
 var BarDatas={
     type: "horizontalBar",
     data: {
@@ -206,7 +191,6 @@ var BarDatas={
         scales:{
             xAxes:[
                 {
-                    // stacked: true,
                     ticks: {
                         max: 10,
                         min: -5,
@@ -220,10 +204,7 @@ var BarDatas={
             ],
             yAxes: [
                 {
-                    // stacked: true,
-                    // scaleLabel: {
-                    //     fontSize: 100,
-                    // },
+
                     gridLines: {
                       display: false,
                       drawBorder: true
@@ -234,14 +215,10 @@ var BarDatas={
     }
 };
 
-
 var ctx6 = $('#port-chart6')[0].getContext("2d");
-//グラフ描画
 var chart6 = new Chart(ctx6,BarDatas);
 
-// --------------------------------------------------------------
 //シミュレーション結果
-// --------------------------------------------------------------
 var lineDatas={
     type: "line",
     data: {
@@ -256,24 +233,14 @@ var lineDatas={
         scales:{
             xAxes:[
                 {
-                    // ticks: {
-                    //     max: 10,
-                    //     min: 0,
-                    //     stepSize:2
-                    // },
                     gridLines: {
-                      display: false,
-                      drawBorder: true
+                        display: false,
+                        drawBorder: true
                     }
                 }
             ],
             yAxes: [
                 {
-                    // ticks: {
-                    //     max: 10,
-                    //     min: -10,
-                    //     stepSize:2
-                    // },
                     scaleLabel: {
                         fontSize: 100,
                     },
@@ -287,10 +254,7 @@ var lineDatas={
     }
 };
 
-// var ctx = document.getElementById("port-chart1").getContext('2d');
 var ctx7 = $('#port-chart7')[0].getContext("2d");
-//グラフ描画
-// var char = new Chart(ctx).Line(BarDatas,options);
 var chart7 = new Chart(ctx7,lineDatas);
 
 </script>
