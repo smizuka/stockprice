@@ -28,11 +28,7 @@ $(function() {
         });
     });
 
-
-    //chart.jsの際にchartインスタンスが入っていたらオブジェクト
-    var chart_sim = null;
-
-    // --------------------------------------------------------------
+    // -----------------------------------------------------------
     //ポートフォリオの削除が行われた際に検索欄にあるbuttonの表示を
     //追加済から追加に変更する関数
     // --------------------------------------------------------------
@@ -52,281 +48,6 @@ $(function() {
         var cell = tbody.rows[i].cells[2];
 
         cell.innerHTML ='<td><button class="search-result-btn btn btn-warning table-string">追　加</button></td>';
-    }
-
-    // --------------------------------------------------------------
-    //シミュレーション結果を表示するコード
-    // --------------------------------------------------------------
-    function sim_chart(data) {
-
-        var datas=data["return"];
-        var index=[];
-        datas.length;
-
-        // console.log(data["start"])
-        // console.log("開始"+data["start"])
-        // console.log("終了"+data["end"])
-
-        // 収益率を算出する
-        var r_rate = (data["end"]-data["start"])/data["start"]*100;
-
-        var r_rate2 = Math.round(r_rate * 10) / 10;
-
-        var p = $("#return-result").children()[0];
-        p.innerHTML=r_rate2+" %";
-        if(r_rate2<0){
-            p.className="text-primary text-center";
-        }else{
-            p.className="text-danger text-center";
-        }
-
-        var p2 = $("#risk-result").children()[0];
-        p2.innerHTML=data["drowdown"]+"%";
-        p2.className="text-primary text-center";
-
-
-        for (var i=0; i<datas.length; i++) {
-            index.push(i+1);
-        }
-        // colors=["#6CB9D8","#ECA184","#EBF182","#8BA7D5","#DB7BB1"];
-
-        result_datas=[{
-            // label:"選択1",
-            borderColor: "#ECA184",
-            data: datas,
-            backgroundColor: "rgba(0,0,0,0)"
-        }];
-
-        // --------------------------------------------------------------
-        //シミュレーション結果を表示するコード
-        // --------------------------------------------------------------
-        var lineDatas={
-            type: "line",
-            data: {
-                labels:index,
-                datasets:result_datas
-            },
-            options:{
-                responsive: true,
-                legend:{
-                    display: false
-
-                    // position: 'bottom'
-                },
-                title: {
-                    display: true,
-                    text: 'シミュレーション結果'
-                },
-                scales:{
-                    xAxes:[
-                        {
-                            ticks: {
-                                max: index,
-                                min: 0,
-                                stepSize:10
-                            },
-                            gridLines: {
-                              display: false,
-                              drawBorder: true
-                            }
-                        }
-                    ],
-                    yAxes: [
-                        {
-                            ticks: {
-                                // max: 10,
-                                // min: -10,
-                                // stepSize:2
-                            },
-                            scaleLabel: {
-                                // fontSize: 100,
-                            },
-                            gridLines: {
-                              display: false,
-                              drawBorder: true
-                            }
-                        }
-                    ]
-                }
-            }
-        };
-
-        var ctx3 = $('#port-chart3')[0].getContext("2d");
-
-        //chart_simの中にインスタンスが入っていたら更新、入っていなければ新規作成
-        if(chart_sim){
-            chart_sim.data.labels=index;
-            chart_sim.data.datasets=result_datas;
-            chart_sim.update();
-        }else{
-            chart_sim= new Chart(ctx3,lineDatas);
-        };
-    }
-
-    // --------------------------------------------------------------
-    //ポートフォリオの削除が行われた際に検索欄にあるbuttonの表示を
-    //追加済から追加に変更する関数
-    // --------------------------------------------------------------
-    function opt_chart_mypage(data) {
-
-        //辞書型のデータセットを追加していく空配列
-        result_datas=[];
-        //凡例を入れたリスト
-        datas=data["datas"];
-        labels=data["labels"];
-        colors=["#6CB9D8","#ECA184","#EBF182","#8BA7D5","#DB7BB1"];
-        num=labels.length-1;
-
-        for (var i=0; i<=num; i++) {
-            dic={
-                label:labels[i],
-                data: datas[i],
-                backgroundColor:colors[i],
-                borderColor: "white",
-                borderWidth: 0
-            };
-            //グラフに表示するデータ
-            result_datas.push(dic);
-        };
-
-        // --------------------------------------------------------------
-        //銘柄比率を表示するチャート
-        // --------------------------------------------------------------
-        var BarDatas={
-            type: "horizontalBar",
-            data: {
-                labels: ["選択１","選択２","選択３","選択４","選択５"],
-                datasets:result_datas
-            },
-            options: {
-                responsive: true,
-                title: {
-                    display: true,
-                    // fontSize: 50,
-                    text: "各銘柄の比率"
-                },
-                legend: {
-                    position: 'bottom'
-                },
-                scales: {
-                    xAxes: [
-                        {
-                            stacked: true,
-                            ticks: {
-                                max: 1,
-                                min: 0,
-                                stepSize:0.2
-                            },
-                            gridLines: {
-                              display: false,
-                              drawBorder: true
-                            }
-                        }
-                    ],
-                    yAxes: [
-                        {
-                            stacked: true,
-                            scaleLabel: {
-                                fontSize: 100,
-                            },
-                            gridLines: {
-                              display: false,
-                              drawBorder: true
-                            }
-                        }
-                    ]
-                }
-            }
-        };
-
-        var ctx = $('#port-chart1')[0].getContext("2d");
-        var chart = new Chart(ctx,BarDatas);
-
-        // --------------------------------------------------------------
-        //リスクとリターンを表示するチャート
-        // --------------------------------------------------------------
-        var datas = [
-        {
-            label: 'リターン',
-            data: data["risk"][0],
-            borderColor : "rgba(254,97,132,0.8)",
-            backgroundColor : "rgba(254,97,132,0.5)",
-        },
-        {
-            label: 'リスク',
-            data: data["risk"][1],
-            borderColor : "rgba(54,164,235,0.8)",
-            backgroundColor : "rgba(54,164,235,0.5)",
-        },
-        ]
-
-        var BarDatas={
-            type: "horizontalBar",
-            data: {
-                labels: ["選択１","選択２","選択３","選択４","選択５"],
-                datasets:datas
-            },
-            options: {
-                responsive: true,
-                title: {
-                    display: true,
-                    // fontSize: 50,
-                    text: "リターンとリスク"
-                },
-                legend: {
-                    position: 'bottom'
-                },
-                scales: {
-                    xAxes: [
-                        {
-                            // stacked: true,
-                            ticks: {
-                                max: 10,
-                                min: -5,
-                                stepSize:3
-                            },
-                            gridLines: {
-                              display: false,
-                              drawBorder: true
-                            }
-                        }
-                    ],
-                    yAxes: [
-                        {
-                            // stacked: true,
-                            scaleLabel: {
-                                fontSize: 100,
-                            },
-                            gridLines: {
-                              display: false,
-                              drawBorder: true
-                            }
-                        }
-                    ]
-                }
-            }
-        };
-
-        var ctx2 = $('#port-chart2')[0].getContext("2d");
-        var chart2 = new Chart(ctx2,BarDatas);
-
-    }
-
-    // --------------------------------------------------------------
-    //計算した期待リターンやリスクをテーブルに入れていく関数
-    // --------------------------------------------------------------
-    function opt_table(data){
-      //空のテーブル要素を取得する
-      var tbody = $("#opt-result-table")[0];
-      // tbodyの行数を取得する
-      // var num = tbody.rows.length;
-
-      for (var i=0; i<5; i++) {
-          var Cell1 = tbody.rows[i].cells[1];
-          var Cell2 = tbody.rows[i].cells[2];
-          Cell1.innerHTML=data["risk"][i][0];
-          Cell2.innerHTML=data["risk"][i][1];
-      };
     }
 
     // --------------------------------------------------------------
@@ -381,7 +102,7 @@ $(function() {
             })
             .done((data) => {
               // 実施した結果をチャート表示する関数
-                sim_chart(data)
+                sim_chart_mypage(data)
                 scroll_to_sim()
             })
             .fail((data) => {
@@ -409,30 +130,6 @@ $(function() {
             codes.push(parseInt(tbody.rows[i].cells[1].textContent));
         };
         return codes
-    }
-
-    // --------------------------------------------------------------
-    //最適化されたあとのグラフの場所に飛ぶ
-    // --------------------------------------------------------------
-    function scroll_to_opt(){
-        var position = $(".mychart").offset().top;
-        $("html,body").animate({
-            scrollTop : position
-        }, {
-            queue : false
-        });
-    }
-
-    // --------------------------------------------------------------
-    //シミュレーション結果にとぶ
-    // --------------------------------------------------------------
-    function scroll_to_sim(){
-        var position = $(".mysim").offset().top;
-        $("html,body").animate({
-            scrollTop : position
-        }, {
-            queue : false
-        });
     }
 
     // --------------------------------------------------------------
@@ -507,7 +204,6 @@ $(function() {
                 // もしポートフォリオ欄に同じコードがする場合、追加済みボタンにする
                 if(codes.indexOf(data["code"][i])>=0){
                     Cell3.innerHTML = '<td><button class="btn btn-default table-string" disabled>追加済</button></td>';
-                    // Cell3.innerHTML = '<td><button class="btn btn-default" style="font-size: 12px; padding:0px" disabled>追加済</button></td>';
                 }else{
                     Cell3.innerHTML = '<td><button class="search-result-btn btn btn-warning table-string">追　加</button></td>';
                 };
@@ -612,13 +308,6 @@ $(function() {
       .always((data) => {
       });
 
-    // tbodyにtrを追加していく
-    // var rows = tbody.insertRow(-1);
-    // trの中にcellを入れていく、-1にすると下に追加していく
-    // var cell1 = tbody.rows[num].insertCell(-1);
-    // cell1.className= "col-xs-2 table-string";
-
-    // btnCell.innerHTML ='<td><button class="btn btn-default" style="padding:0px; font-size:12px;" disabled>追加済</button></td>';
   });
 
   // --------------------------------------------------------------
@@ -644,10 +333,6 @@ $(function() {
           var c =new_row.insertCell(i)
           c.innerHTML="";
       }
-      // var col =tb.rows[0];
-      // var col =tb.rows[0].Cells;
-
-      // console.log(col)
 
       // tboyの１列目のセルに１〜５のindex番号を振る
       for(var i=1 ;i<6;i++){
@@ -665,7 +350,6 @@ $(function() {
   $(document).on('click','#opt-btn',function(){
 
       var tbody = $('#portfolio-table')[0];
-      // var num = tbody.rows.length; // 行数を取得する,header=1とする
 
       var codes=[];
       for (var i=0; i<5; i++) {
@@ -689,12 +373,8 @@ $(function() {
       .done((data) => {
           // グラフを描写するコード
           opt_chart_mypage(data);
-          //平均値とリスクを描写するコード
-          // opt_table(data);
-
           scroll_to_opt();
-
-          //最適化結果をもとにシミュレーションするコード
+          //最適化結果をもとにシミュレーションするajax
           simulate(data);
       })
       .fail((data) => {
@@ -716,13 +396,6 @@ $(function() {
     };
 
     var tbody = $("#portfolio-table")[0];
-    // var num = tbody.rows.length;
-
-    //行数分だけfor文を回してコードを取得していく
-    // codes=[];
-    // for (var i=0; i<num; i++) {
-    //     codes.push(tbody.rows[i].cells[1].textContent);
-    // }
 
     var codes=[];
     for (var i=0; i<5; i++) {
