@@ -51,35 +51,5 @@ class MypagesController < ApplicationController
 
 end
 
-        # <% @lists.zip(@names) do |lists,names|%>
-        #     <div class="card bg-light shadow mb-3">
-        #         <div class="card-body button-parent" style="min-height:300px;">
-        #             <div>
-        #                 <h5 class="text-center"><%=names%></h5>
-        #                 <table class="table table-sm">
-        #                     <thead>
-        #                         <tr>
-        #                             <th>Code</th>
-        #                             <th>Name</th>
-        #                         <tr>
-        #                     </thead>
-
-        #                     <% lists.each do |list|%>
-        #                         <tbody>
-        #                             <tr>
-        #                                 <td><%=list[0]%></td>
-        #                                 <td class="h6"><%=list[1]%></td>
-        #                             </tr>
-        #                         </tbody>
-        #                     <% end %>
-        #                 </table>
-        #             </div>
-        #             <div class="button-children">
-        #                 <button class="ml-3 btn btn-primary inline-block">描写</button>
-        #                 <button class="ml-5 btn btn-primary inline-block">削除</button>
-        #             </div>
-        #         </div>
-        #     </div>
-        # <% end %>
 
 

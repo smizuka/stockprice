@@ -39,38 +39,3 @@ class FavoritesController < ApplicationController
   end
 
 end
-
-# <div class="col-md-4">
-#     <div class="card bg-light shadow mb-4">
-#         <h2 class="card-header">
-#           STEP2
-#         </h2>
-#         <div class="card-body">
-#             <table class="table table-hover">
-#               <thead>
-#                 <tr>
-#                   <th class="col-xs-2">コード</th>
-#                   <th class="col-xs-5">企業名</th>
-#                   <th class="col-xs-2">日付</th>
-#                   <th class="col-xs-2">前日終値</th>
-#                   <th class="col-xs-2"></th>
-#                 </tr>
-#               </thead>
-#               <tbody id="favorite-table">
-#                 <% @favorites.each do |favorite| %>
-#                   <tr>
-#                     <td class="favorite-code"><%= favorite.stock.code %></td>
-#                     <td><%= favorite.stock.name %></td>
-#                     <td><%= favorite.stock.date %></td>
-#                     <td><%= favorite.stock.adjust %></td>
-#                     <td>
-#                       <button class="btn btn-warning">削除</button>
-#                       <%#= button_to "削除", {:controller => "favorites", :action => "destroy", :stock_code => favorite.stock.code},class: "btn btn-warning"%>
-#                     </td>
-#                   </tr>
-#                 <% end %>
-#               </tbody>
-#             </table>
-#         </div>
-#     </div>
-# </div>
