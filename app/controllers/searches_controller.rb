@@ -5,9 +5,6 @@ class SearchesController < ApplicationController
     if !params[:value].blank?
       @stock = Stock.search_by_keyword(params[:value])
 
-      puts "--------------------------"
-      puts "#{@stock}"
-      puts "--------------------------"
       #検索に該当するコードを取得する
       @stocks=@stock.select("code,name").distinct.order("code")
       # where(name like '%72%' or code like '%72%'))
@@ -19,6 +16,9 @@ class SearchesController < ApplicationController
     # SELECT DISTINCT code,name FROM "stocks" WHERE (name like '%72%' or code like '%72%') ORDER BY code)
 
 
+      puts "--------------------------"
+      puts "#{@stocks}"
+      puts "--------------------------"
     #レコードを配列にしていく
     n= @stocks.count
 
