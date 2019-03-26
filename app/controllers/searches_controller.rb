@@ -9,10 +9,13 @@ class SearchesController < ApplicationController
       @stock = Stock.search_by_keyword(params[:value])
       #検索に該当するコードを取得する
       @stocks=@stock.select("code,name").distinct.order("code")
+      # where(name like '%72%' or code like '%72%'))
     end
 
     puts "--------------------------------"
     puts "データベースのあと"
+    puts @stocks
+    puts "--------------------------------"
 
     #レコードを配列にしていく
     n= @stocks.count
