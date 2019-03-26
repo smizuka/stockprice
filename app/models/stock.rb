@@ -2,8 +2,12 @@ class Stock < ApplicationRecord
 
   #銘柄名あるいはコードが含まれる場合の対応
   #２変数指定した場合は#{}も２つ指定しなければならない
+  # scope :search_by_keyword, -> (keyword) {
+  #   where("name like ? or code like ?","%#{keyword}%","%#{keyword}%") if keyword.present?
+  # }
   scope :search_by_keyword, -> (keyword) {
-    where("name like ? or code like ?","%#{keyword}%","%#{keyword}%") if keyword.present?
+    # where("name like ? or code like ?","%#{keyword}%","%#{keyword}%") if keyword.present?
+    where(name like %#{keyword}%? or code like %#{keyword}%?) if keyword.present?
   }
 
   #指定したコードの銘柄データをすべて取得する
