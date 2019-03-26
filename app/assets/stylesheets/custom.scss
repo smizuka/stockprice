@@ -56,6 +56,22 @@ body{
     height: 350px;
 }
 
+//ユーザー情報変更画面の設定
+.edit-div-height{
+    height: 100vh;
+    position:relative;
+}
+.edit-div-h-middle{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: 350px;
+    height: 400px;
+}
+
 //サインアップ画面の設定
 .signup-div-height{
     height: 100vh;
@@ -142,6 +158,13 @@ body{
     //left: 204px;
     //width: 100%;
     //height: 140px;
+    position: sticky;
+    top:0px;
+    width:100%;
+    //最前面に移動する（数値が大きいほど上）
+    z-index: 9999;
+    //
+    background: white;
 }
 
 
@@ -239,7 +262,8 @@ h5{
     color: #fff;
 }
 .sidebar.left {
-  top: 220px;
+  //サイドバーがtopから常に40%になるようにする
+  top: 40%;
   left: 0;
   bottom: 0;
   //画面の横幅に対して25%になるように設定
