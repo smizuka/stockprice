@@ -8,7 +8,8 @@ class SearchesController < ApplicationController
       #検索に該当するコードを取得する
       # @stocks=@stock.select("code,name").distinct.order("code")
       @stock2=@stock.select("code,name")
-      @stocks=@stock2.distinct.order("code")
+      @stock3=@stock2.distinct
+      @stocks=@stock3.order("code")
 
       # where(name like '%72%' or code like '%72%'))
     end
@@ -19,8 +20,9 @@ class SearchesController < ApplicationController
     # SELECT DISTINCT code,name FROM "stocks" WHERE (name like '%72%' or code like '%72%') ORDER BY code)
     p "--------------------------"
 
-    p @stocks
-    p @stocks.count
+    p @stock2
+    p "--------------------------"
+    p @stock3
     #レコードを配列にしていく
     n= @stocks.count
     p "--------------------------"
