@@ -7,7 +7,11 @@ class Stock < ApplicationRecord
   # }
   scope :search_by_keyword, -> (keyword) {
     # where("name like ? or code like ?","%#{keyword}%","%#{keyword}%") if keyword.present?
-    where("name like %#{keyword}%? or code like %#{keyword}%?") if keyword.present?
+    # where("name like %#{keyword}%? or code like %#{keyword}%?") if keyword.present?
+    # where('name like "%#{keyword}%" or code like "%#{keyword}%"') if keyword.present?
+
+    where("code LIKE ?", "%#{keyword}%") if keyword.present?
+
   }
 
   #指定したコードの銘柄データをすべて取得する
