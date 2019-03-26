@@ -2,11 +2,17 @@ class SearchesController < ApplicationController
 
   def index
 
+    puts "--------------------------------"
+    puts "indexs"
+
     if !params[:value].blank?
       @stock = Stock.search_by_keyword(params[:value])
       #検索に該当するコードを取得する
       @stocks=@stock.select("code,name").distinct.order("code")
     end
+
+    puts "--------------------------------"
+    puts "データベースのあと"
 
     #レコードを配列にしていく
     n= @stocks.count
@@ -36,6 +42,9 @@ class SearchesController < ApplicationController
       }
 
     end
+
+    puts "--------------------------------"
+    puts "返す前"
 
     render json: res.to_json
   end
