@@ -1,7 +1,6 @@
 var chart_sim2 = null;
-// --------------------------------------------------------------
+
 //銘柄比率を表示する
-// --------------------------------------------------------------
 function bucknumber_chart1(datas){
 
     var BarDatas={
@@ -55,9 +54,7 @@ function bucknumber_chart1(datas){
     var chart5 = new Chart(ctx5,BarDatas);
 };
 
-// --------------------------------------------------------------
 //リスクとリターンを表示する
-// --------------------------------------------------------------
 function bucknumber_chart2(data1,data2){
     var datas = [
     {
@@ -123,9 +120,7 @@ function bucknumber_chart2(data1,data2){
     var chart6 = new Chart(ctx6,BarDatas);
 };
 
-// --------------------------------------------------------------
 //シミュレーション結果を表示する
-// --------------------------------------------------------------
 function bucknumber_chart3(index,datas){
 
     var lineDatas={

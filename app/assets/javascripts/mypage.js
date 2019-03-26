@@ -1,55 +1,4 @@
 $(function() {
-    // サインアップ、ログイン画面
-    hsize = $(window).height()/3;
-    $(".top-col").css("height", hsize + "px");
-
-    $(document).on('click','.dropdown-menu .dropdown-item',function(){
-        var visibleItem = $('.dropdown-toggle', $(this).closest('.dropdown'));
-        visibleItem.text($(this).attr('value'));
-    });
-
-    //サイドバーを表示させるコード
-    $(document).ready(function () {
-        // 向き
-        var sides = ["left", "top", "right", "bottom"];
-        // サイドバーの初期化
-        for (var i = 0; i < sides.length; ++i) {
-            var cSide = sides[i];
-            $(".sidebar." + cSide).sidebar({side: cSide});
-        }
-
-        // ボタンのクリックにより...
-        $(document).on('click','.btn[data-action]', function () {
-            var $this = $(this);
-            var action = $this.attr("data-action");
-            var side = $this.attr("data-side");
-            $(".sidebar." + side).toggle("sidebar:" + action);
-            return false;
-        });
-    });
-
-    // -----------------------------------------------------------
-    //ポートフォリオの削除が行われた際に検索欄にあるbuttonの表示を
-    //追加済から追加に変更する関数
-    // --------------------------------------------------------------
-    function changeButton(code){
-        //検索一覧の中から削除したコードに一致するものを探し出す
-        var tbody = $("#search-table").children().children()[1];
-        //行数を取得する
-        var num = tbody.rows.length;
-        //行数分だけfor文を回して各行のコードを取得していく
-        codes=[];
-        for (var i=0; i<num; i++) {
-            codes.push(tbody.rows[i].cells[0].textContent);
-        }
-        // 該当するコードがある位置を取得する
-        var i=codes.indexOf(code,0);
-        // 検索した位置からbuttonのある行に代わりの登録のbuttonを入れる
-        var cell = tbody.rows[i].cells[2];
-
-        cell.innerHTML ='<td><button class="search-result-btn btn btn-warning table-string">追　加</button></td>';
-    }
-
     //最適化したあとにシミュレーションする関数
     function simulate(data){
       $(document).on('click','#simulation-button',function(){
@@ -112,22 +61,6 @@ $(function() {
 
     }
 
-    //ポートフォリオ一覧に存在する銘柄を取得する
-    function getCode(){
-        // ポートフォリオに登録されている銘柄一覧を取得する
-        var tbody = $("#portfolio-table")[0]
-        // tbodyの行数を取得する
-        var num = tbody.rows.length;
-
-        var codes=[];
-        //for文を回してtbodyの中のコードを取得する
-        //コードの中身は文字列になっているので整数にする
-        for (var i=0; i<num; i++) {
-            codes.push(parseInt(tbody.rows[i].cells[1].textContent));
-        };
-        return codes
-    }
-
   // 検索した際に実行されるコード
   $(document).on('click','#search-button',function(){
 
@@ -143,68 +76,8 @@ $(function() {
         data:{'value': words}
       })
       .done( (data) => {
-
-        // 検索結果の総数を取得する
-        num=data["code"].length
-
-        if(num==0){
-            //pタグを生成する
-            var p = document.createElement('p');
-            $("#search-table").append(p);
-            p.className='text-center search-alert';
-            p.innerHTML = '該当するものはありません';
-
-        }else{
-            //テーブル要素を生成する
-            var table = document.createElement('table');
-            $("#search-table").append(table);
-            table.className='table table-hover';
-            var table_h = table.createTHead();
-            var table_h_r=table_h.insertRow(0);
-            var Cell1 = table_h_r.insertCell(0);
-            var Cell2 = table_h_r.insertCell(1);
-            var Cell3 = table_h_r.insertCell(2);
-
-            // tbody要素を生成
-            var tbody1 = document.createElement('tbody');
-
-            // theadの下にtbodyを追加する
-            $("#search-table").children().append(tbody1);
-
-            //tbody要素を取得する
-            var tbody2 =$("#search-table").children().find("tbody")[0];
-
-            //ポートフォリオ一覧にある銘柄を取得する関数
-            var codes=getCode();
-
-            // jsonファイルをテーブルに入れていく
-            for (var i=0; i<num; i++) {
-
-                var tbody_r = $('<tr></tr>').appendTo(tbody2);
-                $('<td></td>').appendTo(tbody_r);
-                $('<td></td>').appendTo(tbody_r);
-                $('<td></td>').appendTo(tbody_r);
-                // var tbody_r = tbody2.insertRow(0);
-                var Cell1 = tbody_r[0].cells[0];
-                var Cell2 = tbody_r[0].cells[1];
-                var Cell3 = tbody_r[0].cells[2];
-
-                Cell1.innerHTML = data["code"][i];
-                Cell1.className = "table-string";
-                //substrで0文字目から8文字切り抜く
-                Cell2.innerHTML = data["name"][i].substr(0,12);
-                Cell2.className = "table-string";
-
-                // もしポートフォリオ欄に同じコードがする場合、追加済みボタンにする
-                if(codes.indexOf(data["code"][i])>=0){
-                    Cell3.innerHTML = '<td><button class="btn btn-default table-string" disabled>追加済</button></td>';
-                }else{
-                    Cell3.innerHTML = '<td><button class="search-result-btn btn btn-warning table-string">追　加</button></td>';
-                };
-                Cell3.className = "table-string text-right";
-
-            };
-        };
+        // 検索結果を表示する
+        create_table(data)
       })
       .fail( (data) => {
         console.log(data);
@@ -214,15 +87,7 @@ $(function() {
       });
   });
 
-  // --------------------------------------------------------------
-  //$('#search-button').on('click', function()の書き方をすると、
-  //ページが読み込まれた時点で実行されるので、ページを開いた時点でセレクタで指定した要素が
-  //存在しないとイベントハンドラーとして機能しない
-  //$(document).on('click','#search-table .btn-sm',function()の書き方をすると
-  //document=HTML全体を探索範囲としてどこがクリックされてもイベントハンドラーが実行される。
-  //そのため、第２引数で範囲を指定することによって特定の要素だけを対象として
-  // イベントハンドラーとして対象とすることができる
-  // --------------------------------------------------------------
+  //検索ボタンを押したとき
   $(document).on('click','#search-table .search-result-btn',function(){
 
     var tr = $(this).closest("tr")[0];
@@ -234,15 +99,11 @@ $(function() {
     // ポートフォリオテーブルにある行数を取得する
     var tbody = $("#portfolio-table")[0]
 
-    var codes=[];
-    for (var i=0; i<5; i++) {
-        var a =tbody.rows[i].cells[1].textContent;
-        if(a!=""){
-            codes.push(a);
-        };
-    };
+    //表にある株のコードを取得する
+    var codes=collectCode(tbody);
+    var num=codes.length;
 
-    if(codes.length==5){
+    if(num==5){
       return alert('ポートフォリオは最大５つまでです');
     };
     //もし取得したコード群の中に追加しようとしたコードがあればアラート
@@ -260,34 +121,7 @@ $(function() {
           data: {'data': code}
       })
       .done((data) => {
-
-            var num=codes.length;
-            var cell1 = tbody.rows[num].cells[1];//コード
-            var cell2 = tbody.rows[num].cells[2];//銘柄名
-            var cell3 = tbody.rows[num].cells[3];//現在株価
-            var cell4 = tbody.rows[num].cells[4];//増減率
-            var cell5 = tbody.rows[num].cells[5];//リターン
-            var cell6 = tbody.rows[num].cells[6];//リスク
-            var cell7 = tbody.rows[num].cells[7];//リスク
-
-            cell1.innerHTML = code;
-            cell2.innerHTML = name;
-            cell3.innerHTML = data["adjust"];
-            cell4.innerHTML = data["change"];
-            if(data["change"]<=0){
-                cell4.className="text-primary text-right";
-            }else{
-                cell4.className="text-danger text-right";
-            }
-            cell5.innerHTML = data["mean"];
-            if(data["change"]<=0){
-                cell5.className="text-primary text-right";
-            }else{
-                cell5.className="text-danger text-right";
-            }
-            cell6.innerHTML = data["std"];
-            cell7.innerHTML = '<button class="btn btn-warning remove">削　除</button>';
-
+          add_table_contents(data,num,code,name)
       })
       .fail((data) => {
           console.log(data)
@@ -334,14 +168,8 @@ $(function() {
   $(document).on('click','#opt-btn',function(){
 
       var tbody = $('#portfolio-table')[0];
-
-      var codes=[];
-      for (var i=0; i<5; i++) {
-          var a =tbody.rows[i].cells[1].textContent;
-          if(a!=""){
-              codes.push(a);
-          };
-      };
+      //表にある株のコードを取得する
+      var codes=collectCode(tbody);
 
       if(codes.length < 3){
           return alert('銘柄は最低３つ選んでください');
@@ -376,13 +204,8 @@ $(function() {
 
     var tbody = $("#portfolio-table")[0];
 
-    var codes=[];
-    for (var i=0; i<5; i++) {
-        var a =tbody.rows[i].cells[1].textContent;
-        if(a!=""){
-          codes.push(a);
-        };
-    };
+    //表にある株のコードを取得する
+    var codes=collectCode(tbody);
 
     $.ajax({
             url: '/portfolios/create',
