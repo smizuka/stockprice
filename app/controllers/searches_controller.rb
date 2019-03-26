@@ -2,20 +2,22 @@ class SearchesController < ApplicationController
 
   def index
 
-    puts "--------------------------------"
-    puts "indexs"
-
     if !params[:value].blank?
       @stock = Stock.search_by_keyword(params[:value])
+
+      puts "--------------------------"
+      puts @stock
+      puts "--------------------------"
       #検索に該当するコードを取得する
       @stocks=@stock.select("code,name").distinct.order("code")
       # where(name like '%72%' or code like '%72%'))
     end
 
-    puts "--------------------------------"
-    puts "データベースのあと"
-    puts @stocks
-    puts "--------------------------------"
+    #heroku用に書き換え
+
+    # @stock.where(name like '%#%' or code like '%#{code}%')
+    # SELECT DISTINCT code,name FROM "stocks" WHERE (name like '%72%' or code like '%72%') ORDER BY code)
+
 
     #レコードを配列にしていく
     n= @stocks.count
@@ -45,9 +47,6 @@ class SearchesController < ApplicationController
       }
 
     end
-
-    puts "--------------------------------"
-    puts "返す前"
 
     render json: res.to_json
   end
