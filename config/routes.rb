@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   get "mypages/backnumber"
 
   #検索したときの動作
-  get "searches/index"
+  get "/searches/index"
 
   #最適化計算
   post "optimizations/calc", to: "optimizations#calc"
