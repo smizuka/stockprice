@@ -49,11 +49,11 @@ test:
 #
 
 production:
-<<: *default
-adapter: postgresql
-encoding: unicode
-pool: 5
-database: stockprice2_production
+  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: stockprice2_production
 
 # production:
 #   <<: *default
