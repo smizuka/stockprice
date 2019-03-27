@@ -4,8 +4,10 @@ class SearchesController < ApplicationController
 
     if !params[:value].blank?
       @stock = Stock.search_by_keyword(params[:value])
+
       #検索に該当するコードを取得する
       @stocks=@stock.select("code,name").distinct.order("code")
+
     end
 
     #レコードを配列にしていく
