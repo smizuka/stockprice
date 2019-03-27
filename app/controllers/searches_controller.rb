@@ -13,23 +13,6 @@ class SearchesController < ApplicationController
     #レコードを配列にしていく
     n= @stocks.count
 
-    # if @stock.count!=0
-    #   res ={
-    #       code: @stock.map(&:code).uniq,
-    #       name: @stock.map(&:name).uniq
-    #   }
-    # else
-    # # 該当する銘柄がない場合
-
-    #   codes=[]
-    #   names=[]
-
-    #   res ={
-    #       code: codes,
-    #       name: names
-    #   }
-
-    # end
     if n!=0
       codes=[]
       names=[]
