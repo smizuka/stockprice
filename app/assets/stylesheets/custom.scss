@@ -276,3 +276,19 @@ h5{
 }
 
 
+//バックナンバー画面の水平スクロール
+.slider {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+}
+.slider::-webkit-scrollbar {
+    display: none;
+}
+.slider > div {
+    //margin: 0 3px;
+    //display: inline-block;
+    //width: 32%;
+}
+
+

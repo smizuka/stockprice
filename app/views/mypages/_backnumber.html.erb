@@ -1,7 +1,7 @@
 
-    <div class="col-12 mt-4">
+    <div class="col-12 mt-4 myport-b slider">
         <% @lists.zip(@names) do |lists,names|%>
-            <div class="card bg-light shadow ml-3 inline-block">
+            <div class="card bg-light shadow inline-block mr-2">
                 <div class="card-body button-parent" style="max-height:270px;">
                     <h5 class="group-title text-center"><%=names%></h5>
                     <table class="table table-sm table-hover">
@@ -33,7 +33,7 @@
         <% end %>
     </div>
 
-    <div class="col-12 mt-4 backnumber-right-block mychart">
+    <div class="col-12 mt-4 backnumber-right-block mychart-b">
         <div class="card bg-light shadow">
                 <div class="card bg-light shadow">
                     <div class="card-body" style="min-height:300px;">
@@ -97,7 +97,7 @@
                 </div>
         </div>
 
-        <div class="card bg-light shadow mt-4 mysim mb-4">
+        <div class="card bg-light shadow mt-4 mysim-b mb-4">
             <div class="card-body" style="min-height: 300px;">
                 <canvas id="port-chart7" width="100%" height="50%"></canvas>
             </div>
