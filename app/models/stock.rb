@@ -5,9 +5,9 @@ class Stock < ApplicationRecord
 
   scope :search_by_keyword, -> (keyword) {
     #heroku用(postgreSQL)
-    # where("name like ? or code::text like ?","%#{keyword}%","%#{keyword}%") if keyword.present?
+    where("name like ? or code::text like ?","%#{keyword}%","%#{keyword}%") if keyword.present?
     # MySQL用
-    where("name like ? or code like ?","%#{keyword}%","%#{keyword}%") if keyword.present?
+    # where("name like ? or code like ?","%#{keyword}%","%#{keyword}%") if keyword.present?
   }
 
   #指定したコードの銘柄データをすべて取得する
