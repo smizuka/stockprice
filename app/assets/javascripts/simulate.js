@@ -39,8 +39,8 @@ function simulate2(id,day,select,price,data){
                 }
             })
             .done((data) => {
-                // 実施した結果をチャート表示する関数
 
+                //どの部分テンプレートで作動したか判断する関数
                 if(id=="mypage"){
                     sim_chart_mypage(data);
                     scroll_to_sim();
