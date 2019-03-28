@@ -49,9 +49,9 @@ $(function() {
                 }
             })
             .done((data) => {
-              // 実施した結果をチャート表示する関数
+                // 実施した結果をチャート表示する関数
                 sim_chart_backnumber(data)
-                scroll_to_sim()
+                scroll_to_sim_b()
             })
             .fail((data) => {
               console.log(data)
@@ -82,7 +82,7 @@ $(function() {
           })
           .done((data) => {
               opt_chart_backnumber(data);
-              scroll_to_opt();
+              scroll_to_opt_b();
               //最適化結果をもとにシミュレーションするコード
               simulate(data);
           })

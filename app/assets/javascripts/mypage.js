@@ -49,7 +49,7 @@ $(function() {
             })
             .done((data) => {
                 sim_chart_mypage(data)
-                scroll_to_sim()
+                scroll_to_sim();
             })
             .fail((data) => {
               console.log(data)
