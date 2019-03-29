@@ -11,7 +11,7 @@ class SearchesController < ApplicationController
     end
 
     #レコードを配列にしていく
-    n= @stocks.count
+    n= @stocks.length
 
     if n!=0
       codes=[]
